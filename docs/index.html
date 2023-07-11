@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Icomon</title>
+  </head>
+  <body>
+    <section class="material-half-bg">
+      <div class="cover"></div>
+    </section>
+    <section class="login-content">
+      <div class="logo">
+        <img src="img/moove.png"  style=" width: 200px;">
+        
+        
+      </div>
+      <div class="login-box">
+        <form class="login-form" action="autenticacao.php" name="seachform" method="post" >
+          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>LOGAR</h3>
+          <div class="form-group">
+            <label class="control-label">USUÁRIO</label>
+            <input class="form-control" type="text" name="login" placeholder="Usuário" autofocus>
+          </div>
+          <div class="form-group">
+            <label class="control-label">SENHA</label>
+            <input class="form-control" name="senha" type="password" placeholder="Senha">
+          </div>
+         
+          <div class="form-group btn-container">
+            <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button><br></span>  <a  href="https://www.linkedin.com/in/rudineigti"  target="_blank"><img src="img/in.png" alt="Smiley face" height="30" width="35" style="margin-left:45%;"></a>
+          </div>
+        </form>
+        
+      </div>
+    </section>
+    <!-- Essential javascripts for application to work-->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="js/plugins/pace.min.js"></script>
+    <script type="text/javascript">
+      // Login Page Flipbox control
+      $('.login-content [data-toggle="flip"]').click(function() {
+      	$('.login-box').toggleClass('flipped');
+      	return false;
+      });
+    </script>
+  </body>
+</html>
