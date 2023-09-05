@@ -12,7 +12,7 @@
             $connect = mysqli_connect("localhost", "root", "", "icomom_");  
 
             
-            $query ="select id_usu, nome_gestor from atividade where status <> 'ENCERRADO' and status <> 'EM VALIDACAO' and status <> 'PARALIZADO' and id_gestor = '"$_SESSION["nome"]"' GROUP BY id_usu;";  
+            $query ="SELECT * FROM atividade join usuario on atividade.id_usu = usuario.id and status <> 'ENCERRADO' order by data_vencimento desc;";   
            
              
             $result = mysqli_query($connect, $query); 

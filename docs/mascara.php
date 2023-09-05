@@ -23,7 +23,7 @@
                     while ($dado = mysql_fetch_assoc($sql))
                     {
                         
-                    
+                        $ba2 = $dado["ba"];
                         $nome = $dado["nome"];
                         $localidade = $dado["localidade"];
                         $estacao = $dado["estacao"];
@@ -44,12 +44,7 @@
                         $data_abertura = $dado["data_abertura"];
                         $data_vencimento = $dado["data_vencimento"];
                         $afetacao = $dado["afetacao"];
-                        
-                       
-                       
-                        
-                        
-                        
+                     
                     }
                 
                 }
@@ -265,17 +260,7 @@ fieldset
                     
                     }
     
-                
-    
-  
-                
-                
-                
-                
-                
-                
-                
-                
+               
                 ?>
 
                 <form onSubmit="if(!confirm('Deseja mudar status da atividade??')){return false;}"  enctype="multipart/form-data" method="post"  action="enviar_vali2.php ">
@@ -349,6 +334,9 @@ fieldset
                   <?php } ?>
              
                 </form>
+
+                
+                <a href="pdf.php?ba=<?php echo $ba; ?>" target="_blank" class="btn btn-info btn-xs active" role="button" aria-pressed="true">Gerar Pdf</a>
               </div>
             </div>
             

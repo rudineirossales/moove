@@ -221,9 +221,9 @@ height:70px;
     </div>
     <fieldset class="col-md-6">
                   <div class="form-group">
-                        <label for="formFile" class="form-label">Teste de validação </label>
+                        <label for="formFile" class="form-label">Foto antes </label>
                         <input class="form-control" type="file" accept=".png,.jpg,.jpeg" id="teste1" name="teste1" >
-                        <label for="formFile" class="form-label" style="font-size:11px;color:red;">*Tamanho máximo da imagem 1MB* </label>
+                        <label for="formFile" class="form-label" style="font-size:11px;color:red;">*Tamanho máximo da imagem 2MB* </label>
                         
                         <p id="output1"></p>
                         <script type="text/javascript">
@@ -232,12 +232,36 @@ height:70px;
                             const size = 
                               (this.files[0].size / 1024 / 1024).toFixed(2);
                   
-                            if (size > 1 ) {
-                                alert("Máximo 1MB, Diminua a qualidade da foto.");
+                            if (size > 2 ) {
+                                alert("Máximo 2MB, Diminua a qualidade da foto.");
                                 $("#teste1").val("");
                                 
                             } else {
                                 $("#output1").html('<b>' +
+                                  'Tamanho: ' + size + " MB" + '</b>');
+                            }
+                        });
+                    </script>
+
+                  </div>
+                  <div class="form-group">
+                        <label for="formFile" class="form-label">Foto depois </label>
+                        <input class="form-control" type="file" accept=".png,.jpg,.jpeg" id="teste2" name="teste2" >
+                        <label for="formFile" class="form-label" style="font-size:11px;color:red;">*Tamanho máximo da imagem 2MB* </label>
+                        
+                        <p id="output2"></p>
+                        <script type="text/javascript">
+                        $('#teste2').on('change', function() {
+                  
+                            const size = 
+                              (this.files[0].size / 1024 / 1024).toFixed(2);
+                  
+                            if (size > 2 ) {
+                                alert("Máximo 2MB, Diminua a qualidade da foto.");
+                                $("#teste2").val("");
+                                
+                            } else {
+                                $("#output2").html('<b>' +
                                   'Tamanho: ' + size + " MB" + '</b>');
                             }
                         });

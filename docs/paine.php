@@ -77,20 +77,32 @@ else
 	header("Location: dashboard.php");
 
 	}
-
+	
 	elseif($_SESSION["acesso"] == 'EDT' ){
   
 
-		header("Location: atualiza_ba.php");
+	header("Location: atualiza_ba.php");
+
+	}
 	
-	
-		}
-		elseif($_SESSION["acesso"] == 'DEL' ){
+	elseif($_SESSION["acesso"] == 'DEL' ){
   
 
 			header("Location: encerra_ba.php");
 		
 			}
+	elseif($_SESSION["acesso"] == 'HC' ){
+  
+
+			header("Location: hc/dashboard_hc.php");
+		
+			}
+	elseif($_SESSION["acesso"] == 'PJ' ){
+  
+
+				header("Location: projeto/dashboard_pj.php");
+			
+				}			
 
 	else{
 

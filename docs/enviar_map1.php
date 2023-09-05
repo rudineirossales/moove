@@ -74,7 +74,10 @@ $coord =$_POST['coord'];
 $hoje = date('Y-m-d H:i:s');
 $opc =$_POST['opc'];
 $opc2 =$_POST['opc2'];
-$status ='DESPACHADA';
+$opc3 =$_POST['opc3'];
+$status ='DESPCOORD';
+
+
 
 $sql3 = mysql_query ("select * from atividade where ba = '$ba'" );
 
@@ -117,10 +120,21 @@ $row = mysql_num_rows($sql2);
 
     }
 
+    if($opc3 == 'TRIAGEM')
+{
+
+$status = 'TRIAGEM';
+$gestor = 'TRIAGEM';
+$coord = $_SESSION['id'];
+
+
+
+}
+
 
 $query = "insert into atividade (ba,ba_comum,uf,localidade,estacao,endereco,celula,cdoe,data_abertura,data_vencimento,tipo,tipo_rede,id_usu,status,nome_despacho,data_despacho,obs_cl,afetacao,nome_gestor,tipo_7048,escalonamento)";
 
-$query.= "values ('$ba','$ba_comum','$uf','$localidade','$estacao','$endereco','$celula','$cdoe_cdoia','$data_abertura','$data_vencimento','$tipo','$tipo_rede','$coord','DESPCOORD','".$_SESSION['nome']."','$hoje','$obs','$afetacao','$gestor','$opc','$opc2')";
+$query.= "values ('$ba','$ba_comum','$uf','$localidade','$estacao','$endereco','$celula','$cdoe_cdoia','$data_abertura','$data_vencimento','$tipo','$tipo_rede','$coord','$status','".$_SESSION['nome']."','$hoje','$obs','$afetacao','$gestor','$opc','$opc2')";
 
 
 

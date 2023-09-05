@@ -107,11 +107,6 @@
           </ul>
         </li>
         
-        
-        
-        
-        
-            
     </aside>
     <main class="app-content">
       <div class="app-title">
@@ -135,11 +130,6 @@
                     <input type="text" class="form-control"  name="ba"   required >
         </div> 
 
-                    
-                  
-
-            
-            
             
                     <button type="submit" name="submit3" class="btn btn-primary mb-2">Buscar</button>
                 </form>
@@ -163,42 +153,7 @@
       </div>
       
       
-      <!-- 
-      <div class="row">
-        <div class="col-md-6 col-lg-3">
-          <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
-            <div class="info">
-              <h4>TESTE</h4>
-              <p><b>5</b></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="widget-small info coloured-icon"><i class="icon fa fa-thumbs-o-up fa-3x"></i>
-            <div class="info">
-              <h4>TESTE</h4>
-              <p><b>25</b></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
-            <div class="info">
-              <h4>TESTE</h4>
-              <p><b>10</b></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="widget-small danger coloured-icon"><i class="icon fa fa-star fa-3x"></i>
-            <div class="info">
-              <h4>TESTE</h4>
-              <p><b>500</b></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      -->
+     
 
                   <?php 
                       if (isset($_POST ['submit3']) )

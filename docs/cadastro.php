@@ -118,6 +118,20 @@ $(document).ready(function() {
   });
 });
 </script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#inputOculto3').hide();
+  $('#mySelect').change(function() {
+    if ($('#mySelect').val() == '89') {
+      $('#inputOculto3').show();
+    } else {
+      $('#inputOculto3').hide();
+    }
+  });
+});
+</script>
+
+
   
 <style>
   #loading
@@ -346,9 +360,6 @@ height:70px;
                         </label>
       </div>
     </div>
-        
-
-    
 
     <div class="form-group" id="inputOculto">
     <div class="form-check">
@@ -419,6 +430,7 @@ height:70px;
                               
                           }
                           ?> 
+                          
                     </select>
 
                     
@@ -434,6 +446,16 @@ height:70px;
     <div class="form-group">
     <label for="email">Obs: </label>
   <textarea class="form-control" rows="5" id="obs" name="obs" maxlength="20000" placeholder="Máximo 2000 caracteres"></textarea>
+    </div>
+
+    <div class="form-group">
+      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="opc3" value="TRIAGEM" id="flexRadioDefault4"  >
+                        <label class="form-check-label" style="font-size: 11px; color:red;" for="flexRadioDefault2" >
+                         TRIAGEM
+                        </label>
+      </div>
+      
     </div>
                   
                   

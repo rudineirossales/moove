@@ -62,9 +62,6 @@ function fnExcelReport() {
 }
 
 
-
-
-
 </script> 
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     <!-- Twitter meta-->
@@ -258,14 +255,11 @@ function fnExcelReport() {
                                     <td>Sub-causa</td>
                                     <td>Ro</td>
                                     <td>Cis</td>
+                                    <td>Ba Apoio</td>
                                     <td>Status</td> 
                                     <td>Material</td>
                                     <td>Evidencias</td>
-
-                                    
-                                    
-                                      
-                                     
+   
                                </tr>  
                           </thead> 
                           
@@ -314,6 +308,7 @@ function fnExcelReport() {
                                <td>'.$row["sub"].'</td>    
                                <td>'.$row["ro"].'</td>    
                                <td>'.$row["cis"].'</td>
+                               <td>'.$row["ba_apoio"].'</td>
                                <td>'.$row["status"].' ';?> </td> 
                                
                                <td><?php echo "<a target='_blank' href='verMaterial.php?ba=$ba'> <span class='glyphicon glyphicon-list-alt'><button class='btn btn-primary'> ver </button></a>"?></td>

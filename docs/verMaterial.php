@@ -14,27 +14,19 @@ $ba =$_GET['ba'];  ?>
 
 
 
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   
 <!-- ///////PASTA BOOTSTRAP ////////////////////-->
-   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
 
 
- <script src="jquery-min.js"></script>
- <script src="jquery-ui.js"></script>
- <script src="jquery-ui.min.js"></script>
-<script src="js/jquery.js"></script>
+  <script src="jquery-min.js"></script>
+  <script src="jquery-ui.js"></script>
+  <script src="jquery-ui.min.js"></script>
+  <script src="js/jquery.js"></script>
   <script src="js/bootstrap.min.js"></script>
 
     <!-- ///////PASTA BOOTSTRAP ////////////////////-->

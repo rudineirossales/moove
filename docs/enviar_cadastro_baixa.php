@@ -74,6 +74,7 @@ function saidasuccessfully()
         $qtd_cdoe =$_POST['qtd_cdoe'];
         $obs =$_POST['obs'];
         $teste1 =$_POST['teste1'];
+        $teste2 =$_POST['teste2'];
 
         
     
@@ -92,21 +93,20 @@ function saidasuccessfully()
         
         move_uploaded_file($_FILES['teste1'] ['tmp_name'], $diretorio.$novo_nome1 )	;
           }
-          
-    
-        
-        
-       
 
-
-       
+          if(isset($_FILES['teste2'])) {
     
 	
-           
-         
-        
+            $extensao = strtolower (substr($_FILES['teste2'] ['name'], -4));
+            $novo_nome2  = md5(mt_rand(1, 1000) . microtime()) . $extensao;
+            $diretorio = "arquivo/";
           
-
+          
+          
+          move_uploaded_file($_FILES['teste2'] ['tmp_name'], $diretorio.$novo_nome2 )	;
+            }
+          
+    
         $connect = mysqli_connect("localhost", "root", "", "icomom_");  
         $query ="select * from atividade where ba = '$ba'";
         $result = mysqli_query($connect, $query); 
@@ -124,7 +124,7 @@ function saidasuccessfully()
         
 
      
-    $query = "update atividade set causa = '$causa', sub = '$sub', ro = '$ro', cis = '$cis', obs = '$obs', ba = '$ba', data_encerramento = NOW(), evidencia3 = '$novo_nome1'  where ba = '$ba'";
+    $query = "update atividade set causa = '$causa', sub = '$sub', ro = '$ro', cis = '$cis', obs = '$obs', ba = '$ba', data_encerramento = NOW(), evidencia3 = '$novo_nome1', evidencia4 = '$novo_nome2'  where ba = '$ba'";
     
     $sql = mysql_query($query);
 

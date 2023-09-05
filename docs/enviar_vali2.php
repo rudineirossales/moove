@@ -120,7 +120,10 @@ if ($opc == 'validar')
     
     $query4 = "insert into logs (ba,status,nome,id,data)";
     $query4.= "values ('$ba','ENCERRADO','".$_SESSION['nome']."','".$_SESSION['id']."',NOW())";
+    $query6 = "update  atividade set status = 'ENCERRADO', data_encerramento = NOW()  where ba_apoio = '$ba'";
     $sql4 = mysql_query($query4);
+    $sql6 = mysql_query($query6);
+    
     $por = $_SESSION['nome'];
     include "telegram.php";
 

@@ -32,9 +32,6 @@
                         $descricao = $dado["descricao"];
                         $data_atualizacao = $dado["data_atualizacao"];
                         
-                        
-                        
-                        
                     }
                 
                 }

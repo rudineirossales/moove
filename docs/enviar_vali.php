@@ -63,9 +63,10 @@ function saidasuccessfully()
                         $trava  = $dado["trava_ba"];
                         $trava_por  = $dado["trava_por"];
                         $evidencia3  = $dado["evidencia3"];
+                        $evidencia4  = $dado["evidencia4"];
                         
                        
-                       
+                        
                         
                         
                         
@@ -305,6 +306,21 @@ fieldset
                       
                   
                       <img src="arquivo/<?php echo $evidencia3 ?>"   width="500" height="500" style="padding-top: 5%;"> <br>
+
+                  <?php }?>
+            
+                  </div> <br><br>
+
+                  <div class="text-center">
+
+                  <?php  if ($evidencia4 == ''){?>
+
+                      <span style="color:red;">FOTO NÃO ANEXADA</span>
+
+                  <?php } else {?>
+                      
+                  
+                      <img src="arquivo/<?php echo $evidencia4 ?>"   width="500" height="500" style="padding-top: 5%;"> <br>
 
                   <?php }?>
             

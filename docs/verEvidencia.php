@@ -105,6 +105,9 @@ function loginsuccessfully()
           <div class="text-center">
             <img src="arquivo/<?php echo $dado["evidencia3"];?>"  style="padding-top: 5%;"> 
           </div>
+          <div class="text-center">
+            <img src="arquivo/<?php echo $dado["evidencia4"];?>"  style="padding-top: 5%;"> 
+          </div>
          
             
             <?php 
