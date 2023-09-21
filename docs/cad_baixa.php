@@ -444,6 +444,7 @@ if (isset($_POST ['submit2']) )
       {
 
       $gestor = $dado["nome"];
+      $id_gestor = $dado["id"];
 
       }
 
@@ -451,7 +452,7 @@ if (isset($_POST ['submit2']) )
   
   
    
-          $query = "update atividade set id_usu = '$tec', status = 'DESPTEC', data_desptec = NOW(), nome_gestor = '$gestor' where ba = '$ba2'";
+          $query = "update atividade set id_usu = '$tec', status = 'DESPTEC', data_desptec = NOW(), nome_gestor = '$gestor', id_gestor = '$id_gestor' where ba = '$ba2'";
   
           $sql = mysql_query($query);
   

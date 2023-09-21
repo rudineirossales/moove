@@ -13,6 +13,9 @@
             $query ="select protocolo,cod_logradouro,localidade,logradouro from projeto where cadastro_status = 'NAO INICIADO' or cadastro_status = 'PENDENTE' or cadastro_status = 'CONCLUIDO' group by logradouro";  
             $result = mysqli_query($connect, $query); 
 
+
+
+
             
 ?>
 
@@ -33,7 +36,7 @@
     <link rel="icon" href="img/icomon.png">
 
     <script type="text/javascript">
-function fnExcelReport() {
+    function fnExcelReport() {
     var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
     tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
 
@@ -130,10 +133,7 @@ function fnExcelReport() {
 
           
         </li>
-        
-        
-        
-        
+       
         <li><a class="app-menu__item " href="#" id="test" onClick="javascript:fnExcelReport();">  <i class="app-menu__icon fa fa-table"></i> </i><span class="app-menu__label"> Gerar Excel </span> </a> </li>
     </aside>
     <main class="app-content">
@@ -161,6 +161,7 @@ function fnExcelReport() {
                                     <td>Cód</td> 
                                     <td>Localidade</td>  
                                     <td>Logradouro</td>  
+                              
                                     <td>Liberar</td>
                                       
                                </tr>  
@@ -169,13 +170,18 @@ function fnExcelReport() {
                           while($row = mysqli_fetch_array($result))  
                           {  
 
-                           
+                            $cod_logradouro = $row["cod_logradouro"];
+                            $query2 ="SELECT (select count(*) as NaoIniciado from projeto where cod_logradouro = '$cod_logradouro' and cadastro_status = 'NAO INICIADO') as NaoIniciado, (select count(*) as Pendente from projeto where cod_logradouro = '$cod_logradouro' and cadastro_status = 'PENDENTE' ) as Pendente, (select count(*) as Concluido from projeto where cod_logradouro = '$cod_logradouro' and cadastro_status = 'CONCLUIDO') as Concluido;";
+                            
+                              
+                          
 
                                echo '  
                                <tr>  
-                                    <td><a href="pesq_survey.php?cod='.$row["cod_logradouro"].'"> '.$row["cod_logradouro"].' </span></a></td>   
+                                    <td><a href="pesq_survey.php?cod='.$row["localidade"].'&logradouro='.$row["logradouro"].'"> '.$row["cod_logradouro"].' </span></a></td>   
                                     <td>'.$row["localidade"].'</td>
-                                    <td>'.$row["logradouro"].'</td>  
+                                    <td>'.$row["logradouro"].'</td> 
+                                   
                                     <td> <a style="color:black;" href="liberar_survey.php?protocolo='.$row["cod_logradouro"].'"   role="button" aria-pressed="true"><i style="padding-left:40%;" class="fa fa-solid fa-key fa-lg"></i></a></td>
                                      
                                </tr>  

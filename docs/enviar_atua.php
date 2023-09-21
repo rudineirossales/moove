@@ -15,15 +15,8 @@ if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
 }
 
 
-
- 
-
-
 ?>
 
-
-
- 
 
 <?php
 
@@ -46,6 +39,8 @@ session_start();
 <script type="text/javascript">
 function saidasuccessfully()
 {
+
+  
 	setTimeout("window.location='atua.php'",1000);
 	
 	
@@ -89,16 +84,12 @@ $row = mysql_num_rows($sql2);
       {
 
       $gestor = $dado["nome"];
+      $id_gestor = $dado["id"];
 
       }
 
     }
 
-
-
-
-
- 
         $query = "update atividade set id_usu = '$coord', nome_gestor = '$gestor', status = 'DESPCOORD' where ba = '$ba'";
 
         $sql = mysql_query($query);

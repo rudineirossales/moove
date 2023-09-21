@@ -22,26 +22,10 @@ if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
 ?>
 
 
-
- 
-
 <?php
 
 session_start();
 
-
-
-
-
-
-
-
-
-
-
-
-
-	
 
 	
 //}
@@ -80,12 +64,6 @@ function saidasuccessfully()
 
 
 <body>
-
-
-
-
-
-
 
 
 <?php

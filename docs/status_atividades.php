@@ -7,9 +7,9 @@
             {
                  header("Location: index.html");
                   exit;
-            } 
+            }
 
-            $connect = mysqli_connect("185.213.81.103", "u504529778_icomon_", "Rud!n3!@", "u504529778_icomon_");    
+            $connect = mysqli_connect("localhost", "root", "", "icomom_");  
             
 ?>
 
@@ -90,7 +90,7 @@ function fnExcelReport() {
   </head>
   <body class="app sidebar-mini rtl">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="dashboard_bbk.php">Serede</a>
+    <header class="app-header"><a class="app-header__logo" href="dashboard.php">Serede</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -116,7 +116,7 @@ function fnExcelReport() {
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="dashboard_bbk.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" href="dashboard.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -159,9 +159,10 @@ function fnExcelReport() {
                      <table id="myTable" class="table table-striped table-bordered">  
                           <thead>  
                                <tr>  
-                                    <td>Id</td>  
-                                    <td>Nome</td>  
-                                    
+                                    <td>BA</td>  
+                                    <td>STATUS</td>  
+                                    <td>PRIORIDADE</td>
+                                    <td>NOME</td>
                                </tr>  
                           </thead> 
                           
@@ -174,7 +175,7 @@ function fnExcelReport() {
 
                               
                                 
-                             $query ="select * from atividade_bbk join usuario on atividade_bbk.id_usu = usuario.id where status <> 'ENCERRADO' and status <> 'EM VALIDACAO' and status <> 'PARALIZADO' and atividade_bbk.nome_gestor = '".$_SESSION['nome']."' and status <> 'DESPCOORD' GROUP BY id_usu;";  
+                             $query ="select ba,status,tipo,id_usu,nome from atividade join usuario on atividade.id_usu = usuario.id where status <> 'ENCERRADO' and status <> 'EM VALIDACAO' and status <> 'PARALIZADO' and atividade.nome_gestor = '".$_SESSION['nome']."' and status <> 'DESPCOORD' order by nome;";  
                              $result = mysqli_query($connect, $query); 
                              while($row = mysqli_fetch_array($result))  
                           { 
@@ -182,11 +183,11 @@ function fnExcelReport() {
                            
                                echo '  
                                <tr>  
-                               <td><a href="pesquisa_cx.php?id_usu='.$row["id_usu"].'"> '.$row["id_usu"].' </span></a></td>  
-                               <td>'.$row["nome"].'</td>   
-                           
                                
-                                    
+                               <td>'.$row["ba"].'</td>   
+                               <td>'.$row["status"].'</td>
+                               <td>'.$row["tipo"].'</td>
+                               <td>'.$row["nome"].'</td>     
                                </tr>  
                                ';  
                           }    

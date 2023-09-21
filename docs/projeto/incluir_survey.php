@@ -26,6 +26,7 @@ $sql = mysql_query ("select * from projeto where protocolo = '$cod'" );
                         
                         $logradouro = $dado["logradouro"];
                         $cod_logradouro = $dado["cod_logradouro"];
+                        $localidade = $dado["localidade"];
                        
                 }
                 
@@ -162,6 +163,11 @@ height:70px;
               <div class="col-lg-12">
                 <form onSubmit="if(!confirm('Deseja enviar para campo a atividade??')){return false;}" method="post"  action="enviar_incluir_survey.php ">
                 <div class="form-group">
+                    <label for="exampleInputEmail1">LOCALIDADE</label>
+                    <input class="form-control"  id="ba" readonly value="<?php echo $localidade;?>" name="localidade"  type="text" aria-describedby="emailHelp" >
+                   
+                  </div>
+                <div class="form-group">
                     <label for="exampleInputEmail1">RUA</label>
                     <input class="form-control"  id="ba" readonly value="<?php echo $logradouro;?>" name="logradouro"  type="text" aria-describedby="emailHelp" >
                    
@@ -173,6 +179,10 @@ height:70px;
                   <div class="form-group">
                     <label for="exampleInputEmail1" >Nº FACHADA</label>
                     <input class="form-control"  id="cod_survey" required name="num_fachada"  type="number" aria-describedby="emailHelp" >
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1" >QUANTIDADE UMS</label>
+                    <input class="form-control"  id="cod_survey" required name="qtd_ums"  type="number" aria-describedby="emailHelp" >
                   </div>
                   <div class="form-group">
                       <label for="pwd">COMPLEMENTO 1</label>

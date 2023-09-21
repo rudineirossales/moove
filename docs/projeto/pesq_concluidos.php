@@ -3,18 +3,22 @@
       
          session_start();
 
-         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) || ($_SESSION["acesso"] != 'ADM' ) AND ($_SESSION["acesso"] != 'Tec' ) )
+         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
             {
                  header("Location: index.html");
                   exit;
-            } 
+            }
 
-            $connect = mysqli_connect("185.213.81.103", "u504529778_icomon_", "Rud!n3!@", "u504529778_icomon_");    
+            $connect = mysqli_connect("localhost", "root", "", "u504529778_projeto");  
+            $query ="select protocolo,cod_logradouro,localidade,logradouro from projeto where cadastro_status = 'CONCLUIDO' group by logradouro";  
+            $result = mysqli_query($connect, $query); 
+
             
 ?>
 
 
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
   <title>Icomon</title>  
@@ -26,7 +30,7 @@
             
            
           
-  <link rel="icon" href="img/icomon.png">
+    <link rel="icon" href="img/icomon.png">
 
     <script type="text/javascript">
 function fnExcelReport() {
@@ -66,7 +70,6 @@ function fnExcelReport() {
 
 
 </script> 
-    
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     <!-- Twitter meta-->
     <meta property="twitter:card" content="summary_large_image">
@@ -90,7 +93,7 @@ function fnExcelReport() {
   </head>
   <body class="app sidebar-mini rtl">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="dashboard_bbk.php">Serede</a>
+    <header class="app-header"><a class="app-header__logo" href="#">Icomon</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -116,7 +119,7 @@ function fnExcelReport() {
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="dashboard_bbk.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" href="dashboard_pj.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -124,7 +127,10 @@ function fnExcelReport() {
             <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-circle-o"></i> Cards</a></li>
             <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Widgets</a></li>
           </ul>
+
+          
         </li>
+        
         
         
         
@@ -133,7 +139,7 @@ function fnExcelReport() {
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> Caixa técnica</h1>
+          <h1><i class="fa fa-th-list"></i> Pesquisa de Survey</h1>
           
         </div>
         <ul class="app-breadcrumb breadcrumb side">
@@ -146,50 +152,36 @@ function fnExcelReport() {
         <div class="col-md-12">
 
         
-
-        
           <div class="tile">
-          <form class="form-inline" role="form"  method="POST" action="pesq_cx_col_adm.php"  style="margin-left:10%;">
-                
-    
-    
-
-        </form>
+          
           <div class="table-responsive">  
                      <table id="myTable" class="table table-striped table-bordered">  
                           <thead>  
                                <tr>  
-                                    <td>Id</td>  
-                                    <td>Nome</td>  
-                                    
+                                    <td>Cód</td> 
+                                    <td>Localidade</td>  
+                                    <td>Logradouro</td>  
+                                    <td>Liberar</td>
+                                      
                                </tr>  
-                          </thead> 
-                          
-                          
+                          </thead>  
                           <?php  
-
-                            
+                          while($row = mysqli_fetch_array($result))  
+                          {  
 
                            
 
-                              
-                                
-                             $query ="select * from atividade_bbk join usuario on atividade_bbk.id_usu = usuario.id where status <> 'ENCERRADO' and status <> 'EM VALIDACAO' and status <> 'PARALIZADO' and atividade_bbk.nome_gestor = '".$_SESSION['nome']."' and status <> 'DESPCOORD' GROUP BY id_usu;";  
-                             $result = mysqli_query($connect, $query); 
-                             while($row = mysqli_fetch_array($result))  
-                          { 
-                            
-                           
                                echo '  
                                <tr>  
-                               <td><a href="pesquisa_cx.php?id_usu='.$row["id_usu"].'"> '.$row["id_usu"].' </span></a></td>  
-                               <td>'.$row["nome"].'</td>   
-                           
-                               
-                                    
+                                    <td><a href="pesq_logradouro_concluidos.php?cod='.$row["cod_logradouro"].'"> '.$row["cod_logradouro"].' </span></a></td>   
+                                    <td>'.$row["localidade"].'</td>
+                                    <td>'.$row["logradouro"].'</td>  
+                                    <td> <a style="color:black;" href="liberar_survey.php?protocolo='.$row["cod_logradouro"].'"   role="button" aria-pressed="true"><i style="padding-left:40%;" class="fa fa-solid fa-key fa-lg"></i></a></td>
+                                     
                                </tr>  
                                ';  
-                          }    
+                            }
+                            
                           ?>  
                      </table>  
                 </div>  
@@ -198,8 +190,19 @@ function fnExcelReport() {
  </html>  
  <script>  
  $(document).ready(function(){  
-      $('#myTable').DataTable();  
- });  
- </script>  
+      $('#myTable').DataTable(
+        {
+                   
+          "scrollX": false,
+    "ordering": true,
+    "lengthMenu": [ [ -1, 10, 30, 50, 100], ["Todos", "10","30", "50", "100"] ],
+    "scrollCollapse": true,
+    
+                    
+                }
 
-<script src="js/main.js"></script>
+
+
+      );  
+ });  
+ </script>   

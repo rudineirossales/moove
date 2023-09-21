@@ -51,12 +51,6 @@ function saidasuccessfully()
 <body>
 
 
-
-
-
-
-
-
 <?php
 
 
@@ -76,12 +70,6 @@ function saidasuccessfully()
         $teste1 =$_POST['teste1'];
         $teste2 =$_POST['teste2'];
 
-        
-    
-	
-
-      
-    
         if(isset($_FILES['teste1'])) {
     
 	

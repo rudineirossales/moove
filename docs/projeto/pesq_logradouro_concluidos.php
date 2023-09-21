@@ -9,78 +9,12 @@
                   exit;
             }
 
-            $localidade = $_GET["cod"];
-            $logradouro = $_GET["logradouro"];
+            $cod = $_GET["cod"];
             $protocolo = $_GET["protocolo"];
-            $teste = $_GET["teste"];
 
             $connect = mysqli_connect("localhost", "root", "", "u504529778_projeto");  
-
-            
-            $sql2 = mysql_query ("select count(DISTINCT(cod_survey)) from projeto where localidade = '$localidade' and logradouro = '$logradouro' and cadastro_status = 'NAO INICIADO'" );
-            $ContaSurvey = mysql_num_rows($sql2);
-
-            $sql3 = mysql_query ("select SUM(quantidade_ums) from projeto where localidade = '$localidade' and logradouro = '$logradouro' and cadastro_status = 'NAO INICIADO'" );
-            $ContaUms = mysql_num_rows($sql3);
-
-
-            $query ="select trava,trava_por,cadastro_status,protocolo,logradouro,num_fachada,comp1,comp2,comp3,cod_survey from projeto where localidade = '$localidade' and logradouro = '$logradouro' and cadastro_status = 'NAO INICIADO' or localidade = '$localidade' and logradouro = '$logradouro' and cadastro_status = 'PENDENTE' or localidade = '$localidade' and logradouro = '$logradouro' and cadastro_status = 'CONCLUIDO' order by num_fachada ";  
+            $query ="select check_,cadastro_status,protocolo,logradouro,num_fachada,comp1,comp2,comp3,cod_survey from projeto where cod_logradouro = '$cod' and cadastro_status = 'CONCLUIDO'  order by num_fachada ";  
             $result = mysqli_query($connect, $query); 
-
-            $sql = mysql_query ("select * from projeto where cod_logradouro = '$cod' " );
-
-            $row = mysql_num_rows($sql);
-
-
-                if (mysql_num_rows($sql) > 0)
-
-                {
-                    while ($dado = mysql_fetch_assoc($sql))
-                    {
-                        
-                        $protocolo = $dado["protocolo"];
-                        $trava = $dado["trava"];
-                        $trava_por = $dado["trava_por"];
-                        $cod_logradouro = $dado["cod_logradouro"];
-                     
-                    }
-                
-                }
-                
-                if($teste != 's')
-              {
-                if($trava == "S")
-                {
-
-                  echo "
-                  <script language='JavaScript'>
-                  window.alert('EM TRATATIVA POR $trava_por')
-                  
-                  </script>";
-
-                  echo "<script language='JavaScript'>
-                  window.location='pesq_logradouro.php'
-                  </script>";
-
-                  break;
-                  
-                }
-                else
-                {
-
-                  $query = "update  projeto set trava = 'S', trava_por = '".$_SESSION['nome']."' where cod_logradouro = '$cod'";
-                  $sql = mysql_query($query);
-
-
-                }
-              }
-       
-
-
-                
-
-
-
 ?>
 
 
@@ -91,6 +25,10 @@
   <title>Icomon</title>  
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
            <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script> 
+          
+           <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+           
            
            
               
@@ -195,14 +133,14 @@ function fnExcelReport() {
             <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Widgets</a></li>
           </ul>
         </li>
-         
         
-        <li><a class="treeview-item" href="incluir_survey.php?cod=<?php echo $protocolo;?>"><i class="icon fa fa-circle-o"></i>Incluir Survey</a></li>
+        
+        
         <li><a class="app-menu__item " href="#" id="test" onClick="javascript:fnExcelReport();">  <i class="app-menu__icon fa fa-table"></i> </i><span class="app-menu__label"> Gerar Excel </span> </a> </li>
     </aside>
     <main class="app-content">
       <div class="app-title">
-        <div>
+        <div> 
           <h1><i class="fa fa-th-list"></i> Logradouros</h1>
           
         </div>
@@ -217,68 +155,89 @@ function fnExcelReport() {
 
         
           <div class="tile">
-          <span class="badge badge-pill badge-sucess">  <?php echo $ContaUms;?>
+          
           <div class="table-responsive">  
                      <table id="myTable" class="table table-striped table-bordered">  
                           <thead>  
-                               <tr>  
+                               <tr> 
+                                    <td>Check</td>
                                     <td>Código</td>
                                     <td>Status</td>
                                     <td>Rua</td> 
                                     <td>Nº fachada</td>
-                                    <td>Quantidade de UMS</td>
+                                    <td>Quantidade UMS</td>
                                     <td>Cód.Survey</td>  
                                     <td>Complemento 1</td>
                                     <td>Complemento 2</td>  
                                     <td>Complemento 3</td>
-                                  
+                                    <td>Check</td> 
+                                    
+                                    
+                                    
+                                           
                                </tr>  
                           </thead>  
                           <?php  
                           while($row = mysqli_fetch_array($result))  
                           {  
+                                          
+                                           $protocolo = $row["protocolo"];
+                                           $check = $row["check_"];
 
-                            $cadatro_status = $row["cadastro_status"];
-
-                            if($cadatro_status == 'CONCLUIDO')
-                            {
+                                           if($check == "check")
+                                           { 
+                                            $mostrar = '<i class="fa fa-check" style="font-size:24px;color:green"></i>';
+                                           }
+                                           else
+                                           { 
+                                            $mostrar = '<i class="fa fa-close" style="font-size:24px;color:red"></i></i>';
+                                           }
                               echo '  
                                <tr>  
-                                    <td>'.$row["logradouro"].'</td>
+                                    <td>'.$mostrar.'</i></td>  
+                                    <td>'.$row["protocolo"].'</td>
                                     <td>'.$row["cadastro_status"].'</td>   
                                     <td>'.$row["logradouro"].'</td>
                                     <td>'.$row["num_fachada"].'</td>
                                     <td>'.$row["quantidade_ums"].'</td>
                                     <td>'.$row["cod_survey"].'</td>  
                                     <td>'.$row["comp1"].'</td>
-                                    <td>'.$row["comp1"].'</td>
+                                    <td>'.$row["comp2"].'</td>
                                     <td>'.$row["comp3"].'</td>
-                                    
-                                    
-                                    
-                               </tr>  
+                                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal'.$protocolo.'">
+                                     Check
+                                    </button></td>
+                                
+                               </tr>   
+
+                               <!-- Modal -->
+                              <div class="modal fade" id="exampleModal'.$protocolo.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Deseja validar?</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <form  method="post"  action="pesq_logradouro_concluidos.php">
+
+                                        <input class="form-control"  name="protocolo"  value="'.$protocolo.'" type="hidden" aria-describedby="emailHelp" >
+                                        <input class="form-control"  name="cod"  value="'.$cod.'" type="hidden" aria-describedby="emailHelp" >
+
+                                      
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                                      <button type="submit" name="submit" class="btn btn-primary">OK</button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                                ';  
 
-
-                            }
-                            else
-                            {
-                               echo '  
-                               <tr>  
-                                    <td><a href="editar_survey.php?cod='.$row["protocolo"].'"> '.$row["protocolo"].' </span></a></td>
-                                    <td>'.$row["cadastro_status"].'</td>   
-                                    <td>'.$row["logradouro"].'</td>
-                                    <td>'.$row["num_fachada"].'</td>
-                                    <td>'.$row["cod_survey"].'</td>  
-                                    <td>'.$row["comp1"].'</td>
-                                    <td>'.$row["comp1"].'</td>
-                                    <td>'.$row["comp3"].'</td>
-                                   
-                                    
-                                    
-                               </tr>  
-                               ';  
-                            }
                           }  
                           ?>  
                      </table>  
@@ -304,3 +263,58 @@ function fnExcelReport() {
       );  
  });  
  </script>   
+
+<?php
+if (isset($_POST ['submit']) )
+{
+  
+
+  $protocolo  =$_POST['protocolo'];
+  $cod  =$_POST['cod'];
+
+          $query = "update projeto set check_ = 'check' where protocolo = '$protocolo'";
+  
+          $sql = mysql_query($query);
+  
+  
+  
+  
+        if($sql)
+        {
+  
+          echo "
+          <script language='JavaScript'>
+          window.alert('EDITADO SUCESSO!')
+          
+          </script>";
+
+          echo "<script language='JavaScript'>
+          window.location='pesq_logradouro_concluidos.php?cod=".$cod."'
+          </script>";
+  
+         
+        }
+        else
+        {
+          
+          echo "<script language='JavaScript'>
+          window.alert('ERRO NO ENVIO!');
+          </script> " ;
+  
+          echo " 
+          <div style='display: flex; justify-content: center; align-items: center; padding: 8%;'>
+           <img src='img/404.jpg'>
+          </div> 
+          ";
+  
+          
+          
+        }
+
+
+
+
+
+
+}
+?>

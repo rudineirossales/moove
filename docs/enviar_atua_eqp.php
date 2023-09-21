@@ -15,35 +15,13 @@ if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
 }
 
 
-
- 
-
-
 ?>
-
-
-
- 
 
 <?php
 
 session_start();
 
 
-
-
-
-
-
-
-
-
-
-
-
-	
-
-	
 //}
 
 ?>
@@ -82,12 +60,6 @@ function saidasuccessfully()
 <body>
 
 
-
-
-
-
-
-
 <?php
 
 $id  =$_POST['id'];
@@ -96,19 +68,9 @@ $tec  =$_POST['tec'];
 $coord  =$_POST['coord'];
 $descricao  =$_POST['descricao'];
 
-
-
-
-
-
-
- 
         $query = "update diario set status = '$status', descricao = '$descricao', id_coord = '$coord', nome_coord = '$tec', data_atualizacao = NOW() where re = '$id'";
 
         $sql = mysql_query($query);
-
-
-
 
       if($sql)
       {
@@ -134,12 +96,6 @@ $descricao  =$_POST['descricao'];
         
         
       }
-
-
-
-
-
-
 
 
 ?>

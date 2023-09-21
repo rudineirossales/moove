@@ -40,7 +40,6 @@
                         $ba_comum = $dado["ba_comum"];
                         $data_abertura = $dado["data_abertura"];
                         $data_vencimento= $dado["data_vencimento"];
-
                         $eqp_a = $dado["eqp_a"];
                         $eqp_b = $dado["eqp_b"];
                         $cliente = $dado["cliente"];
@@ -52,6 +51,8 @@
                         $cabo= $dado["cabo"];
                         $trecho= $dado["trecho"];
                         $barramento = $dado["barramento"];
+
+                        
                         
                         
                     }

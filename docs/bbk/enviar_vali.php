@@ -66,12 +66,7 @@ function saidasuccessfully()
                         $prs = $dado["prs"];
                         $cliente = $dado["cliente"];
                         $ccto = $dado["ccto"];
-                        
-                       
-                        
-                        
-                        
-                        
+                      
                     }
                 
                 }
@@ -359,6 +354,32 @@ fieldset
                   </div>
                   <div id="principal" >
                   </div>
+
+                  <fieldset class="col-md-6">
+                  <div class="form-group">
+                        <label for="formFile" class="form-label">Teste de validação </label>
+                        <input class="form-control" required type="file" accept=".png,.jpg,.jpeg" id="teste1" name="teste1" >
+                        <p  style="font-size: 10px; color:red;" > Obrigatório**</p>
+                        <p id="output1"></p>
+                        <script type="text/javascript">
+                        $('#teste1').on('change', function() {
+                  
+                            const size = 
+                              (this.files[0].size / 1024 / 1024).toFixed(2);
+                  
+                            if (size > 1 ) {
+                                alert("Máximo 1 MB");
+                                $("#teste1").val("");
+                                
+                            } else {
+                                $("#output1").html('<b>' +
+                                  'Tamanho: ' + size + " MB" + '</b>');
+                            }
+                        });
+                    </script>   
+
+                  </div>
+                      </fieldset>
                   
                   
         </br><div class="form-check">

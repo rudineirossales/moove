@@ -90,7 +90,7 @@
           <ul class="treeview-menu">
           
             <li><a class="treeview-item" href="pesq_logradouro.php"><i class="icon fa fa-circle-o"></i>Survey Pendentes</a></li>
-           
+            <li><a class="treeview-item" href="pesq_concluidos.php"><i class="icon fa fa-circle-o"></i>Survey Concluidos</a></li>
             <li><a class="treeview-item" href="pesq_logradouro_ex.php"><i class="icon fa fa-circle-o"></i>Survey Excluídos</a></li>
            
             
