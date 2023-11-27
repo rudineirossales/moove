@@ -27,7 +27,7 @@ $ba =$_GET['ba'];  ?>
 <head>
   
 <!-- ///////PASTA BOOTSTRAP ////////////////////-->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
 
 
@@ -41,6 +41,11 @@ $ba =$_GET['ba'];  ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="icon" href="img/icon.ico">
 
+
+
+
+
+
 <script type="text/javascript">
 function loginsuccessfully()
 {
@@ -53,6 +58,8 @@ function loginsuccessfully()
 
 </script>
 
+
+  
 
 <link rel="icon" href="img/icomon.png">
   <title>Icomon </title>
@@ -89,14 +96,14 @@ function loginsuccessfully()
          
           
           <div class="text-center">
-            <img src="arquivo/<?php echo $dado["foto_antes"];?>"  style="padding-top: 5%;"> <br>
+            <img src="../Api/Backbone/backbone_foto/<?php echo $dado["foto_antes"];?>"  style="padding-top: 5%;" width="500" height="500"> <br>
             
           </div>
           <div class="text-center">
-            <img src="arquivo/<?php echo $dado["foto_depois"];?>"  style="padding-top: 5%;"> 
+            <img src="../Api/Backbone/backbone_foto/<?php echo $dado["foto_depois"];?>"  style="padding-top: 5%;" width="500" height="500"> 
           </div>
           <div class="text-center">
-            <img src="arquivo/<?php echo $dado["evidencia3"];?>"  style="padding-top: 5%;"> 
+            <img src="../Api/Backbone/backbone_foto/<?php echo $dado["evidencia3"];?>"  style="padding-top: 5%;" width="500" height="500"> 
           </div>
          
             <?php 

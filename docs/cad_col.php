@@ -55,8 +55,7 @@
 
   
 <style>
-  
-  loading
+  #loading
 {
   
 width:70px;

@@ -9,10 +9,10 @@
                   exit;
             }
 
-            $connect = mysqli_connect("localhost", "root", "", "icomom_");  
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon");  
 
             
-            $query ="SELECT * FROM atividade join usuario on atividade.id_usu = usuario.id and status <> 'ENCERRADO' order by data_vencimento desc;";   
+            $query ="SELECT * FROM atividade join usuario on atividade.id_usu = usuario.id and status <> 'ENCERRADO' order by data_vencimento desc;";  
            
              
             $result = mysqli_query($connect, $query); 
@@ -23,11 +23,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
-
-
-
-
   <title>Icomon</title>  
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
            <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script> 
@@ -158,27 +153,29 @@
         
           <div class="tile">
           
-          <div class="table-responsive" >  
-                     <table  id="myTable" class="table table-striped table-bordered" >  
-                          <thead >  
-                               <tr  > 
-                                    <th>Ba</th>  
-                                    <th>Uf</td>  
-                                    <th>Localidade</td> 
-                                    <th>Estação</th>  
-                                    <th >Endereço</th>  
-                                    <th>Célula</th> 
-                                    <th>Cdoe</th>  
-                                    <th>Tipo</th>  
-                                    <th>Técnico</th>  
-                                    <th>Status</th>  
-                                    <th >Data abertura</th>  
+          <div class="table-responsive">  
+                     <table id="myTable" class="table table-striped table-bordered">  
+                          <thead>  
+                               <tr> 
+                               <th>Ba</th>  
+                                    <th>Uf</th>  
+                                    <th>Localidade</th> 
+                                    <th>Estação</th>
+                                    <th>Data abertura</th>  
                                     <th>Data vencimento</th> 
+                                    <th>Endereço</th>
+                                     <th>Célula</th> 
+                                    <th>Tipo</th>  
+                                    <th>Técnico</th>
+                                    <th>Coordenador</th>  
+                                    <th>Status</th>  
                                     <th>Despachado por</th>  
-                                    <th>Data despacho</th> 
-                                    <th>Atribuído:</th>
-                                    <th>Validado por</th>  
-                                    <th>Data Validação</th>  
+                                    <th>Data despacho</th>  
+                                    <th>Atribuído</th>
+                                   
+                                   
+                                     
+                                    
                                      
                                </tr>  
                           </thead>  
@@ -186,25 +183,26 @@
                           while($row = mysqli_fetch_array($result))  
                           {  
                                echo '  
-                               <tr > 
+                               <tr> 
                                <td>'.$row["ba"].'</td> 
                                <td>'.$row["uf"].'</td>  
-                               <td>'.$row["localidade"].'</td>
+                               <td style="min-width: 150px;">'.$row["localidade"].'</td>
                                <td>'.$row["estacao"].'</td>  
-                               <td>'.$row["endereco"].'</td>  
+                               <td style="min-width: 150px;">'.$row["data_abertura"].'</td>  
+                               <td style="min-width: 150px;">'.$row["data_vencimento"].'</td>  
+                               <td style="min-width: 400px;">'.$row["endereco"].'</td>  
                                <td>'.$row["celula"].'</td> 
-                               <td>'.$row["cdoe"].'</td>  
                                <td>'.$row["tipo"].'</td>  
                                <td>'.$row["nome"].'</td> 
+                               <td>'.$row["nome_gestor"].'</td> 
                                <td>'.$row["status"].'</td>  
-                               <td style="min-width: 150px;" >'.$row["data_abertura"].'</td>  
-                               <td style="min-width: 150px;">'.$row["data_vencimento"].'</td>  
+                               
                                <td style="min-width: 150px;">'.$row["nome_despacho"].'</td>  
                                <td style="min-width: 150px;">'.$row["data_despacho"].'</td>
-                               <td style="min-width: 150px;">'.$row["data_atribuicao"].'</td> 
-                               <td style="min-width: 150px;">'.$row["nome_validacao"].'</td>  
-                               <td style="min-width: 150px;">'.$row["data_validacao"].'</td>
+                               <td style="min-width: 150px;">'.$row["data_atribuicao"].'</td>
+                               
                                   
+                               
                                     
                                </tr>  
                                ';  
@@ -217,7 +215,20 @@
  </html>  
  <script>  
  $(document).ready(function(){  
-      $('#myTable').DataTable();  
+      $('#myTable').DataTable(
+        {
+                   
+          "scrollX": false,
+    "ordering": true,
+    "lengthMenu": [ [ -1, 10, 30, 50, 100], ["Todos", "10","30", "50", "100"] ],
+    "scrollCollapse": true,
+    
+                    
+                }
+
+
+
+      );  
  });  
  </script>  
  <script src="js/main.js"></script>

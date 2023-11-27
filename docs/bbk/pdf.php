@@ -1,6 +1,6 @@
 <?php
 
-include '../mpdf/mpdf.php';
+include 'mpdf/mpdf.php';
 
 
  include "conn.php";
@@ -31,7 +31,7 @@ $select = mysql_query ("select * from atividade_bbk join usuario on atividade_bb
 <span>PONTA B:  $linha[estacao_b]   </span><br>
 <span>ENDEREÇO:  $linha[endereco]   </span><br>
 <span>PRIORIDADE:  $linha[tipo]   </span><br>
-<span>REDE:  $linha[tipo_rede]   </span><br>
+
 
 <span>ABERTURA:  $linha[data_abertura]   </span><br>
 <span>VENCIMENTO:  $linha[data_vencimento]   </span><br>
@@ -42,9 +42,7 @@ $select = mysql_query ("select * from atividade_bbk join usuario on atividade_bb
 <span>VALIDAÇÃO:  $linha[data_validacao]   </span><br>
 <span>NOME VALIDAÇÃO:  $linha[nome_validação]   </span><br>
 <span>ENCERRAMENTO:  $linha[data_encerramento]   </span><br>
-
 <span>COORDENADOR:  $linha[nome_gestor]   </span><br>
-
 <span>CAUSA:  $linha[causa]   </span><br>
 <span>SUB-CAUSA:  $linha[sub]   </span><br>
 <span>RO:  $linha[ro]   </span><br>
@@ -53,6 +51,10 @@ $select = mysql_query ("select * from atividade_bbk join usuario on atividade_bb
 <span>PRS:  $linha[prs]   </span><br>
 <span>CIRCUITO:  $linha[ccto]   </span><br>
 <span>CLIENTE:  $linha[cliente]   </span><br>
+<span>LATITUDE:  $linha[latitude_final]   </span><br>
+<span>LONGITUDE:  $linha[longitude_final]   </span><br>
+<span>CABO:  $linha[cabo]   </span><br>
+<span>TRECHO:  $linha[trecho]   </span><br>
 
 <span>DESCRIÇÃO TÉCNICO: <br> <fieldset style='border: 1px solid; padding: 12px;'>$linha[obs]   </span></fieldset><br><br>
 <span>DESCRIÇÃO CL: <br> <fieldset style='border: 1px solid; padding: 12px;'>$linha[obs_cl]   </span></fieldset><br><br>
@@ -70,6 +72,7 @@ $select = mysql_query ("select * from atividade_bbk join usuario on atividade_bb
     <tr>
     <td> <img src='../Api/Backbone/backbone_foto/$linha[foto_antes]' width='300' height='300'><br> Evidência</td>
     <td> <img src='../Api/Backbone/backbone_foto/$linha[foto_depois]' width='300' height='300'><br> Evidência </td>
+    <td> <img src='../Api/Backbone/backbone_foto/$linha[evidencia3]' width='300' height='300'><br> Evidência </td>
     
     
     </tr>

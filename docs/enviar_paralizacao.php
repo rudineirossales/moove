@@ -22,10 +22,26 @@ if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
 ?>
 
 
+
+ 
+
 <?php
 
 session_start();
 
+
+$hoje = date('Y-m-d H:i:s');
+
+
+
+
+
+
+
+
+
+
+	
 
 	
 //}
@@ -66,31 +82,56 @@ function saidasuccessfully()
 <body>
 
 
+
+
+
+
+
+
 <?php
 
 $ba  =$_POST['ba'];
 $status  =$_POST['status'];
 $motivo  =$_POST['motivo'];
 $just  =$_POST['just'];
+date_default_timezone_set('America/Sao_Paulo');
+$hoje = date('Y-m-d H:i:s');
 
 
 
 
+$sql2 = mysql_query ("select usuario.nome_gestor, id_gestor from atividade join usuario on atividade.id_usu = usuario.id where ba = '$ba'" );
 
-        if($status  <> 'PARALIZADO')
+$row = mysql_num_rows($sql2);
+
+
+    if (mysql_num_rows($sql2) > 0)
+
+    {
+
+      while ($dado = mysql_fetch_assoc($sql2))
+      {
+
+      $id_gestor = $dado["id_gestor"];
+
+      }
+
+    }
+
+        if($status  <> 'PARALISADO')
         {
-
-          $log = "PARALIZADO";
+            
+        $log = "PARALISADO";
  
-        $query = "update atividade set status = 'PARALIZADO', just_paralizacao = '$just', data_paralizacao = NOW(), data_liberacao = '', motivo_paralizacao = '$motivo', nome_paralizacao = '".$_SESSION['nome']."' where ba = '$ba'";
+        $query = "update atividade set status = 'PARALISADO', just_paralizacao = '$just', data_paralizacao = '$hoje', data_liberacao = '', motivo_paralizacao = '$motivo', nome_paralizacao = '".$_SESSION['nome']."' where ba = '$ba'";
 
         }
-        if($status ==  'PARALIZADO')
+        if($status ==  "PARALISADO")
         {
+            
+            $log = "LIBERADO";
 
-          $log = "LIBERADO";
-
-        $query = "update atividade set status = 'EM ANDAMENTO', data_liberacao = NOW(), nome_liberacao = '".$_SESSION['nome']."' where ba = '$ba'";
+        $query = "update atividade set status = 'DESPCOORD', id_usu = '$id_gestor',data_liberacao = '$hoje', nome_liberacao = '".$_SESSION['nome']."' where ba = '$ba'";
 
         }
 
@@ -103,10 +144,10 @@ $just  =$_POST['just'];
 
       if($sql)
       {
-        $query4 = "insert into logs (ba,status,nome,id,data)";
-        $query4.= "values ('$ba','$log','".$_SESSION['nome']."','".$_SESSION['id']."',NOW())";
-        $sql4 = mysql_query($query4);
-
+          
+              $query4 = "insert into logs (ba,status,nome,id,data)";
+              $query4.= "values ('$ba','$log','".$_SESSION['nome']."','".$_SESSION['id']."','$hoje')";
+              $sql4 = mysql_query($query4);
 
         echo "
         <script language='JavaScript'>

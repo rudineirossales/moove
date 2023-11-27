@@ -274,8 +274,7 @@ height:70px;
     
                   <div class="form-group">
                     <label for="exampleInputEmail1">Tipo</label>
-                    <input class="form-control"  id="ba" readonly name="tipo"  value=
-                    "<?php echo $tipo?>" type="text" aria-describedby="emailHelp" >
+                    <input class="form-control"  id="ba" readonly name="tipo"  value="<?php echo $tipo?>" type="text" aria-describedby="emailHelp" >
                   </div>
 
       

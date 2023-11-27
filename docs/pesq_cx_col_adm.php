@@ -3,13 +3,13 @@
       
          session_start();
 
-         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) || ($_SESSION["acesso"] != 'ADM' ) AND ($_SESSION["acesso"] != 'Tec' ) )
+         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"])  )
             {
                  header("Location: index.html");
                   exit;
             }
 
-            $connect = mysqli_connect("localhost", "root", "", "icomom_");  
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon");  
             
 ?>
 
@@ -90,7 +90,7 @@ function fnExcelReport() {
   </head>
   <body class="app sidebar-mini rtl">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="dashboard.php">Serede</a>
+    <header class="app-header"><a class="app-header__logo" href="dashboard.php">Icomon</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -172,9 +172,17 @@ function fnExcelReport() {
 
                            
 
-                              
+                              if($_SESSION["id"] == "3000"){
+                                  
+                                $query ="select * from atividade join usuario on atividade.id_usu = usuario.id where status <> 'ENCERRADO' and status <> 'EM VALIDACAO' and status <> 'PARALISADO'  and status <> 'DESPCOORD' GROUP BY id_usu;";  
+                                  
+                              }else{
+                                  
+                                 $query ="select * from atividade join usuario on atividade.id_usu = usuario.id where status <> 'ENCERRADO' and status <> 'EM VALIDACAO' and status <> 'PARALISADO' and atividade.nome_gestor = '".$_SESSION['nome']."' and status <> 'DESPCOORD' and usuario.funcao <> 'COORD'  GROUP BY id_usu;";  
+                                  
+                              }
                                 
-                             $query ="select * from atividade join usuario on atividade.id_usu = usuario.id where status <> 'ENCERRADO' and status <> 'EM VALIDACAO' and status <> 'PARALIZADO' and atividade.nome_gestor = '".$_SESSION['nome']."' and status <> 'DESPCOORD' GROUP BY id_usu;";  
+                              
                              $result = mysqli_query($connect, $query); 
                              while($row = mysqli_fetch_array($result))  
                           { 

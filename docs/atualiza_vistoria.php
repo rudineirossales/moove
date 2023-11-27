@@ -6,7 +6,10 @@ $hoje = date('Y-m-d H:i:s');
 
 // MARCIO
                             
-$sql2 = mysql_query ("select causa,estacao, data_validacao,ba,tipo,endereco,data_encerramento,status,vistoria,nome_gestor from atividade where status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'marcio alves'  and MONTH(data_encerramento) = MONTH(NOW()) -1 order by ba asc limit 30;" );
+$sql2 = mysql_query ("select causa,estacao, data_validacao,ba,tipo,endereco,data_encerramento,status,vistoria,nome_gestor from atividade where status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'marcio alves'  and MONTH(data_encerramento) = MONTH(NOW()) -1 and causa = 'VANDALISMO' or 
+status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'marcio alves'  and MONTH(data_encerramento) = MONTH(NOW()) -1 and causa = 'ACAO DE TERCEIROS' or
+status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'marcio alves'  and MONTH(data_encerramento) = MONTH(NOW()) -1 and causa = 'CARGA ALTA/CABO BAIXO'
+order by ba asc limit 20;" );
 $row = mysql_num_rows($sql2); 
 
 
@@ -37,7 +40,10 @@ while($dado = mysql_fetch_assoc($sql2))
 
 // MARLOS
 
-$sql2 = mysql_query ("select causa,estacao, data_validacao,ba,tipo,endereco,data_encerramento,status,vistoria,nome_gestor from atividade where status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'Marlos Ueldes'  and MONTH(data_encerramento) = MONTH(NOW()) -1 order by ba asc limit 30;" );
+$sql2 = mysql_query ("select causa,estacao, data_validacao,ba,tipo,endereco,data_encerramento,status,vistoria,nome_gestor from atividade where status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'Marlos Ueldes'  and MONTH(data_encerramento) = MONTH(NOW()) -1 and causa = 'VANDALISMO' or 
+status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'Marlos Ueldes'  and MONTH(data_encerramento) = MONTH(NOW()) -1 and causa = 'ACAO DE TERCEIROS' or
+status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'Marlos Ueldes'  and MONTH(data_encerramento) = MONTH(NOW()) -1 and causa = 'CARGA ALTA/CABO BAIXO'
+order by ba asc limit 20;" );
 $row = mysql_num_rows($sql2); 
 
 
@@ -69,7 +75,10 @@ while($dado = mysql_fetch_assoc($sql2))
 
 // RODRIGO
 
-$sql2 = mysql_query ("select causa,estacao, data_validacao,ba,tipo,endereco,data_encerramento,status,vistoria,nome_gestor from atividade where status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'Rodrigo Jorge'  and MONTH(data_encerramento) = MONTH(NOW()) -1 order by ba asc limit 30;" );
+$sql2 = mysql_query ("select causa,estacao, data_validacao,ba,tipo,endereco,data_encerramento,status,vistoria,nome_gestor from atividade where status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'Rodrigo Jorge'  and MONTH(data_encerramento) = MONTH(NOW()) -1 and causa = 'VANDALISMO' or 
+status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'Rodrigo Jorge'  and MONTH(data_encerramento) = MONTH(NOW()) -1 and causa = 'ACAO DE TERCEIROS' or
+status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'Rodrigo Jorge'  and MONTH(data_encerramento) = MONTH(NOW()) -1 and causa = 'CARGA ALTA/CABO BAIXO'
+order by ba asc limit 20;" );
 $row = mysql_num_rows($sql2); 
 
 
@@ -101,7 +110,10 @@ while($dado = mysql_fetch_assoc($sql2))
 
 // BESSA
 
-$sql2 = mysql_query ("select causa,estacao, data_validacao,ba,tipo,endereco,data_encerramento,status,vistoria,nome_gestor from atividade where status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'Wesley Bessa'  and MONTH(data_encerramento) = MONTH(NOW()) -1 order by ba asc limit 30;" );
+$sql2 = mysql_query ("select causa,estacao, data_validacao,ba,tipo,endereco,data_encerramento,status,vistoria,nome_gestor from atividade where status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'Wesley Bessa'  and MONTH(data_encerramento) = MONTH(NOW()) -1 and causa = 'VANDALISMO' or 
+status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'Wesley Bessa'  and MONTH(data_encerramento) = MONTH(NOW()) -1 and causa = 'ACAO DE TERCEIROS' or
+status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'Wesley Bessa'  and MONTH(data_encerramento) = MONTH(NOW()) -1 and causa = 'CARGA ALTA/CABO BAIXO'
+order by ba asc limit 20;" );
 $row = mysql_num_rows($sql2); 
 
 
@@ -133,7 +145,10 @@ while($dado = mysql_fetch_assoc($sql2))
 
 // WAGNER
 
-$sql2 = mysql_query ("select causa,estacao, data_validacao,ba,tipo,endereco,data_encerramento,status,vistoria,nome_gestor from atividade where status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'WAGNER MONTEIRO'  and MONTH(data_encerramento) = MONTH(NOW()) -1 order by ba asc limit 30;" );
+$sql2 = mysql_query ("select causa,estacao, data_validacao,ba,tipo,endereco,data_encerramento,status,vistoria,nome_gestor from atividade where status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'WAGNER MONTEIRO'  and MONTH(data_encerramento) = MONTH(NOW()) -1 and causa = 'VANDALISMO' or 
+status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'WAGNER MONTEIRO'  and MONTH(data_encerramento) = MONTH(NOW()) -1 and causa = 'ACAO DE TERCEIROS' or
+status = 'ENCERRADO' and vistoria = '' and tipo= '97' and nome_gestor = 'WAGNER MONTEIRO'  and MONTH(data_encerramento) = MONTH(NOW()) -1 and causa = 'CARGA ALTA/CABO BAIXO'
+order by ba asc limit 20;" );
 $row = mysql_num_rows($sql2); 
 
 

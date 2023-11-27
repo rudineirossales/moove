@@ -12,43 +12,7 @@
 
           
 
-            $sql = mysql_query ("select * from usuario join atividade_bbk on usuario.id = atividade.id_usu where atividade.ba = '$ba'" );
-
-            $row = mysql_num_rows($sql);
-
-
-                if (mysql_num_rows($sql) > 0)
-
-                {
-                    while ($dado = mysql_fetch_assoc($sql))
-                    {
-                        
-                        $ba2 = $dado["ba"];
-                        $nome = $dado["nome"];
-                        $localidade = $dado["localidade"];
-                        $estacao = $dado["estacao"];
-                        $endereco = $dado["endereco"];
-         
-                        $tipo = $dado["tipo"];
-                        $tipo_rede = $dado["tipo_rede"];
-                        $data_despacho = $dado["data_despacho"];
-                        $causa = $dado["causa"];
-                        $sub = $dado["sub"];
-                        $ro = $dado["ro"];
-                        $cis = $dado["cis"];
-                        $obs = $dado["obs"];
-                        $obs_cl = $dado["obs_cl"];
-                        $data_encerramento = $dado["data_encerramento"];
-                        $data_despacho = $dado["data_despacho"];
-                        $data_abertura = $dado["data_abertura"];
-                        $data_vencimento = $dado["data_vencimento"];
-                        $afetacao = $dado["afetacao"];
-                     
-                    }
-                
-                }
-
-            
+           
 
 ?>
 
@@ -239,6 +203,7 @@ fieldset
                             $sub = $dado["sub"];
                             $ro = $dado["ro"];
                             $estacao_a = $dado["estacao_a"];
+                            $estacao_b = $dado["estacao_b"];
                             $cis = $dado["cis"];
                             $obs = $dado["obs"];
                             $obs_cl = $dado["obs_cl"];
@@ -247,13 +212,17 @@ fieldset
                             $data_abertura = $dado["data_abertura"];
                             $data_vencimento = $dado["data_vencimento"];
                             $afetacao = $dado["afetacao"];
-                            $evidencia1 = $dado["evidencia1"];
-                            $evidencia2 = $dado["evidencia2"];
+                            $evidencia1 = $dado["foto_antes"];
+                            $evidencia2 = $dado["foto_depois"];
                             $evidencia3 = $dado["evidencia3"];
                             $barramento = $dado["barramento"];
                             $prs = $dado["prs"];
                             $ccto = $dado["ccto"];
                             $cliente = $dado["cliente"];
+                            $latitude_final = $dado["latitude_final"];
+                            $longitude_final = $dado["longitude_final"];
+                            $cabo = $dado["cabo"];
+                            $trecho = $dado["trecho"];
            
                         }
                     
@@ -268,7 +237,8 @@ fieldset
                   <li class="list-group-item"><b> Ba: </b> <?php echo $ba;  ?></li>
                   <li class="list-group-item"><b> Técnico: </b> <?php echo $nome;  ?></li>
                   <li class="list-group-item"><b> Localidade: </b> <?php echo $localidade;  ?></li>
-                  <li class="list-group-item"><b> Estação: </b> <?php echo $estacao_a;  ?></li>
+                  <li class="list-group-item"><b> Estação A: </b> <?php echo $estacao_a;  ?></li>
+                  <li class="list-group-item"><b> Estação B: </b> <?php echo $estacao_a;  ?></li>
                   <li class="list-group-item"><b> Endereço: </b> <?php echo $endereco;  ?></li>
                   <li class="list-group-item"><b> Tipo Ba: </b> <?php echo $tipo;  ?></li>
                   <li class="list-group-item"><b> Abertura: </b> <?php echo $data_abertura;  ?></li>
@@ -283,6 +253,10 @@ fieldset
                   <li class="list-group-item"><b> Cliente: </b> <?php echo $cliente;  ?></li>
                   <li class="list-group-item"><b> Ro: </b> <?php echo $ro;  ?></li>
                   <li class="list-group-item"><b> Cis: </b> <?php echo $cis;  ?></li>
+                  <li class="list-group-item"><b> Cabo: </b> <?php echo $cabo;  ?></li>
+                  <li class="list-group-item"><b> Trecho: </b> <?php echo $trecho;  ?></li>
+                  <li class="list-group-item"><b> Latitude: </b> <?php echo $latitude_final;  ?></li>
+                  <li class="list-group-item"><b> Longitude: </b> <?php echo $longitude_final;  ?></li>
                   
                   
                  
@@ -323,14 +297,14 @@ fieldset
                     <textarea readonly  class="form-control"  id="exampleTextarea" name="obs" rows="6"> <?php echo '(' . $obs . ' )     ' . $obs_cl; ?> </textarea>
                   </div>
                   <div class="text-center">
-                  <img src="arquivo/<?php echo $evidencia1 ?>"  style="padding-top: 5%;"> <br>
+                  <img src="..Api/VPS/BBK/backbone_foto/<?php echo $evidencia1 ?>"  width='300' height='300' style="padding-top: 5%;"> <br>
                   
                 </div>
                 <div class="text-center">
-                  <img src="arquivo/<?php echo $evidencia2 ?>"  style="padding-top: 5%;"> 
+                  <img src="..Api/VPS/BBK/backbone_foto/<?php echo $evidencia2 ?>"  width='300' height='300' style="padding-top: 5%;"> 
                 </div>
                 <div class="text-center">
-                  <img src="arquivo/<?php echo $evidencia3 ?>"  style="padding-top: 5%;"> 
+                  <img src="..Api/VPS/BBK/backbone_foto/<?php echo $evidencia3 ?> "  width='300' height='300' style="padding-top: 5%;"> 
                 </div>
 
                   <?php } ?>

@@ -3,12 +3,13 @@
       
          session_start();
 
-         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"])   || ($_SESSION["acesso"] != 'ADM' )  AND ($_SESSION["acesso"] != 'GA' ) )
+         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"])   )
             {
                  header("Location: index.html");
                   exit;
             }
-
+            date_default_timezone_set('America/Sao_Paulo');
+            $hoje = date('Y-m-d');     
 
 ?>
 
@@ -146,7 +147,7 @@ $(document).ready(function() {
 $(document).ready(function() {
   $('#inputBa94').hide();
   $('#mySelect').change(function() {
-    if ($('#mySelect').val() == '94' || $('#mySelect').val() == '75') {
+    if ($('#mySelect').val() == '94' || $('#mySelect').val() == '75' || $('#mySelect').val() == '93') {
       $('#inputBa94').show();
     } else {
       $('#inputBa94').hide();
@@ -297,6 +298,7 @@ height:70px;
                   <select class="form-control " id="mySelect" name="tipo">
                       <option value="97">  97 </option>
                       <option value="94">  94 </option>
+                      <option value="93">  93 </option>
                       <option value="75">  75 </option>
                       <option value="60">  60 </option>
                       <option value="21">  21 </option>
@@ -315,6 +317,7 @@ height:70px;
                   <label for="email">UF:</label>  
                     <select class="form-control "  name="uf">
                       <option value="PR">  PR </option>
+                      <option value="AM">  AM </option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -427,7 +430,7 @@ height:70px;
 
     <div class="form-group">
      <label for="pwd"> DATA DE ABERTURA:</label>
-      <input type="datetime-local" class="form-control"  name="data_abertura" required>
+      <input type="datetime-local" class="form-control" max="<?php echo $hoje; ?>" name="data_abertura" required>
     </div>
 
     <div class="form-group">
@@ -444,7 +447,7 @@ height:70px;
                           <?php
 
                             
-                          $sql = "SELECT * FROM usuario  where funcao = 'COORD_BBK' group by nome_gestor order by nome
+                          $sql = "SELECT * FROM usuario  where funcao = 'COORD_BBK' or funcao = 'COORD_BBK_FTTH' group by nome_gestor order by nome
                           ";
                           $qr = mysql_query($sql) or die(mysql_error());
                           while($ln = mysql_fetch_assoc($qr)) 

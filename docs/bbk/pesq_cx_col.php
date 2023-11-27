@@ -9,7 +9,7 @@
                   exit;
             }
 
-            $connect = mysqli_connect("185.213.81.103", "u504529778_icomon_", "Rud!n3!@", "u504529778_icomon_");  
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon");  
             $query ="SELECT * FROM atividade_bbk where id_usu = '".$_SESSION['id']."' and status <> 'ENCERRADO' order by status";  
             $result = mysqli_query($connect, $query); 
 ?>
@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <html lang="en"> 
   <head>
-  <title>Controle de estoque</title>  
+  <title>Icomon</title>  
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
            <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script> 
            

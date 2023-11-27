@@ -7,15 +7,20 @@ function saidasuccessfully()
 }
 </script> 
 
+
+
 <?php 
 
 include "conn.php"; 
+
+session_start();
 
 
 
 $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-
+date_default_timezone_set('America/Sao_Paulo');
+$hoje = date('Y-m-d H:i:s');
 
 
 if(!empty($dados['CadUsuario'])){
@@ -28,9 +33,9 @@ if(!empty($dados['CadUsuario'])){
             $quantidade = $dados['email'][$chave];
             $ba = $dados['ba'];
 
-            $query = "INSERT INTO material (descricao, quantidade,ba)";
-            $query.= "values ('$descricao', '$quantidade', '$ba')";
-            $sql = mysql_query($query); 
+            $query = "INSERT INTO material (descricao,quantidade,ba,data)";
+            $query.= "values ('$descricao', '$quantidade', '$ba', '$hoje')";
+            $sql = mysql_query($query);
 
      }
 
@@ -38,10 +43,10 @@ if(!empty($dados['CadUsuario'])){
 {
    $query2 = "update atividade set status = 'EM VALIDACAO' where ba = '$ba'";
    $sql2 = mysql_query($query2);
-
-   $query4 = "insert into logs (ba,status,nome,id,data)";
-   $query4.= "values ('$ba','EM VALIDACAO','".$_SESSION['nome']."','".$_SESSION['id']."',NOW())";
-   $sql4 = mysql_query($query4);
+   
+  $query4 = "insert into logs (ba,status,nome,id,data)";
+  $query4.= "values ('$ba','EM VALIDACAO','".$_SESSION['nome']."','".$_SESSION['id']."','$hoje')";
+  $sql4 = mysql_query($query4);
  
   
   echo "
@@ -70,7 +75,7 @@ else
 }
 else{
 
-   echo "Erro";
+   echo $ba;
 
 }
 

@@ -15,13 +15,33 @@ if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
 }
 
 
+
+ 
+
+
 ?>
 
+
+
+ 
 
 <?php
 
 session_start();
 
+
+
+
+
+
+
+
+
+
+
+
+
+	
 
 	
 //}
@@ -39,8 +59,6 @@ session_start();
 <script type="text/javascript">
 function saidasuccessfully()
 {
-
-  
 	setTimeout("window.location='atua.php'",1000);
 	
 	
@@ -54,7 +72,7 @@ function saidasuccessfully()
 
 <meta charset="UTF-8"/>
 
-<title>Icomon</title>
+<title>Gerencia de Estoque</title>
 
 
 </head>
@@ -65,10 +83,17 @@ function saidasuccessfully()
 
 
 
+
+
+
+
+
 <?php
 
 $ba  =$_POST['ba'];
 $tec  =$_POST['tec'];
+
+
 $coord  =$_POST['coord'];
 
 $sql2 = mysql_query ("select * from usuario where id = '$coord'" );
@@ -84,12 +109,16 @@ $row = mysql_num_rows($sql2);
       {
 
       $gestor = $dado["nome"];
-      $id_gestor = $dado["id"];
 
       }
 
     }
 
+
+
+
+
+ 
         $query = "update atividade set id_usu = '$coord', nome_gestor = '$gestor', status = 'DESPCOORD' where ba = '$ba'";
 
         $sql = mysql_query($query);
@@ -99,16 +128,17 @@ $row = mysql_num_rows($sql2);
 
       if($sql)
       {
-
-        $query4 = "insert into logs (ba,status,nome,id,data)";
-        $query4.= "values ('$ba','DESPCOORD_REPASSE','".$_SESSION['nome']."','".$_SESSION['id']."',NOW())";
-        $sql4 = mysql_query($query4);
+          
+          $query4 = "insert into logs (ba,status,nome,id,data)";
+          $query4.= "values ('$ba','DESPCOORD_REPASSE','".$_SESSION['nome']."','".$_SESSION['id']."','$hoje')";
+          $sql4 = mysql_query($query4);
 
         echo "
         <script language='JavaScript'>
         window.alert('EDITADO SUCESSO!')
         
         </script>";
+       
 
         echo "<script>saidasuccessfully()</script>";
       }
@@ -119,11 +149,22 @@ $row = mysql_num_rows($sql2);
         window.alert('ERRO NO ENVIO!');
         </script> " ;
 
-        echo $tec;
+        echo " 
+        <div style='display: flex; justify-content: center; align-items: center; padding: 8%;'>
+         <img src='img/404.jpg'>
+        </div> 
+        ";
 
         
         
       }
+
+
+
+
+
+
+
 
 ?>
 

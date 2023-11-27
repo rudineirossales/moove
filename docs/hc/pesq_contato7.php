@@ -10,10 +10,15 @@
             }
 
             $connect = mysqli_connect("185.213.81.103", "u504529778_hc", "Rud!n3!@", "u504529778_hc");  
-            $query ="SELECT * FROM reparo_hc where status = '' and contador = '3'";  
+            $query ="SELECT * FROM reparo_hc where status = '' and contador = '3' and funcionalidade <> 'SEM RETORNO'";  
             $result = mysqli_query($connect, $query); 
-            $connection ->close();
+            
             $hoje = date('Y-m-d');
+            
+            
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "hc"); 
+            $contaValidacao = mysql_num_rows($sql);
+            mysql_close($connection);
 ?>
 
 
@@ -23,12 +28,7 @@
   <title>BA's em triagem</title>  
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
            <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script> 
-           
-           
-              
-            
-           
-          
+    
     <link rel="icon" href="img/icomon.png">
 
     <script type="text/javascript">
@@ -122,7 +122,7 @@ function fnExcelReport() {
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="index_col.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" href="dashboard_hc.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -154,16 +154,23 @@ function fnExcelReport() {
         
           <div class="tile">
           
-          <div class="table-responsive">  
+          <div class="table-responsive">
+              <span style="padding-left:3%;"class="badge badge-pill badge-success">  <?php echo $contaValidacao;?>  </span>
+  
                      <table id="myTable" class="table table-striped table-bordered">  
                           <thead>  
                                <tr> 
                                     <td>Uf</td>
                                     <td>Sa</td> 
                                     <td>Data Execução</td>  
-                                    <td>Companhia</td>  
+                                    <td>Companhia</td>
+                                    <th>Cliente</th>
+                                    <th>Contato</th>
                                     <td>Técnico</td> 
                                     <td>Macro</td> 
+                                    <td>Liberar SA</td> 
+    
+
                                        
                                </tr>  
                           </thead>  
@@ -172,18 +179,23 @@ function fnExcelReport() {
                           {    
                             
                                 $data = $row["data_execucao"];
-                                $qtdDias = 3;
+                                $qtdDias = 7;
+                                $cliente = $row["cliente"];
+                                $primeiroNome = explode(" ", $cliente);
                                 $reteste = date('Y-m-d', strtotime("+{$qtdDias} days",strtotime($data)));
 
                                 if($reteste == $hoje){
                                echo '  
                                <tr>  
-                                    <td>'.$reteste.'</td> 
+                                    <td>'.$row["uf"].'</td> 
                                     <td><a href="cadastro_hc.php?sa='.$row["sa"].'"> '.$row["sa"].' </span></a></td>   
                                     <td>'.$row["data_execucao"].'</td>
-                                    <td>'.$row["companhia"].'</td>  
+                                    <td>'.$row["companhia"].'</td>
+                                    <td>'.$primeiroNome[0].'</td>
+                                    <td>'.$row["contato"].'</td>
                                     <td>'.$row["tecnico"].'</td> 
                                     <td>'.$row["macro"].'</td> 
+                                    <td> <a style="color:black;" href="liberar_sa.php?sa='.$row["sa"].'"   role="button" aria-pressed="true"><i style="padding-left:40%;" class="fa fa-solid fa-key   fa-lg"></i></a></td>
                                   
                                </tr>  
                                ';  
@@ -196,7 +208,20 @@ function fnExcelReport() {
  </html>  
  <script>  
  $(document).ready(function(){  
-      $('#myTable').DataTable();  
+      $('#myTable').DataTable(
+        {
+                   
+          "scrollX": false,
+    "ordering": true,
+    "lengthMenu": [ [ -1, 10, 30, 50, 100], ["Todos", "10","30", "50", "100"] ],
+    "scrollCollapse": true,
+    
+                    
+                }
+
+
+
+      );  
  });  
  </script>  
  

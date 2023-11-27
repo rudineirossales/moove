@@ -9,25 +9,32 @@
                   exit;
             }
 
-            $localidade = $_GET["cod"];
+            $localidade = $_GET["localidade"];
             $logradouro = $_GET["logradouro"];
-            $protocolo = $_GET["protocolo"];
+            $protocolo = $_GET["cod"];
             $teste = $_GET["teste"];
-
-            $connect = mysqli_connect("localhost", "root", "", "u504529778_projeto");  
-
+            $cod2 = $_GET["cod2"];
             
-            $sql2 = mysql_query ("select count(DISTINCT(cod_survey)) from projeto where localidade = '$localidade' and logradouro = '$logradouro' and cadastro_status = 'NAO INICIADO'" );
-            $ContaSurvey = mysql_num_rows($sql2);
 
-            $sql3 = mysql_query ("select SUM(quantidade_ums) from projeto where localidade = '$localidade' and logradouro = '$logradouro' and cadastro_status = 'NAO INICIADO'" );
-            $ContaUms = mysql_num_rows($sql3);
+           $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "projeto");    
+            
+            $sql2 = mysql_query ("select count(DISTINCT(cod_survey)) from projeto where localidade = '$localidade' and logradouro = '$logradouro'   group by cod_survey" );
+            $ContaSurveyDistintos = mysql_num_rows($sql2);
 
-
-            $query ="select trava,trava_por,cadastro_status,protocolo,logradouro,num_fachada,comp1,comp2,comp3,cod_survey from projeto where localidade = '$localidade' and logradouro = '$logradouro' and cadastro_status = 'NAO INICIADO' or localidade = '$localidade' and logradouro = '$logradouro' and cadastro_status = 'PENDENTE' or localidade = '$localidade' and logradouro = '$logradouro' and cadastro_status = 'CONCLUIDO' order by num_fachada ";  
+            $query3 ="select SUM(quantidade_ums) as soma from projeto where localidade = '$localidade' and logradouro = '$logradouro'  ";  
+            $SomaSurvey = mysqli_query($connect, $query3); 
+            
+             while($row = mysqli_fetch_array($SomaSurvey))  
+             {
+            
+                        $SomaUms= $row["soma"];
+            
+             } 
+            
+            $query ="select quantidade_ums,trava,trava_por,cadastro_status,protocolo,logradouro,num_fachada,comp1,comp2,comp3,cod_survey from projeto where localidade = '$localidade' and logradouro = '$logradouro' and cadastro_status = 'NAO INICIADO' or localidade = '$localidade' and logradouro = '$logradouro' and cadastro_status = 'PENDENTE' or localidade = '$localidade' and logradouro = '$logradouro' and cadastro_status = 'CONCLUIDO' order by num_fachada ";   
             $result = mysqli_query($connect, $query); 
 
-            $sql = mysql_query ("select * from projeto where cod_logradouro = '$cod' " );
+            $sql = mysql_query ("select * from projeto where cod_logradouro = '$cod2' " );
 
             $row = mysql_num_rows($sql);
 
@@ -68,18 +75,13 @@
                 else
                 {
 
-                  $query = "update  projeto set trava = 'S', trava_por = '".$_SESSION['nome']."' where cod_logradouro = '$cod'";
+                  $query = "update  projeto set trava = 'S', trava_por = '".$_SESSION['nome']."' where cod_logradouro = '$cod2'";
                   $sql = mysql_query($query);
 
 
                 }
               }
        
-
-
-                
-
-
 
 ?>
 
@@ -217,9 +219,14 @@ function fnExcelReport() {
 
         
           <div class="tile">
-          <span class="badge badge-pill badge-sucess">  <?php echo $ContaUms;?>
+          
           <div class="table-responsive">  
+          
                      <table id="myTable" class="table table-striped table-bordered">  
+                      
+                      
+                      <h6>Soma UM's:  <span class="badge badge-secondary"><?php echo $SomaUms;?></span></h6>
+                      <h6>Survey Distintos:  <span class="badge badge-secondary"><?php echo $ContaSurveyDistintos;?></span></h6>
                           <thead>  
                                <tr>  
                                     <td>Código</td>
@@ -231,7 +238,10 @@ function fnExcelReport() {
                                     <td>Complemento 1</td>
                                     <td>Complemento 2</td>  
                                     <td>Complemento 3</td>
-                                  
+                                   
+                                    
+                                    
+                                      
                                </tr>  
                           </thead>  
                           <?php  
@@ -244,7 +254,7 @@ function fnExcelReport() {
                             {
                               echo '  
                                <tr>  
-                                    <td>'.$row["logradouro"].'</td>
+                                    <td>'.$row["protocolo"].'</td>
                                     <td>'.$row["cadastro_status"].'</td>   
                                     <td>'.$row["logradouro"].'</td>
                                     <td>'.$row["num_fachada"].'</td>
@@ -253,9 +263,7 @@ function fnExcelReport() {
                                     <td>'.$row["comp1"].'</td>
                                     <td>'.$row["comp1"].'</td>
                                     <td>'.$row["comp3"].'</td>
-                                    
-                                    
-                                    
+                                 
                                </tr>  
                                ';  
 
@@ -269,6 +277,7 @@ function fnExcelReport() {
                                     <td>'.$row["cadastro_status"].'</td>   
                                     <td>'.$row["logradouro"].'</td>
                                     <td>'.$row["num_fachada"].'</td>
+                                    <td>'.$row["quantidade_ums"].'</td>
                                     <td>'.$row["cod_survey"].'</td>  
                                     <td>'.$row["comp1"].'</td>
                                     <td>'.$row["comp1"].'</td>

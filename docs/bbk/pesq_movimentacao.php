@@ -3,13 +3,13 @@
       
          session_start();
 
-         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) || ($_SESSION["acesso"] != 'ADM' ) AND ($_SESSION["acesso"] != 'Tec' ) )
+         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"])  )
             {
                  header("Location: index.html");
                   exit;
             }
 
-            $connect = mysqli_connect("185.213.81.103", "u504529778_icomon_", "Rud!n3!@", "u504529778_icomon_");  
+           $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon");  
             
 ?>
 
@@ -235,21 +235,27 @@ function fnExcelReport() {
                      <table id="myTable" class="table table-striped table-bordered">  
                           <thead>  
                                <tr> 
-                               <td>Ba</td>  
+                                    <td>Ba</td>  
                                     <td>Uf</td> 
                                     <td>Localidade</td>  
-                                    <td>Estação</td>  
-                                    <td>Endereço</td>
-                                    <td>Afetação</td>
-                                    <td>Célula</td>  
-                                    <td>Cdoe</td>  
+                                    <td>Estacao</td>  
+                                    <td>Endereco</td>
+                                    <td>Cliente</td>
+                                    <td>Ccto</td>
+                                    <td>Prs</td>
+                                    <td>Rota</td>
+                                    <td>Barramento</td>
+                                    <td>Cabo</td>
+                                    <td>Trecho</td>
+                                    <td>Latitude</td>
+                                    <td>Longitude</td>
                                     <td>Tipo ba</td>
                                     <td>Tipo rede</td>
-                                    <td>Téc</td> 
+                                    <td>Tec</td> 
                                     <td>Abertura</td>
                                     <td>vencimento</td>
                                     <td>Despacho</td> 
-                                    <td>Atribuíção</td>
+                                    <td>Atribuicao</td>
                                     <td>Encerramento</td>
                                     <td>Causa</td>
                                     <td>Sub-causa</td>
@@ -258,7 +264,7 @@ function fnExcelReport() {
                                     <td>Ba Apoio</td>
                                     <td>Status</td> 
                                     <td>Material</td>
-                                    <td>Evidencias</td>
+                                   <!-- <td>Evidencias</td> -->
    
                                </tr>  
                           </thead> 
@@ -291,11 +297,17 @@ function fnExcelReport() {
                                <td>'.$row["ba"].'</td>
                                <td>'.$row["uf"].'</td> 
                                <td>'.$row["localidade"].'</td>  
-                               <td>'.$row["estacao"].'</td>  
+                               <td>'.$row["estacao_a"].'</td>  
                                <td>'.$row["endereco"].'</td>
-                               <td>'.$row["afetacao"].'</td>  
-                               <td>'.$row["celula"].'</td>  
-                               <td>'.$row["cdoe"].'</td>  
+                               <td>'.$row["cliente"].'</td>
+                               <td>'.$row["ccto"].'</td>
+                               <td>'.$row["prs"].'</td>
+                               <td>'.$row["rota"].'</td>
+                                <td>'.$row["barramento"].'</td>
+                               <td>'.$row["cabo"].'</td>  
+                               <td>'.$row["trecho"].'</td>  
+                               <td>'.$row["latitude_final"].'</td>  
+                               <td>'.$row["longitude_final"].'</td>  
                                <td>'.$row["tipo"].'</td>
                                <td>'.$row["tipo_rede"].'</td>
                                <td>'.$row["nome"].'</td>
@@ -311,8 +323,8 @@ function fnExcelReport() {
                                <td>'.$row["ba_apoio"].'</td>
                                <td>'.$row["status"].' ';?> </td> 
                                
-                               <td><?php echo "<a target='_blank' href='verMaterial.php?ba=$ba'> <span class='glyphicon glyphicon-list-alt'><button class='btn btn-primary'> ver </button></a>"?></td>
-                               <td><?php echo "<a target='_blank' href='verEvidencia.php?ba=$ba'> <span class='glyphicon glyphicon-list-alt'><button class='btn btn-primary'> ver </button></a>"?></td>   
+                               <td><?php echo "<a target='_blank' href='../verMaterial.php?ba=$ba'> <span class='glyphicon glyphicon-list-alt'><button class='btn btn-primary'> ver </button></a>"?></td>
+                               <!-- <td><?php echo "<a target='_blank' href='verEvidencia.php?ba=$ba'> <span class='glyphicon glyphicon-list-alt'><button class='btn btn-primary'> ver </button></a>"?></td>  --> 
                                     
                                     
                                </tr>  
@@ -324,9 +336,22 @@ function fnExcelReport() {
            </div>  
       </body>  
  </html>  
- <script>  
+  <script>  
  $(document).ready(function(){  
-      $('#myTable').DataTable();  
+      $('#myTable').DataTable(
+        {
+                   
+          "scrollX": false,
+    "ordering": true,
+    "lengthMenu": [ [ -1, 10, 30, 50, 100], ["Todos", "10","30", "50", "100"] ],
+    "scrollCollapse": true,
+    
+                    
+                }
+
+
+
+      );  
  });  
- </script>  
+ </script>   
  <script src="js/main.js"></script>

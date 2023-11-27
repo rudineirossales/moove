@@ -69,6 +69,7 @@ function saidasuccessfully()
 
 <?php
 
+date_default_timezone_set('America/Sao_Paulo');
 $ba  =$_POST['ba'];
 $uf =$_POST['uf'];
 $localidade =$_POST['localidade'];
@@ -81,6 +82,7 @@ $status  =$_POST['status'];
 $coordenador  =$_POST['coordenador'];
 $obs  = 'BA DE APOIO GERADO PELO BA PAI: '.$ba.'//  '.$_POST['obs'];
 $id_tec  =$_POST['tec'];
+$hoje = date('Y-m-d H:i:s');
 $token = '88'.rand(100000,400000);
 
 
@@ -89,7 +91,7 @@ $token = '88'.rand(100000,400000);
 
 
         $query = "insert into atividade (ba,uf,localidade,estacao,celula,cdoe,endereco,tipo,obs_cl,ba_apoio,id_usu,status,nome_despacho,data_despacho)";
-        $query.= "values ('$token','$uf','$localidade','$estacao','$celula','$cdoe','$endereco','$tipo','$obs','$ba','$id_tec','BA APOIO','".$_SESSION['nome']."',NOW())";
+        $query.= "values ('$token','$uf','$localidade','$estacao','$celula','$cdoe','$endereco','$tipo','$obs','$ba','$id_tec','BA APOIO','".$_SESSION['nome']."','$hoje')";
 
         $sql = mysql_query($query);
 
@@ -100,7 +102,7 @@ $token = '88'.rand(100000,400000);
       {
 
         $query4 = "insert into logs (ba,status,nome,id,data)";
-        $query4.= "values ('$token','BA DE APOIO','".$_SESSION['nome']."','".$_SESSION['id']."',NOW())";
+        $query4.= "values ('$token','BA DE APOIO','".$_SESSION['nome']."','".$_SESSION['id']."','$hoje')";
         $sql4 = mysql_query($query4);
 
         echo "

@@ -10,7 +10,8 @@
             }
 
 
-           
+         date_default_timezone_set('America/Sao_Paulo');
+         $hoje = date('Y-m-d');     
 
 
 ?>
@@ -118,19 +119,6 @@ $(document).ready(function() {
   });
 });
 </script>
-<script type="text/javascript">
-$(document).ready(function() {
-  $('#inputOculto3').hide();
-  $('#mySelect').change(function() {
-    if ($('#mySelect').val() == '89') {
-      $('#inputOculto3').show();
-    } else {
-      $('#inputOculto3').hide();
-    }
-  });
-});
-</script>
-
 
   
 <style>
@@ -241,19 +229,19 @@ height:70px;
           <li class="breadcrumb-item"><a href="#">Form Components</a></li>
         </ul>
       </div>
-      <div class="row justify-content-md-center" >
+      <div  class="row justify-content-md-center" >
         <div  class="col-md-6">
           <div class="tile">
             <div class="row">
               <div class="col-lg-12">
-                <form onSubmit="if(!confirm('Deseja enviar para campo a atividade??')){return false;}" method="post" enctype="multipart/form-data" action="enviar_map1.php ">
+                <form  method="post" onSubmit="if(!confirm('Deseja enviar para campo a atividade??')){return false;}" enctype="multipart/form-data" action="enviar_map1.php ">
                 <div class="form-group">
                     <label for="exampleInputEmail1">BA OU Nº PEDIDO</label>
                     <input class="form-control"  id="ba" required name="ba"  type="number" aria-describedby="emailHelp" >
                     <label style="font-size: 12px; color:red;"> <?php echo  rand(10000000,20000000); ?> </label>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1" >BA CAUSA COMUM</label>
+                    <label for="exampleInputEmail1">BA CAUSA COMUM</label>
                     <input class="form-control"  id="ba" required name="ba_comum"  type="number" aria-describedby="emailHelp" >
                   </div>
               <div class="form-group">
@@ -314,7 +302,7 @@ height:70px;
 
     <div class="form-group">
      <label for="pwd"> DATA DE ABERTURA:</label>
-      <input type="datetime-local" class="form-control"  name="data_abertura" required>
+      <input type="datetime-local" class="form-control"   max="<?php echo $hoje; ?>" name="data_abertura" required>
     </div>
 
     <div class="form-group">
@@ -328,8 +316,10 @@ height:70px;
             <option value="10">  BA10 </option>
             <option value="97">  BA97 </option>
             <option value="7048">  7048 </option>
+            <option value="TIM">  TIM </option>
             <option value="89">  89 </option>
-            <option value="ESCALONAMENTO">  ESCALONAMENTO </option>
+            <option value="ESCALONAMENTO">  ESCALONAMENTO V.TAL </option>
+            <option value="ESCALONAMENTO OUTROS">  ESCALONAMENTO OUTROS </option>
            
         </select>
     </div>
@@ -360,45 +350,42 @@ height:70px;
                         </label>
       </div>
     </div>
+        
+
+    
 
     <div class="form-group" id="inputOculto">
-    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="opc" value="ND" id="flexRadioDefault1" checked >
-                        <label class="form-check-label" for="flexRadioDefault2" >
-                         ND
-                        </label>
-      </div>
+        
+    <fieldset style="border: 2px groove; padding:10px;">
+            
         <div class="form-check">
-                        <input class="form-check-input" type="radio" name="opc" value="SOM" id="flexRadioDefault2"  >
-                        <label class="form-check-label" for="flexRadioDefault1">
-                         SOM
-                        </label>
-        </div>
-      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="opc" value="OMR" id="flexRadioDefault3" >
-                        <label class="form-check-label" for="flexRadioDefault2" >
-                         OMR
-                        </label>
-      </div>
-
-      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="opc" value="ND" id="flexRadioDefault1" checked >
-                        <label class="form-check-label" for="flexRadioDefault2" >
-                         ND
-                        </label>
-      </div>
-        <div class="form-check">
-                        <input class="form-check-input" type="radio" name="opc" value="TIM" id="flexRadioDefault2"  >
-                        <label class="form-check-label" for="flexRadioDefault1">
-                         TIM
-                        </label>
-        </div>
-      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="opc" value="CLARO" id="flexRadioDefault3" >
-                        <label class="form-check-label" for="flexRadioDefault2" >
-                         CLARO
-                        </label>
-      </div>
+                            <input class="form-check-input" type="radio" name="opc" value="ND" id="flexRadioDefault1" checked >
+                            <label class="form-check-label" for="flexRadioDefault2" >
+                             ND
+                            </label>
+          </div>
+            <div class="form-check">
+                            <input class="form-check-input" type="radio" name="opc" value="SOM" id="flexRadioDefault2"  >
+                            <label class="form-check-label" for="flexRadioDefault1">
+                             SOM
+                            </label>
+            </div>
+          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="opc" value="OMR" id="flexRadioDefault3" >
+                            <label class="form-check-label" for="flexRadioDefault2" >
+                             OMR
+                            </label>
+          </div>
+         <div class="form-group">
+              <label for="pwd">SA:</label>
+              <input type="text" class="form-control"  name="sa" >
+         </div>
+         <div class="form-group">
+             <label for="pwd">ID GPON:</label>
+             <input type="text" class="form-control"  name="idgpon" > 
+         </div>
+      
+    </fieldset>
       
     </div>
     <div class="form-group">
@@ -419,7 +406,7 @@ height:70px;
                           <?php
 
                             
-                          $sql = "SELECT * FROM usuario  group by nome_gestor order by nome
+                          $sql = "SELECT * FROM usuario  where funcao = 'COORD' or funcao = 'COORD_BBK_FTTH' group by nome_gestor order by nome
                           ";
                           $qr = mysql_query($sql) or die(mysql_error());
                           while($ln = mysql_fetch_assoc($qr)) 
@@ -430,7 +417,6 @@ height:70px;
                               
                           }
                           ?> 
-                          
                     </select>
 
                     
@@ -447,10 +433,10 @@ height:70px;
     <label for="email">Obs: </label>
   <textarea class="form-control" rows="5" id="obs" name="obs" maxlength="20000" placeholder="Máximo 2000 caracteres"></textarea>
     </div>
-
+    
     <div class="form-group">
       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="opc3" value="TRIAGEM" id="flexRadioDefault4"  >
+                        <input class="form-check-input" type="checkbox" name="opc3" value="TRIAGEM" id="teste"  >
                         <label class="form-check-label" style="font-size: 11px; color:red;" for="flexRadioDefault2" >
                          TRIAGEM
                         </label>
@@ -491,6 +477,7 @@ height:70px;
       	ga('send', 'pageview');
       }
     </script>
+    <?php $connection ->close(); ?>
   </body>
 </html>
 

@@ -4,7 +4,7 @@
  
 $coord = $_POST['coord'];
  
-$sql = "SELECT * FROM diario WHERE id_coord = '$coord'";
+$sql = "SELECT * FROM diario WHERE id_coord = '$coord' and acesso = 'Tec'";
 $qr = mysql_query($sql) or die(mysql_error());
  
 if(mysql_num_rows($qr) == 0){

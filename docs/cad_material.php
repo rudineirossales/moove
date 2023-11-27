@@ -182,13 +182,15 @@ height:70px;
                             <input  type="hidden" name="ba" id="ba" value="<?php echo $ba; ?>"> </br>
                             <fieldset class="form-group border p-3">
                             <label>Descrição</label>
-                              <select class="form-control col-6" id="nome" name="nome[]"  required >
+                                <select class="form-control col-6" id="nome" name="nome[]"  required >
+                                  <option value="SEM MATERIAL"  >SEM MATERIAL</option>
                                   <option value="CABO 12"  >CABO 12</option>
                                   <option value="CABO 36"  >CABO 36</option> 
                                   <option value="CABO 72"  >CABO 72</option>
                                   <option value="CABO 144"  >CABO 144</option>
                                   <option value="CABO 288"  >CABO 288</option>
                                   <option value="CDOE"  >CDOE</option>
+                                  <option value="PRECON"  >PRECON</option>
                                   <option value="CAIXA MEIO 1/8"  >CAIXA MEIO 1/8</option>
                                   <option value="CAIXA MEIO 1/16"  >CAIXA MEIO 1/16</option>
                                   <option value="CAIXA FIM 1/8"  >CAIXA MEIO 1/8</option>
@@ -210,8 +212,8 @@ height:70px;
                                   </option><option value="TAMPA RETANGULAR"  >TAMPA RETANGULAR</option>
                                   </option><option value="BAP"  >BAP</option>
                                   </option><option value="BANDEJA"  >BANDEJA</option>
-
-                              </select></br> 
+                                  </option><option value="ESTICADOR"  >ESTICADOR</option>
+                                </select></br> 
                                 <label for="">Quantidade:</label>
                                 <input class="form-control col-6" type="number" name="email[]" id="email"> </br><br>
                                 </fieldset>
@@ -254,6 +256,7 @@ height:70px;
       	ga('send', 'pageview');
       }
     </script>
+    <?php $connection ->close(); ?>
   </body>
 </html>
 

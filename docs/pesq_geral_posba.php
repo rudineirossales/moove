@@ -9,10 +9,10 @@
                   exit;
             }
 
-            $connect = mysqli_connect("mysql.hostinger.com.br", "u504529778_icomon_", "Rud!n3!@", "u504529778_icomon_");  
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon");   
 
             
-            $query ="SELECT * FROM pos_ba where status = 'PENDENTE'";   
+            $query ="SELECT * FROM pos_ba where status = 'PENDENTE' order by nome_gestor asc";   
            
              
             $result = mysqli_query($connect, $query); 
@@ -143,7 +143,7 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> Esteira de atividade com status em aberto</h1>
+          <h1><i class="fa fa-th-list"></i> Vistorias pendentes</h1>
           
         </div>
         <ul class="app-breadcrumb breadcrumb side">
@@ -179,7 +179,7 @@
                                <td>'.$row["ba"].'</td> 
                                <td>'.$row["estacao"].'</td>  
                                <td>'.$row["endereco"].'</td>
-                               <td>'.$row["estacao"].'</td>  
+                              
                                <td>'.$row["data_validacao"].'</td>  
                                <td>'.$row["nome_gestor"].'</td> 
                                <td>'.$row["nome"].'</td>  

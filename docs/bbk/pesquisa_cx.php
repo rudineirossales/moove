@@ -3,13 +3,13 @@
       
          session_start();
 
-         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) || ($_SESSION["acesso"] != 'ADM' ) AND ($_SESSION["acesso"] != 'Tec' ) )
+         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) || ($_SESSION["acesso"] != 'BBK' ) AND ($_SESSION["acesso"] != 'Tec' ) )
             {
                  header("Location: index.html");
                   exit;
             }
 
-            $connect = mysqli_connect("185.213.81.103", "u504529778_icomon_", "Rud!n3!@", "u504529778_icomon_");   
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon");     
             
 ?>
 
@@ -179,7 +179,7 @@ function fnExcelReport() {
 
                               
                                 
-                             $query ="select * from atividade_bbk join usuario on atividade_bbk.id_usu = usuario.id where status <> 'ENCERRADO' and status <> 'EM VALIDACAO' and status <> 'PARALIZADO' and id_usu = '$id_usu'";  
+                             $query ="select * from atividade_bbk join usuario on atividade_bbk.id_usu = usuario.id where status <> 'ENCERRADO' and status <> 'EM VALIDACAO' and status <> 'PARALISADO' and id_usu = '$id_usu'";  
                              $result = mysqli_query($connect, $query); 
                              while($row = mysqli_fetch_array($result))  
                           { 

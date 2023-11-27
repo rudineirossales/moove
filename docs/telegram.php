@@ -6,14 +6,14 @@ $grupo='-1001776452894';
 
 $parametros['chat_id']=$grupo;
 
-if($status == 'DESPACHADA' and $tipo == '97'){
+if($status == 'DESPCOORD' and $tipo == '97'){
 $parametros['text']='BA:'.$ba.'
 ESTAÇÃO:'.$estacao.'
 CELULA:'.$celula.'
 CDOE:'.$cdoe_cdoia.'
 ENDEREÇO:'.$endereco.'
 PRIORIDADE:'.$tipo.'
-REDE:'.$afetacao.'
+AFETAÇÃO:'.$afetacao.'
 REDE:'.$tipo_rede.'
 ABERTURA:'.$data_abertura.'
 VENC.:'.$data_vencimento.'
@@ -24,16 +24,19 @@ OBS:'.$obs;
 if($status == 'ENCERRADO' and $tipo == '97'){
 	$parametros['text']='BA:'.$ba.'
 	STATUS:'.$status.'
+	TEC:'.$nome.'
 	POR:'.$por;
 	
 
 
 }
 if($status == 'REPROVADO' and $tipo == '97'){
-	$parametros['text']='BA:'.$ba.'
+$parametros['text']='BA:'.$ba.'
 	STATUS:'.$status.'
 	POR:'.$por.'
 	TEC:'.$nome.'
+	ESTAÇÃO:'.$estacao.'
+	CÉLULA:'.$celula.'
 	OBS:'.$obs_rej;
 
 

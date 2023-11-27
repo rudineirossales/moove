@@ -4,7 +4,7 @@
       
          session_start();
 
-         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"])  )
+         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) || ($_SESSION["acesso"] != 'DEL' ) )
             {
                  header("Location: index.html");
                   exit;
@@ -176,8 +176,10 @@
                     $data_abertura = $dado["data_abertura"];
                     $status = $dado["status"];
                     $obs_cl = $dado["obs_cl"];
+                    $obs = $dado["obs"];
                     $afetacao = $dado["afetacao"];
                     $tipo_rede = $dado["tipo_rede"];
+                    $obs_cl = str_replace("'","",$obs_cl);
                    
                    
                    
@@ -286,7 +288,7 @@
 
                 <div class="form-group">
                      <label for="email">Obs: </label>
-                     <textarea class="form-control" rows="5"  id="obs" name="obs" maxlength="20000" placeholder="Máximo 2000 caracteres"> <?php echo $obs_cl; ?> </textarea>
+                     <textarea class="form-control" rows="5"  id="obs" name="obs" > <?php echo $obs_cl; ?> </textarea>
                 </div>
                                 
                                
@@ -440,7 +442,7 @@
         </div>
       </main>
 
-   
+
       </body>
 </html>
 

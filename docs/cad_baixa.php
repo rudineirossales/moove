@@ -9,8 +9,10 @@
                  header("Location: index.html");
                   exit;
             }
-
+            date_default_timezone_set('America/Sao_Paulo');
             $ba =$_GET['ba'];
+
+            $hoje = date('Y-m-d H:i:s');
             
             $sql = mysql_query ("select * from atividade where atividade.ba = '$ba'" );
 
@@ -42,6 +44,9 @@
                         $ba_comum = $dado["ba_comum"];
                         $data_abertura = $dado["data_abertura"];
                         $data_vencimento= $dado["data_vencimento"];
+                        $afetacao= $dado["afetacao"];
+                        $data_ag= $dado["data_ag"];
+                        $periodo= $dado["periodo"];
                         
                         
                         
@@ -62,7 +67,7 @@
   <script type="text/javascript">
 function saidasuccessfully()
 {
-	setTimeout("window.location='dashboard.php'");
+	setTimeout("window.location='pesq_cx_col.php'");
 	
 	
 }
@@ -159,6 +164,8 @@ height:70px;
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
   </head>
   <body class="app sidebar-mini rtl">
 
@@ -166,7 +173,7 @@ height:70px;
 
   
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="#">Icomon</a>
+    <header class="app-header"><a class="app-header__logo" href="pesq_cx_col.php"><i class="bi bi-arrow-left">           ICOMON</i></a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -192,7 +199,7 @@ height:70px;
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active"  <?php if ($_SESSION["acesso"] == "Tec"){ echo 'href="index_col.html"';} else {echo 'href="dashboard.php"'; } ?>><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active"  <?php if ($_SESSION["acesso"] == "Tec"){ echo 'href="page_tec/page_ftth.php"';} else {echo 'href="dashboard.php"'; } ?>><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -217,11 +224,11 @@ height:70px;
           <li class="breadcrumb-item"><a href="#">Form Components</a></li>
         </ul>
       </div>
-      <div class="row">
-        <div class="col-md-12">
+      <div  class="row justify-content-md-center"">
+        <div class="col-md-6">
           <div class="tile">
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-12">
                 <form method="post"  action="enviar_cad_baixa.php ">
 
                 <div class="form-group">
@@ -244,6 +251,11 @@ height:70px;
                   <div class="form-group">
                     <label for="exampleInputEmail1">Estação</label>
                     <input class="form-control"  id="ba" readonly name="estacao"  value="<?php echo $estacao?>" type="text" aria-describedby="emailHelp" >
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Afetação</label>
+                    <input class="form-control"  id="ba" readonly name="afetacao"  value="<?php echo $afetacao?>" type="text" aria-describedby="emailHelp" >
                   </div>
                   
                   
@@ -367,19 +379,15 @@ height:70px;
                                         <?php
 
                                           
-                                        $sql = "SELECT * FROM usuario where funcao = 'COORD'  group by nome_gestor order by nome
-                                        ";
+                                        $sql = "SELECT * FROM usuario  where funcao = 'COORD' OR funcao = 'COORD_BBK_FTTH' group by nome_gestor order by nome";
+                                        
                                         $qr = mysql_query($sql) or die(mysql_error());
                                         while($ln = mysql_fetch_assoc($qr)) 
                                         {
-                                            echo '<option value="'.$ln['nome_gestor'].'">'.$ln['nome_gestor'].'</option>';
-
-                                           
+                                            echo '<option value="'.$ln['id_gestor'].'">'.$ln['nome_gestor'].'</option>';
                                         }
                                         ?> 
                                   </select>
-
-                                  
               </div>
                       <div class="form-group">
                                           <label for="exampleSelect1">Técnico</label>
@@ -388,7 +396,7 @@ height:70px;
                                           </select>
                       </div> 
                         </div> 
-                        <?php if($status == "PARALIZADO") { ?> <span>BA PARALIZADO</span> <?php } else {  ?>
+                        <?php if($status == "PARALISADO") { ?> <span style="color: red;">BA PARALISADO</span> <?php } else {  ?>
                         <button type="submit" class="btn btn-primary" name="submit2">Repassar</button> <?php }?>
                  </form>
             </div>        
@@ -405,7 +413,7 @@ height:70px;
 </div>
               
               <button class="btn btn-primary" data-toggle="modal" data-target="#modal-mensagem">
-                Repasse.
+                Repasse
               </button>
 
 
@@ -426,14 +434,17 @@ height:70px;
 if (isset($_POST ['submit2']) )
 {
   
-
+date_default_timezone_set('America/Sao_Paulo');
   $ba2  =$_POST['ba2'];
   $tec  =$_POST['tec'];
-  $gestor  =$_POST['coord'];
+  $coord  =$_POST['coord'];
+  $hoje = date('Y-m-d H:i:s');
   
-  $sql2 = mysql_query ("select * from usuario where id = '$gestor'" );
+  
+  
+$sql2 = mysql_query ("select * from usuario where id = '$coord'" );
 
-  $row = mysql_num_rows($sql2);
+$row = mysql_num_rows($sql2);
 
 
     if (mysql_num_rows($sql2) > 0)
@@ -444,15 +455,15 @@ if (isset($_POST ['submit2']) )
       {
 
       $gestor = $dado["nome"];
-      $id_gestor = $dado["id"];
 
       }
 
     }
   
   
+  
    
-          $query = "update atividade set id_usu = '$tec', status = 'DESPTEC', data_desptec = NOW(), nome_gestor = '$gestor', id_gestor = '$id_gestor' where ba = '$ba2'";
+          $query = "update atividade set id_usu = '$tec', status = 'DESPTEC', data_desptec = '$hoje', nome_gestor = '$gestor' where ba = '$ba2'";
   
           $sql = mysql_query($query);
   
@@ -461,14 +472,15 @@ if (isset($_POST ['submit2']) )
   
         if($sql)
         {
-  
-          $query4 = "insert into logs (ba,status,nome,id,data)";
-          $query4.= "values ('$ba2','DESPTEC','".$_SESSION['nome']."','".$_SESSION['id']."',NOW())";
-          $sql4 = mysql_query($query4);
-
+            
+              $query4 = "insert into logs (ba,status,nome,id,data)";
+              $query4.= "values ('$ba2','DESPTEC','".$_SESSION['nome']."','".$_SESSION['id']."','$hoje')";
+              $sql4 = mysql_query($query4);
+              mysql_close($connection);
+    
           echo "
           <script language='JavaScript'>
-          window.alert('EDITADO SUCESSO!')
+          window.alert('REPASSE COM SUCESSO!')
           
           </script>";
 
@@ -521,6 +533,8 @@ if (isset($_POST ['submit2']) )
       	ga('send', 'pageview');
       }
     </script>
+    
+
   </body>
 </html>
 

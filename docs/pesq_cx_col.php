@@ -3,14 +3,22 @@
       
          session_start();
 
-         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
+         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]))
             {
                  header("Location: index.html");
                   exit;
             }
 
-            $connect = mysqli_connect("localhost", "root", "", "icomom_");  
-            $query ="SELECT * FROM atividade where id_usu = '".$_SESSION['id']."' and status <> 'ENCERRADO' order by status";  
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon");  
+            if($_SESSION['acesso'] == 'ADM'){
+                
+                 $query ="SELECT * FROM atividade where status = 'DESPCOORD' OR  status = 'PARALISADO' order by status";  
+            }
+            else{
+              $query ="SELECT * FROM atividade where id_usu = '".$_SESSION['id']."' and status <> 'ENCERRADO' and status <> 'PARALISADO' order by status";    
+                
+            }
+            
             $result = mysqli_query($connect, $query); 
 ?>
 
@@ -18,16 +26,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <title>Controle de estoque</title>  
+  <title>Icomon</title>  
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
            <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script> 
            
-           
-              
-            
-           
-          
-    <link rel="icon" href="img/icomon.png">
+       <link rel="icon" href="img/icomon.png">
 
     <script type="text/javascript">
 function fnExcelReport() {
@@ -87,10 +90,13 @@ function fnExcelReport() {
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   </head>
   <body class="app sidebar-mini rtl">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="#">Icomon</a>
+        <header class="app-header"><a class="app-header__logo" href="page_tec/page_tec.html"><i class="bi bi-arrow-left">           ICOMON</i></a>
+        
+
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -116,7 +122,7 @@ function fnExcelReport() {
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="index_col.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" <?php if ($_SESSION["acesso"] == "Tec"){ echo 'href="page_tec/page_tec.html"';} else {echo 'href="dashboard.php"'; } ?> ><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -152,10 +158,14 @@ function fnExcelReport() {
                      <table id="myTable" class="table table-striped table-bordered">  
                           <thead>  
                                <tr>  
-                                    <td>Ba.</td> 
+                                    <td>Ba</td> 
+                                    <td>Prioridade</td> 
+                                     
+                                    <td>Coordenador</td> 
                                     <td>Status</td>  
                                     <td>Estação</td>  
                                     <td>Cdoe</td> 
+                                    <td>Afetação</td>
                                     <td>Célula</td> 
                                     
                                     
@@ -171,9 +181,13 @@ function fnExcelReport() {
                                echo '  
                                <tr>  
                                     <td><a href="cad_baixa.php?ba='.$row["ba"].'"> '.$row["ba"].' </span></a></td>   
+                                    <td>'.$row["tipo"].'</td>
+                                    
+                                    <td>'.$row["nome_gestor"].'</td>
                                     <td>'.$row["status"].'</td>
                                     <td>'.$row["estacao"].'</td>  
-                                    <td>'.$row["cdoe"].'</td> 
+                                    <td>'.$row["cdoe"].'</td>
+                                    <td>'.$row["afetacao"].'</td>
                                     <td>'.$row["celula"].'</td> 
                                     
                                     
@@ -194,7 +208,20 @@ function fnExcelReport() {
  </html>  
  <script>  
  $(document).ready(function(){  
-      $('#myTable').DataTable();  
+      $('#myTable').DataTable(
+        {
+                   
+          "scrollX": false,
+    "ordering": true,
+    "lengthMenu": [ [ -1, 10, 30, 50, 100], ["Todos", "10","30", "50", "100"] ],
+    "scrollCollapse": true,
+    
+                    
+                }
+
+
+
+      );  
  });  
  </script>  
  

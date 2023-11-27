@@ -14,6 +14,8 @@
              
 ?> 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,6 +42,8 @@
          
   </script>
 
+  
+  
   
     <link rel="icon" href="img/icomon.png">
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
@@ -102,7 +106,12 @@
             <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Widgets</a></li>
           </ul>
         </li>
-          
+        
+        
+        
+        
+        
+            
     </aside>
     <main class="app-content">
       <div class="app-title">
@@ -126,8 +135,17 @@
                     <input type="text" class="form-control"  name="ba"   required >
         </div> 
 
+                    
+                  
+
+            
+            
+            
                     <button type="submit" name="submit3" class="btn btn-primary mb-2">Buscar</button>
                 </form>
+
+
+
 
                 </div>
                 <div class="modal-footer">
@@ -145,6 +163,7 @@
       </div>
       
       
+      
                   <?php 
                       if (isset($_POST ['submit3']) )
                 { 
@@ -154,7 +173,11 @@
                   $sql = mysql_query ("select  * from atividade  where ba = '$ba'" );
                 }  
 
+
                 $row = mysql_num_rows($sql);
+
+ 
+ 
 
                 if (mysql_num_rows($sql) > 0)
 
@@ -163,7 +186,7 @@
                   while ($dado = mysql_fetch_assoc($sql))
                   {
                    
-                    $ba = $dado["ba"];
+                    $ba2 = $dado["ba"];
                     $uf = $dado["uf"];
                     $localidade = $dado["localidade"];
                     $estacao = $dado["estacao"];
@@ -278,7 +301,7 @@
                 <div class="form-group">
                 <label for="exampleSelect1">Técnico </label>
                                   <select class="form-control" id="tec" name="tec" required   >
-                                  <option value="0" disabled="disabled"  checked >Escolha um coordenador </option>
+                                  <option value=""  checked >Escolha um Técnico </option>
 
                                         <?php
 
@@ -308,7 +331,7 @@
 
 
 </div><br><br>
-<?php if ($ba > 0 && $status <> "ENCERRADO" && $status <> "PARALIZADO" )
+<?php if ($ba2 > 0 && $status <> "ENCERRADO" && $status <> "PARALISADO" )
 
 {?>
 <button class="btn btn-primary"  name="submit" type="submit">Enviar</button>
@@ -416,6 +439,14 @@
     </script>
   
 </div>
+
+
+
+
+
+
+
+
 
 
 <script src="js/popper.min.js"></script>

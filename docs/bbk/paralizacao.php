@@ -4,7 +4,7 @@
       
          session_start();
 
-         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"])  || ($_SESSION["acesso"] != 'ADM' ) AND ($_SESSION["acesso"] != 'GA' ) )
+         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"])  || ($_SESSION["acesso"] != 'BBK' ) AND ($_SESSION["acesso"] != 'GA' ) )
             {
                  header("Location: index.html");
                   exit;
@@ -285,7 +285,7 @@
                                 
 </div>
 </div><br><br>
-<?php if ($ba > 0 && $status <> "PARALIZADO" && $status <> "ENCERRADO" )
+<?php if ($ba > 0 && $status <> "PARALISADO" && $status <> "ENCERRADO" )
 
 {?>
 
@@ -302,7 +302,7 @@
         
 </div>
 <button class="btn btn-danger"  name="submit" type="submit">Paralizar</button>
- <?php } if ($ba > 0 && $status == "PARALIZADO"){ ?>
+ <?php } if ($ba > 0 && $status == "PARALISADO"){ ?>
 
 <button class="btn btn-danger"  name="submit" type="submit">Normalizar</button> 
 

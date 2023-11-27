@@ -2,6 +2,11 @@
 
 
 <?php 
+
+date_default_timezone_set('America/Sao_Paulo');
+$hoje = date('Y-m-d H:i:s');
+
+
 $ba =$_POST['ba'];
 
 session_start();
@@ -69,7 +74,7 @@ $teste1  =$_POST['teste1'];
 	
           $extensao = strtolower (substr($_FILES['teste1'] ['name'], -4));
           $novo_nome1  = md5(mt_rand(1, 1000) . microtime()) . $extensao;
-          $diretorio = "arquivo/";
+          $diretorio = "Api/FTTH/photos/";
         
         
         
@@ -81,7 +86,7 @@ $teste1  =$_POST['teste1'];
 	
             $extensao = strtolower (substr($_FILES['teste2'] ['name'], -4));
             $novo_nome2  = md5(mt_rand(1, 1000) . microtime()) . $extensao;
-            $diretorio = "arquivo/";
+            $diretorio = "Api/FTTH/photos/";
           
           
           
@@ -91,9 +96,6 @@ $teste1  =$_POST['teste1'];
         $connect = mysqli_connect("mysql.hostinger.com.br", "u504529778_icomon_", "Rud!n3!@", "u504529778_icomon_");  
         $query ="update pos_ba set descricao = '$descricao', status = 'VISTORIADO', data ='$hoje', foto = '$novo_nome1' where ba = '$ba'";
         $result = mysqli_query($connect, $query); 
-                          
-   
-        $query = "update atividade set causa = '$causa', sub = '$sub', ro = '$ro', cis = '$cis', obs = '$obs', ba = '$ba', data_encerramento = NOW(), evidencia3 = '$novo_nome1', evidencia4 = '$novo_nome2'  where ba = '$ba'";
         
         $sql = mysql_query($query);
 

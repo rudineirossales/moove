@@ -5,6 +5,8 @@
 $ba =$_POST['ba'];
 
 session_start();
+date_default_timezone_set('America/Sao_Paulo'); 
+
 
 if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
 {
@@ -16,7 +18,7 @@ if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
 ?>
 
 <?php session_start(); ?>
-
+$ba
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -51,11 +53,17 @@ function saidasuccessfully()
 <body>
 
 
+
+
+
+
+
+
 <?php
 
 
 
-        
+        date_default_timezone_set('America/Sao_Paulo');
         $ro =$_POST['ro'];
         $cis =$_POST['cis'];
         $causa =$_POST['causa'];
@@ -67,9 +75,17 @@ function saidasuccessfully()
         $cdoe =$_POST['cdoe'];
         $qtd_cdoe =$_POST['qtd_cdoe'];
         $obs =$_POST['obs'];
+        $hoje = date('Y-m-d H:i:s');
         $teste1 =$_POST['teste1'];
         $teste2 =$_POST['teste2'];
+        
 
+        
+    
+	
+
+      
+    
         if(isset($_FILES['teste1'])) {
     
 	
@@ -81,7 +97,6 @@ function saidasuccessfully()
         
         move_uploaded_file($_FILES['teste1'] ['tmp_name'], $diretorio.$novo_nome1 )	;
           }
-
           if(isset($_FILES['teste2'])) {
     
 	
@@ -94,8 +109,9 @@ function saidasuccessfully()
           move_uploaded_file($_FILES['teste2'] ['tmp_name'], $diretorio.$novo_nome2 )	;
             }
           
-    
-        $connect = mysqli_connect("localhost", "root", "", "icomom_");  
+          
+
+        $connect = mysqli_connect("mysql.hostinger.com.br", "u504529778_icomon_", "Rud!n3!@", "u504529778_icomon_");  
         $query ="select * from atividade where ba = '$ba'";
         $result = mysqli_query($connect, $query); 
                           
@@ -107,12 +123,13 @@ function saidasuccessfully()
 
         }  
 
-      
-      
-        
 
-     
-    $query = "update atividade set causa = '$causa', sub = '$sub', ro = '$ro', cis = '$cis', obs = '$obs', ba = '$ba', data_encerramento = NOW(), evidencia3 = '$novo_nome1', evidencia4 = '$novo_nome2'  where ba = '$ba'";
+
+
+
+
+    $query = "update atividade set causa = '$causa', sub = '$sub', ro = '$ro', cis = '$cis', obs = '$obs', ba = '$ba', data_encerramento = '$hoje',evidencia3 = '$novo_nome1', evidencia4 = '$novo_nome2' where ba = '$ba'";
+
     
     $sql = mysql_query($query);
 
@@ -125,12 +142,10 @@ if($sql)
 {
   
     
-
   
+ 
 
   echo "<script>saidasuccessfully()</script>";
-
-
 }
 else
 {

@@ -28,6 +28,7 @@
                         $endereco = $dado["endereco"];
                         $data_validacao = $dado["data_validacao"];
                         $nome = $dado["nome"];
+                        $ba = $dado["ba"];
                        
                     }
                 
@@ -161,7 +162,7 @@ height:70px;
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-edit"></i>Icomon</h1>
+          <h1><i class="fa fa-edit"></i> Vistoria Pós ba</h1>
           <p></p>
         </div>
         <ul class="app-breadcrumb breadcrumb">
@@ -170,11 +171,11 @@ height:70px;
           <li class="breadcrumb-item"><a href="#">Form Components</a></li>
         </ul>
       </div>
-      <div class="row">
-        <div class="col-md-12">
+      <div class="row justify-content-md-center">
+        <div class="col-md-6">
           <div class="tile">
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-12">
                 <form method="post"  action="envia2_posba.php" enctype="multipart/form-data">
 
                 <div class="form-group">
@@ -191,7 +192,7 @@ height:70px;
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Data encerramento</label>
-                    <input class="form-control"  id="ba" readonly name="localidade"  value="<?php echo $data_encerramento?>" type="text" aria-describedby="emailHelp" >
+                    <input class="form-control"  id="ba" readonly name="localidade"  value="<?php echo $data_validacao?>" type="text" aria-describedby="emailHelp" >
                   </div>
 
                   <div class="form-group">
@@ -202,7 +203,7 @@ height:70px;
 
                   <div class="form-group">
                       <label for="email">Descrição: </label>
-                    <textarea class="form-control" rows="5"  id="obs" name="obs"  ></textarea>
+                    <textarea class="form-control" rows="5"  id="obs" name="descricao"  ></textarea>
                   </div>
 
                   <fieldset class="col-md-6">
@@ -252,7 +253,7 @@ height:70px;
     </main>
 
 
-   
+    
     <!-- Essential javascripts for application. to work-->
   
     <script src="js/popper.min.js"></script>

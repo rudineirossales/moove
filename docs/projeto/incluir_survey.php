@@ -166,7 +166,7 @@ height:70px;
                     <label for="exampleInputEmail1">LOCALIDADE</label>
                     <input class="form-control"  id="ba" readonly value="<?php echo $localidade;?>" name="localidade"  type="text" aria-describedby="emailHelp" >
                    
-                  </div>
+                </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">RUA</label>
                     <input class="form-control"  id="ba" readonly value="<?php echo $logradouro;?>" name="logradouro"  type="text" aria-describedby="emailHelp" >
@@ -174,7 +174,7 @@ height:70px;
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1" >CÓD.SURVEY</label>
-                    <input class="form-control"  id="cod_survey" required name="cod_survey"  type="number" aria-describedby="emailHelp" >
+                    <input class="form-control"  id="cod_survey" required name="cod_survey"  type="text" aria-describedby="emailHelp" >
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1" >Nº FACHADA</label>
@@ -186,18 +186,18 @@ height:70px;
                   </div>
                   <div class="form-group">
                       <label for="pwd">COMPLEMENTO 1</label>
-                      <input type="text" class="form-control"  name="comp1" required>
+                      <input type="text" class="form-control"  name="comp1" >
                 </div>
                 <input type="hidden" class="form-control" value="<?php echo $cod_logradouro;?>" name="cod_logradouro" required>
                 <input type="hidden" class="form-control" value="<?php echo $cod;?>" name="cod" required>
                 <div class="form-group">
                       <label for="pwd">COMPLEMENTO 2</label>
-                      <input type="text" class="form-control"  name="comp2" required>
+                      <input type="text" class="form-control"  name="comp2" >
                 </div>
                   <input type="hidden" class="form-control"  value="<?php echo $cod_logradouro;?>" name="cod_logradouro" required>
                 <div class="form-group">
                       <label for="pwd">COMPLEMENTO 3</label>
-                      <input type="text" class="form-control"  name="comp3" required>
+                      <input type="text" class="form-control"  name="comp3" >
                 </div>
 
                     </div>

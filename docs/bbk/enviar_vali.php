@@ -43,6 +43,7 @@ function saidasuccessfully()
                         $nome = $dado["nome"];
                         $localidade = $dado["localidade"];
                         $estacao_a = $dado["estacao_a"];
+                        $estacao_b = $dado["estacao_b"];
                         $endereco = $dado["endereco"];
                         $barramento = $dado["barramento"];
                         $tipo = $dado["tipo"];
@@ -66,7 +67,14 @@ function saidasuccessfully()
                         $prs = $dado["prs"];
                         $cliente = $dado["cliente"];
                         $ccto = $dado["ccto"];
-                      
+                        $latitude_final = $dado["latitude_final"];
+                        $longitude_final = $dado["longitude_final"];
+                        
+                       
+                        
+                        
+                        
+                        
                     }
                 
                 }
@@ -259,7 +267,8 @@ fieldset
                   <li class="list-group-item"><b> Ba: </b> <?php echo $ba;  ?></li>
                   <li class="list-group-item"><b> Técnico: </b> <?php echo $nome;  ?></li>
                   <li class="list-group-item"><b> Localidade: </b> <?php echo $localidade;  ?></li>
-                  <li class="list-group-item"><b> Estação: </b> <?php echo $estacao_a;  ?></li>
+                  <li class="list-group-item"><b> Ponta A: </b> <?php echo $estacao_a;  ?></li>
+                  <li class="list-group-item"><b> Ponta B: </b> <?php echo $estacao_b;  ?></li>
                   <li class="list-group-item"><b> Endereço: </b> <?php echo $endereco;  ?></li>
                   <li class="list-group-item"><b> Tipo Ba: </b> <?php echo $tipo;  ?></li>
                   <li class="list-group-item"><b> Abertura: </b> <?php echo $data_abertura;  ?></li>
@@ -275,6 +284,8 @@ fieldset
                   <li class="list-group-item"><b> Cliente: </b> <?php echo $cliente;  ?></li>
                   <li class="list-group-item"><b> Ro: </b> <?php echo $ro;  ?></li>
                   <li class="list-group-item"><b> Cis: </b> <?php echo $cis;  ?></li>
+                  <li class="list-group-item"><b> Latitude: </b> <?php echo $latitude_final;  ?></li>
+                  <li class="list-group-item"><b> Longitude: </b> <?php echo $longitude_final;  ?></li>
                   
                   
                    
@@ -324,7 +335,7 @@ fieldset
                   <?php } else {?>
                       
                   
-                      <img src="../Api/Backbone/backbone_foto/<?php echo $foto_antes ?>"   width="500" height="500" style="padding-top: 5%;"> <br>
+                      <img src="../Api/VPS/BBK/backbone_foto/<?php echo $foto_antes ?>"   width="500" height="500" style="padding-top: 5%;"> <br>
 
                   <?php }?>
             
@@ -339,7 +350,7 @@ fieldset
                   <?php } else {?>
                       
                   
-                      <img src="../Api/Backbone/backbone_foto/<?php echo $foto_depois ?>"   width="500" height="500" style="padding-top: 5%;"> <br>
+                      <img src="../Api/VPS/BBK/backbone_foto/<?php echo $foto_depois ?>"   width="500" height="500" style="padding-top: 5%;"> <br>
 
                   <?php }?>
             
@@ -354,11 +365,11 @@ fieldset
                   </div>
                   <div id="principal" >
                   </div>
-
-                  <fieldset class="col-md-6">
+                  
+                   <fieldset class="col-md-6">
                   <div class="form-group">
                         <label for="formFile" class="form-label">Teste de validação </label>
-                        <input class="form-control" required type="file" accept=".png,.jpg,.jpeg" id="teste1" name="teste1" >
+                        <input class="form-control"  type="file" accept=".png,.jpg,.jpeg" id="teste1" name="teste1" >
                         <p  style="font-size: 10px; color:red;" > Obrigatório**</p>
                         <p id="output1"></p>
                         <script type="text/javascript">

@@ -51,13 +51,13 @@
   <?php   
 
      
-            $sql2 = mysql_query ("select *  from atividade_bbk where status = 'EM VALIDACAO'" );
+            $sql2 = mysql_query ("select *  from atividade_bbk where status = 'EM VALIDACAO' and nome_gestor = '".$_SESSION['nome']."'" );
             $contaValidacao = mysql_num_rows($sql2);
 
   ?>
  
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="dashboard_bbk.php">ICOMON</a>
+    <header class="app-header"><a class="app-header__logo" href="dashboard_bbk.php">ICOMON </a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -65,7 +65,7 @@
         <!--Notification Menu-->
        
         <!-- User Menu-->
-        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"> BKB</i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             
             <li><a class="dropdown-item" href="../logout.php"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
@@ -83,7 +83,7 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="dashboard_bbk.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" href="../dashboard.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Ftth</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -93,40 +93,56 @@
           </ul>
         </li>
         
-        <?php if($_SESSION['acesso'] == 'ADM'){  ?>
+        
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Atividades</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
           
             <li><a class="treeview-item" href="cadastro_bbk.php"><i class="icon fa fa-circle-o"></i> Cadastro</a></li>
             <li><a class="treeview-item" href="atua.php"><i class="icon fa fa-circle-o"></i> Repasse</a></li>
-            <li><a class="treeview-item" href="paralizacao.php"><i class="icon fa fa-circle-o"></i> Paralizar / Liberar BA</a></li>
+            <li><a class="treeview-item" href="paralizacao.php"><i class="icon fa fa-circle-o"></i> Paralisar / Liberar BA</a></li>
             <li><a class="treeview-item" href="pesq_per.php"><i class="icon fa fa-circle-o"></i>Esteira</a></li>
             <li><a class="treeview-item" href="pesq_movimentacao.php"><i class="icon fa fa-circle-o"></i> Pequisa período<a><li>
             <li><a class="treeview-item" href="validacao.php"><i class="icon fa fa-circle-o"></i> Validação <pre> <span class="badge badge-pill badge-<?php if($contaValidacao > 0 ) { echo 'warning';} else { echo 'success';} ?>">  <?php echo $contaValidacao;?>  </span></pre><a><li>
-            <li><a class="treeview-item" href="mascara.php"><i class="icon fa fa-circle-o"></i> Gerar mascara<a><li> 
-          <?php }?>
+            <li><a class="treeview-item" href="mascara.php"><i class="icon fa fa-circle-o"></i> Consultar B.A<a><li> 
+      
          
           </ul>
         </li>
        
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Colaborador</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-          <?php if($_SESSION['acesso'] == 'ADM'){ ?>
+         
             
             <!--<li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i> Editar</a></li> -->
             
             <li><a class="treeview-item" href="pesq_cx_col_adm.php"><i class="icon fa fa-circle-o"></i> Caixa Téc</a></li>
             <li><a class="treeview-item" href="pesq_cx_col.php"><i class="icon fa fa-circle-o"></i> Caixa coordenador  <pre> <span class="badge badge-pill badge-<?php if($row > 0 ) { echo 'warning';} else { echo 'success';} ?>">  <?php echo $row;?>  </span></pre></a></li>
-          <?php }?>
+            <li><a class="treeview-item" href="cadastro_ba_token.php"><i class="icon fa fa-circle-o"></i> Gerar BA de apoio</a></li>
+      
 
-         <?php if($_SESSION['acesso'] == 'Tec'){ ?>
+         
             <li><a class="treeview-item" href="pesq_cx_col.php"><i class="icon fa fa-circle-o"></i> Caixa</a></li>
             <li><a class="treeview-item" href="pesq_movimentacao.php"><i class="icon fa fa-circle-o"></i> Pesquisa período</a></li>
 
-         <?php }?> 
+   
             
           </ul>
+          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Diário de bordo</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+          
+            <li><a class="treeview-item" href="pesq_diario.php"><i class="icon fa fa-circle-o"></i> Atualização</a></li>
+            </ul>
+             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Kmz / Dgo</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+          
+          <li><a class="treeview-item" href="../dgo/adm.php"><i class="icon fa fa-circle-o"></i> Dgo</a></li> 
+          <li><a class="treeview-item" href="../rota_teste/docs/dashboard.php"><i class="icon fa fa-circle-o"></i> Kmz</a></li>  
+            </ul>
+            </li>
+          
+       
         </li>
+       
 
       
         
@@ -150,7 +166,7 @@
              </div>
                </div>
 
-<!-- <iframe width="1000" height="2000" src="https://lookerstudio.google.com/embed/reporting/4b324134-50d6-415b-81c7-f2739b06b667/page/t4iPD" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+ <iframe width="100%" height="4000" src="https://lookerstudio.google.com/embed/reporting/22bc35e4-0f66-4b59-b18e-549835cdf563/page/t4iPD" frameborder="0" style="border:0" allowfullscreen></iframe> 
 
         <div class="clearfix"></div>
         

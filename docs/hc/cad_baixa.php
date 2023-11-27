@@ -41,6 +41,10 @@
                         $funcionalidade_2 = $dado["funcionalidade_2"];
                         $funcionalidade_3 = $dado["funcionalidade_3"];
                         $funcionalidade_4 = $dado["funcionalidade_4"];
+                        $data_ag = $dado["data_ag"];
+                        $periodo = $dado["periodo"];
+                        $acesso_gpon = $dado["acesso_gpon"];
+                        
                        
                         
                         
@@ -192,7 +196,7 @@ height:70px;
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active"  <?php if ($_SESSION["acesso"] == "Tec"){ echo 'href="index_col.html"';} else {echo 'href="dashboard.php"'; } ?>><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active"  <?php if ($_SESSION["acesso"] == "Tec"){ echo 'href="index_col.html"';} else {echo 'href="dashboard_hc.php"'; } ?>><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -233,6 +237,10 @@ height:70px;
                     <input class="form-control"   readonly name="sa" value="<?php echo $sa?>" type="text" aria-describedby="emailHelp" >
                   </div>
                   <div class="form-group">
+                    <label for="exampleInputEmail1">Acesso Gpon</label>
+                    <input class="form-control"   readonly name="acesso_gpon" value="<?php echo $acesso_gpon?>" type="text" aria-describedby="emailHelp" >
+                  </div>
+                  <div class="form-group">
                     <label for="exampleInputEmail1">Execução</label>
                     <input class="form-control"  id="ba" readonly name="data_execucao"  value="<?php echo $data_execucao?>" type="text" aria-describedby="emailHelp" >
                   </div>
@@ -254,6 +262,14 @@ height:70px;
                   <div class="form-group">
                     <label for="exampleInputEmail1">Contato</label>
                     <input class="form-control"  id="ba" readonly name="cdoe"  value="<?php echo $contato1?>" type="text" aria-describedby="emailHelp" >
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Data do agendamento</label>
+                    <input class="form-control"  id="ba" readonly name="data_ag"  value="<?php echo $data_ag?>" type="text" aria-describedby="emailHelp" >
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Período</label>
+                    <input class="form-control"  id="ba" readonly name="periodo"  value="<?php echo $periodo?>" type="text" aria-describedby="emailHelp" >
                   </div>
                   
                   <div class="form-group">
@@ -384,9 +400,11 @@ if (isset($_POST ['submit2']) )
   
   $sa  =$_POST['sa'];
   $tec  =$_POST['tec'];
+  date_default_timezone_set('America/Sao_Paulo');
+  $hoje = date('Y-m-d H:i:s');
   
    
-          $query = "update reparo_hc set id_usu = '$tec', status = 'EM ANDAMENTO' where sa = '$sa'";
+          $query = "update reparo_hc set id_usu = '$tec', status = 'EM ANDAMENTO', data_despacho_tec = '$hoje' where sa = '$sa'";
   
           $sql = mysql_query($query);
   

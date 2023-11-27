@@ -82,7 +82,7 @@
   
   
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="dashboard.php">ICOMON</a>
+    <header class="app-header"><a class="app-header__logo" href="dashboard_hc.php">ICOMON</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -93,7 +93,7 @@
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             
-            <li><a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+            <li><a class="dropdown-item" href="../logout.php"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
           </ul>
         </li>
       </ul>
@@ -108,7 +108,7 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="dashboard.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" href="dashboard_hc.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -126,7 +126,22 @@
             <li><a class="treeview-item" href="pesq_contato3.php"><i class="icon fa fa-circle-o"></i> Contato 3</a></li>
             <li><a class="treeview-item" href="pesq_contato5.php"><i class="icon fa fa-circle-o"></i> Contato 5</a></li>
             <li><a class="treeview-item" href="pesq_contato7.php"><i class="icon fa fa-circle-o"></i>Contato 7</a></li>
+            <li><a class="treeview-item" href="pesq_per.php"><i class="icon fa fa-circle-o"></i>Pesquisa por período</a></li>
+            <li><a class="treeview-item" href="esteira.php"><i class="icon fa fa-circle-o"></i>Reteste Não ok</a></li>
+       
+            <li><a class="treeview-item" href="import2.php"><i class="icon fa fa-circle-o"></i>Upload de Base</a></li>
             
+          </ul>
+        </li>
+        
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Contato sem retorno</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+          
+            <li><a class="treeview-item" href="pesq_semretorno1.php"><i class="icon fa fa-circle-o"></i> Contato SR 1</a></li>
+            <li><a class="treeview-item" href="pesq_semretorno3.php"><i class="icon fa fa-circle-o"></i> Contato SR 3</a></li>
+            <li><a class="treeview-item" href="pesq_semretorno5.php"><i class="icon fa fa-circle-o"></i> Contato SR 5</a></li>
+            <li><a class="treeview-item" href="pesq_semretorno7.php"><i class="icon fa fa-circle-o"></i>Contato SR 7</a></li>
+        
           </ul>
         </li>
         
@@ -135,10 +150,35 @@
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Coordenador</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
           
-            <li><a class="treeview-item" href="caixa_coord.php"><i class="icon fa fa-circle-o"></i> Caixa do coordenador</a></li>
+            <li><a class="treeview-item" href="caixa_coord.php"><i class="icon fa fa-circle-o"></i> Pós contato pendente </a></li>
+             <li><a class="treeview-item" href="pesq_posreparo.php"><i class="icon fa fa-circle-o"></i> Pós contato encerrados</a></li>
+            <li><a class="treeview-item" href="repetitivos.php"><i class="icon fa fa-circle-o"></i> Repetitivos pendentes </a></li>
+            <li><a class="treeview-item" href="pesq_repetitivos.php"><i class="icon fa fa-circle-o"></i> Pesquisa repetitivos  </a></li>
+            <li><a class="treeview-item" href="garantia.php"><i class="icon fa fa-circle-o"></i> Garantia pendentes </a></li>
+            <li><a class="treeview-item" href="pesq_garantia.php"><i class="icon fa fa-circle-o"></i> Pesquisa garantia  </a></li>
+            <li><a class="treeview-item" href="repetidas.php"><i class="icon fa fa-circle-o"></i> Repetida pendentes </a></li>
+            <li><a class="treeview-item" href="pesq_repetidas.php"><i class="icon fa fa-circle-o"></i> Pesquisa repetidas  </a></li>
+            <li><a class="treeview-item" href="blacklist.php"><i class="icon fa fa-circle-o"></i> Blacklist pendentes </a></li>
+            <li><a class="treeview-item" href="pesq_blacklist.php"><i class="icon fa fa-circle-o"></i> Pesquisa blacklist  </a></li>
+            <li><a class="treeview-item" href="feedback.php"><i class="icon fa fa-circle-o"></i> Feedback pendentes </a></li>
+            <li><a class="treeview-item" href="pesq_feedback.php"><i class="icon fa fa-circle-o"></i> Pesquisa Feedback  </a></li>
+            <li><a class="treeview-item" href="endereco.php"><i class="icon fa fa-circle-o"></i> Endereço pendentes </a></li>
+            <li><a class="treeview-item" href="pesq_endereco.php"><i class="icon fa fa-circle-o"></i> Pesquisa endereços  </a></li>
+           
            
           
           </ul>
+          <!--
+          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Rat</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+          
+            <li><a class="treeview-item" href="atua.php"><i class="icon fa fa-circle-o"></i> Validação escaneamento</a></li>
+            <li><a class="treeview-item" href="pesq_rat.php"><i class="icon fa fa-circle-o"></i> Pesquisa escaneamento</a></li>
+            
+            
+          </ul>
+        </li>
+         -->
         
         
             
@@ -156,7 +196,7 @@
       </div>
       <div class="row">
         
-        
+        <iframe width="100%" height="2800" src="https://lookerstudio.google.com/embed/reporting/4aca2a16-b011-453c-8e12-eda3d3e587ba/page/t9HYD" frameborder="0" style="border:0" allowfullscreen></iframe>
      
 
       

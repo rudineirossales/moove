@@ -9,7 +9,7 @@
                   exit;
             }
 
-            $connect = mysqli_connect("mysql.hostinger.com.br", "u504529778_icomon_", "Rud!n3!@", "u504529778_icomon_");  
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon");   
             $query ="SELECT * FROM pos_ba where id_gestor = '".$_SESSION['id']."' and status = 'PENDENTE'";  
             $result = mysqli_query($connect, $query); 
 ?>
@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <title>Controle de estoque</title>  
+  <title>Icomon</title>  
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
            <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script> 
            
@@ -116,7 +116,7 @@ function fnExcelReport() {
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="index_col.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" href="dashboard.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -133,7 +133,7 @@ function fnExcelReport() {
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> Caixa de atividades.</h1>
+          <h1><i class="fa fa-th-list"></i> Vistoria pós BA</h1>
           
         </div>
         <ul class="app-breadcrumb breadcrumb side">
@@ -154,6 +154,7 @@ function fnExcelReport() {
                                <tr>  
                                     <td>Ba</td> 
                                     <td>Estacao</td>  
+                                    <td>Endereço</td>
                                     <td>Data Encerramento</td>  
                                     <td>Gestor</td> 
                                     
@@ -170,8 +171,9 @@ function fnExcelReport() {
                           {  
                                echo '  
                                <tr>  
-                                    <td><a href="cad_baixa.php?ba='.$row["ba"].'"> '.$row["ba"].' </span></a></td>   
+                                    <td><a href="envia_posba.php?ba='.$row["ba"].'"> '.$row["ba"].' </span></a></td>   
                                     <td>'.$row["estacao"].'</td>
+                                    <td>'.$row["endereco"].'</td>
                                     <td>'.$row["data_validacao"].'</td>  
                                     <td>'.$row["nome_gestor"].'</td> 
                                    

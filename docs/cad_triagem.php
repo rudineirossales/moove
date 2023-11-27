@@ -45,11 +45,12 @@
                         
                         
                         
+                        
                 }
                 
                 }
-              
-
+                       date_default_timezone_set('America/Sao_Paulo');
+                       $hoje = date('Y-m-d H:i:s');
 
 ?>
 
@@ -394,7 +395,7 @@ if (isset($_POST ['submit']) )
         {
   
           $query4 = "insert into logs (ba,status,nome,id,data)";
-          $query4.= "values ('$ba','DESPCOORD','".$_SESSION['nome']."','".$_SESSION['id']."',NOW())";
+          $query4.= "values ('$ba','DESPCOORD','".$_SESSION['nome']."','".$_SESSION['id']."','$hoje')";
           $sql4 = mysql_query($query4);
 
           echo "
@@ -439,7 +440,7 @@ if (isset($_POST ['submit2']) )
 
           $ba  =$_POST['ba'];
  
-          $query = "update atividade set id_usu = '".$_SESSION['id']."', nome_validacao = '".$_SESSION['nome']."',data_encerramento = NOW(), obs_cl = 'ENCERRADO MANUALMENTE PELA TRIAGEM', nome_gestor = '$gestor', status = 'ENCERRADA', causa='ENCERRADO TRIAGEM', sub = 'ENCERRADO TRIAGEM' where ba = '$ba'";
+          $query = "update atividade set id_usu = '".$_SESSION['id']."', nome_validacao = '".$_SESSION['nome']."',data_encerramento = NOW(), obs_cl = 'ENCERRADO MANUALMENTE PELA TRIAGEM', nome_gestor = '$gestor', status = 'ENCERRADO', causa='ENCERRADO TRIAGEM', sub = 'ENCERRADO TRIAGEM' where ba = '$ba'";
   
           $sql = mysql_query($query);
   
@@ -450,7 +451,7 @@ if (isset($_POST ['submit2']) )
         {
   
           $query4 = "insert into logs (ba,status,nome,id,data)";
-          $query4.= "values ('$ba','ENCERRADO TRIAGEM','".$_SESSION['nome']."','".$_SESSION['id']."',NOW())";
+          $query4.= "values ('$ba','ENCERRADO TRIAGEM','".$_SESSION['nome']."','".$_SESSION['id']."','$hoje')";
           $sql4 = mysql_query($query4);
 
           echo "

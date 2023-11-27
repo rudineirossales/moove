@@ -129,7 +129,7 @@ function fnExcelReport() {
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> Estoque Atual</h1>
+          <h1><i class="fa fa-th-list"></i> Relatório 7048</h1>
           
         </div>
         <ul class="app-breadcrumb breadcrumb side">
@@ -145,7 +145,7 @@ function fnExcelReport() {
 
         
           <div class="tile">
-          <form class="form-inline" role="form"   method="POST" action="pesq_movimentacao.php" style="margin-left:10%;">
+          <form class="form-inline" role="form"   method="POST" action="relatorio_exclusivo.php" style="margin-left:10%;">
     <div class="form-group">
    
 
@@ -279,7 +279,7 @@ function fnExcelReport() {
                             }
                             else
                             {
-                            $query ="select *  from usuario join atividade_bbk on usuario.id = atividade_bbk.id_usu  where data_encerramento BETWEEN '$data 00:00:00' and '$data2 23:59:00' and status='ENCERRADO' and sub = 'Ba Indevido' and tipo = '7048' or data_encerramento BETWEEN '$data 00:00:00' and '$data2 23:59:00' and status='ENCERRADO' and sub = 'Sem Atuacao' and tipo = '7048' ";
+                            $query ="select *  from usuario join atividade on usuario.id = atividade.id_usu  where data_encerramento BETWEEN '$data 00:00:00' and '$data2 23:59:00' and status='ENCERRADO' and sub = 'Ba Indevido' and tipo = '7048' or data_encerramento BETWEEN '$data 00:00:00' and '$data2 23:59:00' and status='ENCERRADO' and sub = 'Sem Atuacao' and tipo = '7048' ";
                             }
                             $result = mysqli_query($connect, $query); 
                           
@@ -326,7 +326,20 @@ function fnExcelReport() {
  </html>  
  <script>  
  $(document).ready(function(){  
-      $('#myTable').DataTable();  
+      $('#myTable').DataTable(
+        {
+                   
+          "scrollX": false,
+    "ordering": true,
+    "lengthMenu": [ [ -1, 10, 30, 50, 100], ["Todos", "10","30", "50", "100"] ],
+    "scrollCollapse": true,
+    
+                    
+                }
+
+
+
+      );  
  });  
- </script>  
+ </script>   
  <script src="js/main.js"></script>

@@ -9,8 +9,8 @@
                   exit;
             }
 
-            $connect = mysqli_connect("185.213.81.103", "u504529778_hc", "Rud!n3!@", "u504529778_hc");  
-
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "hc");
+            mysql_close($connection);
             
 ?>
 
@@ -21,7 +21,12 @@
   <title>Icomon</title>  
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
            <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script> 
-       
+           
+           
+              
+            
+           
+          
     <link rel="icon" href="img/icomon.png">
 
     <script type="text/javascript">
@@ -56,6 +61,10 @@ function fnExcelReport() {
     }
 
 }
+
+
+
+
 
 </script> 
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
@@ -107,7 +116,7 @@ function fnExcelReport() {
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" <?php if ($_SESSION["acesso"] == "Tec"){ echo 'href="index_col.html"';} else {echo 'href="dashboard.php"'; } ?>><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" <?php if ($_SESSION["acesso"] == "Tec"){ echo 'href="index_col.html"';} else {echo 'href="dashboard_hc.php"'; } ?>><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -116,7 +125,9 @@ function fnExcelReport() {
             <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Widgets</a></li>
           </ul>
         </li>
-
+        
+        
+        
         <li><a class="app-menu__item " href="#" id="test" onClick="javascript:fnExcelReport();">  <i class="app-menu__icon fa fa-table"></i> </i><span class="app-menu__label"> Gerar Excel </span> </a> </li>
     </aside>
     <main class="app-content">
@@ -134,6 +145,9 @@ function fnExcelReport() {
       <div class="row">
         <div class="col-md-12">
 
+        
+
+        
           <div class="tile">
           <form class="form-inline" role="form"   method="POST" action="pesq_per.php" style="margin-left:10%;">
     <div class="form-group">
@@ -171,6 +185,8 @@ function fnExcelReport() {
        </div>
       </div>
      </div>
+    
+  
    
   </div>
 
@@ -212,6 +228,10 @@ function fnExcelReport() {
 
     <br>
 
+
+  
+
+
     <button type="submit"  name="submit" id="submit" class="btn btn-primary">Busca</button> <br><br><br><br>
   </form>
           
@@ -220,6 +240,7 @@ function fnExcelReport() {
                           <thead>  
                                <tr> 
                                     <td>Sa</td>  
+                                    <td>Acesso Gpon</td> 
                                     <td>Cliente</td> 
                                     <td>Contato</td>  
                                     <td>Execucao</td>  
@@ -233,6 +254,8 @@ function fnExcelReport() {
                                     <td>Funcionalidade 1º</td>
                                     <td>Nome triagem 1º</td>
                                     <td>Data triagem 1º</td> 
+                                    <td>Data Despacho Coord</td> 
+                                    <td>Data Despacho Téc</td> 
                                     <td>Descricao triagem 1º</td> 
 
                                     <td>Atendeu 2º?</td>
@@ -255,8 +278,9 @@ function fnExcelReport() {
                                     <td>Nome triagem 4º</td>
                                     <td>Data triagem 4º</td> 
                                     <td>Descricao triagem 4º</td> 
-
+                                    <td>Tratada campo</td>
                                     <td>Status</td>
+                                    
                                     
                                </tr>  
                           </thead> 
@@ -281,6 +305,7 @@ function fnExcelReport() {
                                echo '  
                                <tr> 
                                <td>'.$row["sa"].'</td>
+                               <td>'.$row["acesso_gpon"].'</td>
                                <td>'.$row["cliente"].'</td>
                                <td>'.$row["contato"].'</td>
                                <td>'.$row["data_execucao"].'</td> 
@@ -294,6 +319,8 @@ function fnExcelReport() {
                                <td>'.$row["funcionalidade"].'</td>
                                <td>'.$row["contato1"].'</td>
                                <td>'.$row["data_contato1"].'</td>
+                               <td>'.$row["data_despacho_tec"].'</td>
+                               <td>'.$row["data_despacho_coord"].'</td>
                                <td>'.$row["obs_contato1"].'</td>
 
                                <td>'.$row["atendeu_2"].'</td>  
@@ -316,8 +343,9 @@ function fnExcelReport() {
                                <td>'.$row["contato4"].'</td>
                                <td>'.$row["data_contato4"].'</td>
                                <td>'.$row["obs_contato4"].'</td>
-
+                               <td>'.$row["tratada"].'</td>
                                <td>'.$row["status"].' ';?> </td> 
+                               
                                    
                                </tr>  
                                <?php
@@ -330,7 +358,20 @@ function fnExcelReport() {
  </html>  
  <script>  
  $(document).ready(function(){  
-      $('#myTable').DataTable();  
+      $('#myTable').DataTable(
+        {
+                   
+          "scrollX": false,
+    "ordering": true,
+    "lengthMenu": [ [ -1, 10, 30, 50, 100], ["Todos", "10","30", "50", "100"] ],
+    "scrollCollapse": true,
+    
+                    
+                }
+
+
+
+      );  
  });  
  </script>  
  <script src="js/main.js"></script>

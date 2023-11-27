@@ -6,7 +6,7 @@
 
 session_start();
 
-if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) || ($_SESSION["acesso"] != 'EDT' ) )
+if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) || ($_SESSION["acesso"] != 'DEL' ) )
 {
   header("Location: atua.php");
   exit;
@@ -71,14 +71,15 @@ function saidasuccessfully()
 
 
 <?php
-
+date_default_timezone_set('America/Sao_Paulo');
 $ba  =$_POST['ba'];
 $obs  =$_POST['obs'];
+$hoje = date('Y-m-d H:i:s');
 
 
 
 
-        $query = "update atividade set  status = 'ENCERRADO', obs = 'ENCERRADO MANUAL CL ' "."'$obs', nome_validacao = '".$_SESSION['nome']."', data_validacao = NOW() where ba = '$ba'";
+        $query = "update atividade set  status = 'ENCERRADO', obs_cl = '$obs', nome_validacao = '".$_SESSION['nome']."', data_validacao = '$hoje' where ba = '$ba'";
 
         $sql = mysql_query($query);
 
@@ -86,13 +87,15 @@ $obs  =$_POST['obs'];
       {
 
         $query4 = "insert into logs (ba,status,nome,id,data)";
-        $query4.= "values ('$ba','ENCERRADO MANUAL CL','".$_SESSION['nome']."','".$_SESSION['id']."',NOW())";
-       
+        $query4.= "values ('$ba','ENCERRADO MANUAL CL','".$_SESSION['nome']."','".$_SESSION['id']."','$hoje')";
+        
         echo "
         <script language='JavaScript'>
         window.alert('EDITADO SUCESSO!')
         
         </script>";
+        
+       
 
         echo "<script>saidasuccessfully()</script>";
       }

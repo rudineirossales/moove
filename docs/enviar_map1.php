@@ -31,7 +31,7 @@ if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
 <script type="text/javascript">
 function saidasuccessfully()
 {
-  setTimeout("window.location='dashboard.php'",3000);
+  setTimeout("window.location='cadastro.php'",3000);
   
   
 }
@@ -76,6 +76,8 @@ $opc =$_POST['opc'];
 $opc2 =$_POST['opc2'];
 $opc3 =$_POST['opc3'];
 $status ='DESPCOORD';
+$sa =$_POST['sa'];
+$idgpon =$_POST['idgpon'];
 
 
 
@@ -119,8 +121,8 @@ $row = mysql_num_rows($sql2);
       }
 
     }
-
-    if($opc3 == 'TRIAGEM')
+    
+      if($opc3 == 'TRIAGEM')
 {
 
 $status = 'TRIAGEM';
@@ -132,9 +134,9 @@ $coord = $_SESSION['id'];
 }
 
 
-$query = "insert into atividade (ba,ba_comum,uf,localidade,estacao,endereco,celula,cdoe,data_abertura,data_vencimento,tipo,tipo_rede,id_usu,status,nome_despacho,data_despacho,obs_cl,afetacao,nome_gestor,tipo_7048,escalonamento)";
+$query = "insert into atividade (ba,ba_comum,uf,localidade,estacao,endereco,celula,cdoe,data_abertura,data_vencimento,tipo,tipo_rede,id_usu,status,nome_despacho,data_despacho,obs_cl,afetacao,nome_gestor,tipo_7048,escalonamento,sa,idgpon)";
 
-$query.= "values ('$ba','$ba_comum','$uf','$localidade','$estacao','$endereco','$celula','$cdoe_cdoia','$data_abertura','$data_vencimento','$tipo','$tipo_rede','$coord','$status','".$_SESSION['nome']."','$hoje','$obs','$afetacao','$gestor','$opc','$opc2')";
+$query.= "values ('$ba','$ba_comum','$uf','$localidade','$estacao','$endereco','$celula','$cdoe_cdoia','$data_abertura','$data_vencimento','$tipo','$tipo_rede','$coord','$status','".$_SESSION['nome']."','$hoje','$obs','$afetacao','$gestor','$opc','$opc2','$sa','$idgpon')";
 
 
 
@@ -149,16 +151,16 @@ if($sql )
       $query4.= "values ('$ba','DESPCOORD','".$_SESSION['nome']."','".$_SESSION['id']."','$hoje')";
       $sql4 = mysql_query($query4);
   
-  echo "
-  <script language='JavaScript'>
-  window.alert('ENVIADA A CAMPO')
-  
-  </script>";
+      echo "
+      <script language='JavaScript'>
+      window.alert('ENVIADA A CAMPO')
+      
+      </script>";
+ 
   
    echo "<script>saidasuccessfully()</script>";
   
-
-  
+ mysql_close($connection);
 }
 else
 {

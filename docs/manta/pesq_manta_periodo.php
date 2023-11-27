@@ -3,13 +3,11 @@
       
          session_start();
 
-         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
-            {
-                 header("Location: index.html");
-                  exit;
-            }
+         
 
-            $connect = mysqli_connect("localhost", "root","", "icomom_");
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon"); 
+            
+            
             
 ?>
 
@@ -33,12 +31,12 @@ function fnExcelReport() {
     var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
     tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
 
-    tab_text = tab_text + '<x:Name>Relatorio Caixa Fechada</x:Name>';
+    tab_text = tab_text + '<x:Name>Relatorio Mnata</x:Name>';
 
     tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
     tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
 
-    tab_text = tab_text + "<table border='1px'>";
+    tab_text = tab_text + "<table border='3px'>";
     tab_text = tab_text + $('#myTable').html();
     tab_text = tab_text + '</table></body></html>';
 
@@ -50,7 +48,7 @@ function fnExcelReport() {
     if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
         if (window.navigator.msSaveBlob) {
             var blob = new Blob([tab_text], {
-                type: "application/csv;charset=utf-8;"
+                type: "application/csv;charset=UTF-8;"
             });
             navigator.msSaveBlob(blob, 'Test file.xls');
         }
@@ -115,7 +113,7 @@ function fnExcelReport() {
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" <?php if ($_SESSION["acesso"] == "Tec"){ echo 'href="index_col.html"';} else {echo 'href="dashboard.php"'; } ?>><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" <?php if ($_SESSION["acesso"] == "Tec"){ echo 'href="#"';} else {echo 'href="#"'; } ?>><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -132,7 +130,7 @@ function fnExcelReport() {
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> Estoque Atual</h1>
+          <h1><i class="fa fa-th-list"></i> Relatório de mantas</h1>
           
         </div>
         <ul class="app-breadcrumb breadcrumb side">
@@ -148,7 +146,7 @@ function fnExcelReport() {
 
         
           <div class="tile">
-          <form class="form-inline" role="form"   method="POST" action="pesq_movimentacao.php" style="margin-left:10%;">
+          <form class="form-inline" role="form"   method="POST" action="pesq_manta_periodo.php" style="margin-left:10%;">
     <div class="form-group">
    
 
@@ -238,10 +236,11 @@ function fnExcelReport() {
                      <table id="myTable" class="table table-striped table-bordered">  
                           <thead>  
                                <tr> 
-                                                      <th>Protocolo</th>
+                                <th>Protocolo</th>                     
                                 <th>Uf</th>
+                                <th>Coordenador</th>
                                 <th>Cidade</th>
-                                <th>Estação</th>
+                                <th>Estacao</th>
                                 <th>Bairro</th>
                                 <th>Endereço</th>
                                 <th>Data</th>
@@ -249,10 +248,15 @@ function fnExcelReport() {
                                 <th>Tipo</th>
                                 <th>Cabo</th>
                                 <th>Rede</th>
-                                <th>Latitude / Longitude</th>
+                                <th>Latitude</th>
+                                <th>Longitude</th>
                                 <th>Quantidade de mantas</th>
-                                <th>Visualizar</th>
+                                <th>Plaquetas</th>
+                                <th>Espiral</th>
+                                <th>Reserva tecnica</th>
+                                <th>Maps</th>
                                 <th>Pdf</th>
+                                
     
                                </tr>  
                           </thead> 
@@ -277,8 +281,10 @@ function fnExcelReport() {
                                     $ba = $row["ba"]; 
                                echo '  
                                <tr> 
+                                   
                                <td>'.$row["id"].'</td>
-                               <td>'.$row["uf"].'</td> 
+                               <td>'.$row["uf"].'</td>
+                               <td>'.$row["coordenador"].'</td>
                                <td>'.$row["cidade"].'</td>  
                                <td>'.$row["estacao"].'</td>  
                                <td>'.$row["bairro"].'</td>
@@ -288,19 +294,27 @@ function fnExcelReport() {
                                <td>'.$row["tipo_rede"].'</td>
                                <td>'.$row["cabo"].'</td>
                                <td>'.$row["tipo_rede"].'</td>
-                               <td>'.$row["latitude"].',','.$dado ["logitude"]  ?></td>
+                               <td>'.$row["latitude"].'</td>
+                               <td>'.$row["longitude"].'</td>
+                               <td>'.$row["mantas"].'</td>
+                               <td>'.$row["plaquetas"].'</td>
+                               <td>'.$row["espiral"].'</td>
                                
                                
-                               <td>'.$row["mantas"].' ';?> </td> 
+                               
+                               <td>'.$row["reserva_tecnica"].' ';?> </td> 
+                               <td> <a href="https://www.google.com.br/maps/search/<?php echo $row ["latitude"] ?>,<?php echo $row ["longitude"] ?>/@<?php echo $dado ["latitude"] ?>,<?php echo $dado ["longitude"] ?>" target="_blank" class="btn btn-info btn-xs active" role="button" aria-pressed="true">Maps</a></td>
+                               
+                               
 
                                 <?php
                                         $foto_antes = $row ["foto_antes"];
                                         $foto_depois = $row ["foto_depois"];
-                                        $protocolo = $row ["id"];
+                                        $protocolo = $row ["protocolo"];
                                 ?>
                                
-                               <td> <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal<?php echo $dado ['id'];  ?>" >Visualizar</button> </td>
-                               <td> <a href="pdf.php?protocolo=<?php echo $dado["protocolo"];?>" target="_blank" class="btn btn-info btn-xs active" role="button" aria-pressed="true">Gerar Pdf</a></td>
+                               
+                               <td> <a href="pdf.php?protocolo=<?php echo $row["id"];?>" target="_blank" class="btn btn-info btn-xs active" role="button" aria-pressed="true">Gerar Pdf</a></td>
                                     
                                     
                                </tr>  
@@ -314,7 +328,20 @@ function fnExcelReport() {
  </html>  
  <script>  
  $(document).ready(function(){  
-      $('#myTable').DataTable();  
+      $('#myTable').DataTable(
+        {
+                   
+          "scrollX": false,
+    "ordering": true,
+    "lengthMenu": [ [ -1, 10, 30, 50, 100], ["Todos", "10","30", "50", "100"] ],
+    "scrollCollapse": true,
+    
+                    
+                }
+
+
+
+      );  
  });  
  </script>  
  <script src="js/main.js"></script>

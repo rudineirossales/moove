@@ -14,19 +14,27 @@ $ba =$_GET['ba'];  ?>
 
 
 
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   
 <!-- ///////PASTA BOOTSTRAP ////////////////////-->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
 
 
-  <script src="jquery-min.js"></script>
-  <script src="jquery-ui.js"></script>
-  <script src="jquery-ui.min.js"></script>
-  <script src="js/jquery.js"></script>
+ <script src="jquery-min.js"></script>
+ <script src="jquery-ui.js"></script>
+ <script src="jquery-ui.min.js"></script>
+<script src="js/jquery.js"></script>
   <script src="js/bootstrap.min.js"></script>
 
     <!-- ///////PASTA BOOTSTRAP ////////////////////-->
@@ -62,8 +70,8 @@ function loginsuccessfully()
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-<div class="table-responsive">  
+    
+    <div class="table-responsive">  
                      <table id="myTable" class="table table-striped table-bordered">  
                           <thead>  
                                <tr> 
@@ -72,7 +80,7 @@ function loginsuccessfully()
                                     <td>Quantidade</td> 
                                     
                                </tr>  
-                          </thead>
+                          </thead> 
 
 <?php
 
@@ -85,7 +93,7 @@ function loginsuccessfully()
 
     {  ?>
 
- 
+
 
 
                           <?php

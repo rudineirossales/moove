@@ -9,7 +9,7 @@
                   exit;
             }
 
-            $connect = mysqli_connect("localhost", "root", "", "icomom_");  
+           $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon");  
             
 ?>
 
@@ -174,7 +174,7 @@ function fnExcelReport() {
 
                               
                                 
-                             $query ="select * from diario  where id_coord = '".$_SESSION['id']."'";  
+                             $query ="select * from diario  where id_coord = '".$_SESSION['id']."' and acesso = 'Tec'";  
                              $result = mysqli_query($connect, $query); 
                              while($row = mysqli_fetch_array($result))  
                           { 
@@ -198,7 +198,10 @@ function fnExcelReport() {
  </html>  
  <script>  
  $(document).ready(function(){  
-      $('#myTable').DataTable();  
+      "scrollX": false,
+    "ordering": true,
+    "lengthMenu": [ [ -1, 10, 30, 50, 100], ["Todos", "10","30", "50", "100"] ],
+    "scrollCollapse": true
  });  
  </script>  
 

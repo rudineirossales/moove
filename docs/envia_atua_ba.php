@@ -15,7 +15,15 @@ if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
 }
 
 
+
+ 
+
+
 ?>
+
+
+
+ 
 
 <?php
 
@@ -81,7 +89,7 @@ $tipo_rede  =$_POST['tipo_rede'];
 
 
 
-        $query = "update atividade set localidade = '$localidade', tipo_rede = '$tipo_rede', estacao = '$estacao', celula = '$celula', cdoe = '$cdoe', afetacao = '$afetacao', endereco = '$endereco', data_abertura = '$data_abertura',data_vencimento = '$data_vencimento',tipo = '$prioridade', status = '$status', obs = '$obs' where ba = '$ba'";
+        $query = "update atividade set localidade = '$localidade', tipo_rede = '$tipo_rede', estacao = '$estacao', celula = '$celula', cdoe = '$cdoe', afetacao = '$afetacao', endereco = '$endereco', data_abertura = '$data_abertura',data_vencimento = '$data_vencimento',tipo = '$prioridade', status = '$status', obs_cl = '$obs' where ba = '$ba'";
 
         $sql = mysql_query($query);
 
@@ -94,6 +102,8 @@ $tipo_rede  =$_POST['tipo_rede'];
         window.alert('EDITADO SUCESSO!')
         
         </script>";
+        
+        
 
         echo "<script>saidasuccessfully()</script>";
       }

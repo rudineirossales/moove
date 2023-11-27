@@ -65,20 +65,10 @@
 
   <?php   
 
-          $sql = mysql_query ("select *  from atividade where id_usu = '".$_SESSION['id']."' and status = 'DESPCOORD' OR id_usu = '".$_SESSION['id']."' and status = 'PARALIZADO'" );
+          $sql = mysql_query ("select *  from atividade where id_usu = '".$_SESSION['id']."' and status = 'DESPCOORD' OR id_usu = '".$_SESSION['id']."' and status = 'PARALISADO'"  );
           $row = mysql_num_rows($sql);
-          if (mysql_num_rows($sql) > 0)
-
-            {
-
-
-                  echo "<script>
-                  swal('Você tem atividades não atribuídas');
-                      </script>'";
-
-                  
-            }
-
+          
+            
             $sql2 = mysql_query ("select *  from atividade where status = 'EM VALIDACAO'" );
             $contaValidacao = mysql_num_rows($sql2);
 
@@ -97,7 +87,7 @@
         <!--Notification Menu-->
        
         <!-- User Menu-->
-        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"> FTTH</i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             
             <li><a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
@@ -115,7 +105,7 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="dashboard.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" href="bbk/dashboard_bbk.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Backbone</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -125,18 +115,23 @@
           </ul>
         </li>
         
-        <?php if($_SESSION['acesso'] == 'ADM'){  ?>
+        
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Atividades</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
           
             <li><a class="treeview-item" href="cadastro.php"><i class="icon fa fa-circle-o"></i> Cadastro</a></li>
-            <li><a class="treeview-item" href="atua.php"><i class="icon fa fa-circle-o"></i> Repasse</a></li>
-            <li><a class="treeview-item" href="paralizacao.php"><i class="icon fa fa-circle-o"></i> Paralizar / Liberar BA</a></li>
+            <li><a class="treeview-item" href="cadastro_de_indevidos.php"><i class="icon fa fa-circle-o"></i> Cadastro de indevidos</a></li>
+            <li><a class="treeview-item" href="atua.php"><i class="icon fa fa-circle-o"></i> Repasse</a></li> 
             <li><a class="treeview-item" href="pesq_per.php"><i class="icon fa fa-circle-o"></i>Esteira</a></li>
-            <li><a class="treeview-item" href="pesq_movimentacao.php"><i class="icon fa fa-circle-o"></i> Pequisa período<a><li>
+            <li><a class="treeview-item" href="paralizacao.php"><i class="icon fa fa-circle-o"></i> Paralisar / Liberar BA</a></li>
+            <li><a class="treeview-item" href="pesq_movimentacao.php"><i class="icon fa fa-circle-o"></i> Pequisa ba encerrado<a><li>
+                <li><a class="treeview-item" href="pesq_movimentacao_materiais.php"><i class="icon fa fa-circle-o"></i> Pequisa materiais<a><li>
+            <li><a class="treeview-item" href="pesq_indevidos.php"><i class="icon fa fa-circle-o"></i> Pequisa de indevidos<a><li>
+            <li><a class="treeview-item" href="atua.php"><i class="icon fa fa-circle-o"></i> Repasse</a></li> 
             <li><a class="treeview-item" href="validacao.php"><i class="icon fa fa-circle-o"></i> Validação <pre> <span class="badge badge-pill badge-<?php if($contaValidacao > 0 ) { echo 'warning';} else { echo 'success';} ?>">  <?php echo $contaValidacao;?>  </span></pre><a><li>
-            <li><a class="treeview-item" href="mascara.php"><i class="icon fa fa-circle-o"></i> Gerar mascara<a><li> 
-          <?php }?>
+            <li><a class="treeview-item" href="mascara.php"><i class="icon fa fa-circle-o"></i> Gerar mascara<a><li>
+            <li><a class="treeview-item" href="pesq_triagem.php"><i class="icon fa fa-circle-o"></i> Caixa de triagem<a><li>
+          
           
             
           
@@ -147,33 +142,50 @@
 
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Colaborador</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-          <?php if($_SESSION['acesso'] == 'ADM'){ ?>
+         
             <li><a class="treeview-item" href="cad_col.php"><i class="icon fa fa-circle-o"></i> Cadastro</a></li>
-            <!--<li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i> Editar</a></li> -->
+            <li><a class="treeview-item" href="cadastro_ba_token.php"><i class="icon fa fa-circle-o"></i> Gerar BA de apoio</a></li>
             
             <li><a class="treeview-item" href="pesq_cx_col_adm.php"><i class="icon fa fa-circle-o"></i> Caixa Téc</a></li>
-            <li><a class="treeview-item" href="pesq_cx_col.php"><i class="icon fa fa-circle-o"></i> Caixa coordenador  <pre> <span class="badge badge-pill badge-<?php if($row > 0 ) { echo 'warning';} else { echo 'success';} ?>">  <?php echo $row;?>  </span></pre></a></li>
-          <?php }?>
-
-         <?php if($_SESSION['acesso'] == 'Tec'){ ?>
+            <li><a class="treeview-item" href="pesq_cx_col.php"><i class="icon fa fa-circle-o"></i> Caixa Coordenador <pre> </pre><span class="badge badge-pill badge-<?php if($row > 0 ) { echo 'warning';} else { echo 'success';} ?>"> <?php echo $row;?> </span> </pre></a></li>
+            <li><a class="treeview-item" href="status_atividades.php"><i class="icon fa fa-circle-o"></i> Status de atividades</a></li>
+          
+          
+            
+       
             <li><a class="treeview-item" href="pesq_cx_col.php"><i class="icon fa fa-circle-o"></i> Caixa</a></li>
             <li><a class="treeview-item" href="pesq_movimentacao.php"><i class="icon fa fa-circle-o"></i> Pesquisa período</a></li>
 
-         <?php }?> 
+  
             
           </ul>
         </li>
-
-        <?php if($_SESSION['acesso'] == 'ADM'){  ?>
+        
+     
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Diário de bordo</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
           
-            <li><a class="treeview-item" href="pesq_diario.php"><i class="icon fa fa-circle-o"></i> Cadastro</a></li>
+            <li><a class="treeview-item" href="pesq_diario.php"><i class="icon fa fa-circle-o"></i> Atualização</a></li>
+            </ul>
+            </li>
             
-          <?php }?>
+          
+          
+      
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Vistoria pós BA</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+          
+            <li><a class="treeview-item" href="pesq_posba.php"><i class="icon fa fa-circle-o"></i> Por coordenador</a></li>
+            <li><a class="treeview-item" href="pesq_geral_posba.php"><i class="icon fa fa-circle-o"></i> Total pendentes</a></li>
+            <li><a class="treeview-item" href="pesq_vistoria_encerradas.php"><i class="icon fa fa-circle-o"></i> Pesquisa encerradas</a></li>
+            
+       
+        </ul>
         
-            
+        
+         
     </aside>
+    
     <main class="app-content">
     <div class="app-title">
         <div>
@@ -190,14 +202,13 @@
         
      
 
-      
 
 </div>
 </div>
 </div>
 </div>
 
-<iframe width="1000" height="2000" src="https://lookerstudio.google.com/embed/reporting/4b324134-50d6-415b-81c7-f2739b06b667/page/t4iPD" frameborder="0" style="border:0" allowfullscreen></iframe>
+<iframe width="100%" height="4000" src="https://lookerstudio.google.com/embed/reporting/4b324134-50d6-415b-81c7-f2739b06b667/page/t4iPD" frameborder="0" style="border:0" allowfullscreen></iframe>
 
 
         

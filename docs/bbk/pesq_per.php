@@ -3,13 +3,13 @@
       
          session_start();
 
-         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"])  || ($_SESSION["acesso"] != 'ADM' ) AND ($_SESSION["acesso"] != 'GA' ) )
+         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"])   )
             {
                  header("Location: index.html");
                   exit;
             }
 
-            $connect = mysqli_connect("185.213.81.103", "u504529778_icomon_", "Rud!n3!@", "u504529778_icomon_");  
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon");  
 
             
             $query ="SELECT * FROM atividade_bbk join usuario on id_usu = usuario.id and status <> 'ENCERRADO' order by data_vencimento desc;";   

@@ -9,7 +9,7 @@
                   exit;
             }
 
-            $connect = mysqli_connect("localhost", "root", "", "u504529778_projeto");  
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "projeto");    
             $query ="select protocolo,cod_logradouro,localidade,logradouro from projeto where cadastro_status = 'CONCLUIDO' group by logradouro";  
             $result = mysqli_query($connect, $query); 
 

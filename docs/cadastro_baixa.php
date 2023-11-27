@@ -11,13 +11,7 @@
             }
 
             $ba =$_GET['ba'];
-            
-        
-    
-
-              
-
-
+  
 ?>
 
 
@@ -51,6 +45,31 @@
        
 </script>
 
+<script type="text/javascript">
+function getImagePreview(event)
+  {
+    var image=URL.createObjectURL(event.target.files[0]);
+    var imagediv= document.getElementById('preview');
+    var newimg=document.createElement('img');
+    imagediv.innerHTML='';
+    newimg.src=image;
+    newimg.width="300";
+    imagediv.appendChild(newimg);
+  }
+</script>
+<script type="text/javascript">
+function getImagePreview2(event)
+  {
+    var image=URL.createObjectURL(event.target.files[0]);
+    var imagediv= document.getElementById('preview2');
+    var newimg=document.createElement('img');
+    imagediv.innerHTML='';
+    newimg.src=image;
+    newimg.width="300";
+    imagediv.appendChild(newimg);
+  }
+</script>
+
 <link rel="icon" href="img/icomon.png">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -66,11 +85,32 @@
   
 width:70px;
 height:70px;  
-  
-  
-  
-  
+ 
 }
+
+
+
+
+.input_container {
+  border: 1px solid #e5e5e5;
+}
+
+input[type=file]::file-selector-button {
+  background-color: #fff;
+  color: #000;
+  border: 0px;
+  border-right: 1px solid #e5e5e5;
+  padding: 10px 15px;
+  margin-right: 20px;
+  transition: .5s;
+}
+
+input[type=file]::file-selector-button:hover {
+  background-color: #eee;
+  border: 0px;
+  border-right: 1px solid #e5e5e5;
+}
+
 
 </style>
 
@@ -208,7 +248,7 @@ height:70px;
       
       <div class="form-group">
                 <label for="exampleInputEmail1">Ro</label>
-                <input class="form-control" name="ro"  required type="text" aria-describedby="emailHelp" >
+                <input class="form-control" name="ro"  type="text" aria-describedby="emailHelp" >
       </div>
       <div class="form-group">
                 <label for="exampleInputEmail1">Cis</label>
@@ -219,10 +259,13 @@ height:70px;
                 <label for="email">Obs: </label>
                 <textarea class="form-control" rows="5"  id="obs" name="obs" maxlength="20000" placeholder="Máximo 2000 caracteres"> <?php echo $obs_cl; ?> </textarea>
     </div>
-    <fieldset class="col-md-6">
+    
+    
+    <fieldset class="col-md-12">
                   <div class="form-group">
                         <label for="formFile" class="form-label">Foto antes </label>
-                        <input class="form-control" type="file" accept=".png,.jpg,.jpeg" id="teste1" name="teste1" >
+                        <input class="form-control" required type="file" accept=".png,.jpg" id="upload_file" onchange="getImagePreview(event)" name="teste1" >
+                         <div id="preview"> </div>
                         <label for="formFile" class="form-label" style="font-size:11px;color:red;">*Tamanho máximo da imagem 2MB* </label>
                         
                         <p id="output1"></p>
@@ -244,9 +287,13 @@ height:70px;
                     </script>
 
                   </div>
-                  <div class="form-group">
+    
+    <div class="form-group">
                         <label for="formFile" class="form-label">Foto depois </label>
-                        <input class="form-control" type="file" accept=".png,.jpg,.jpeg" id="teste2" name="teste2" >
+                        <div class="input_container">
+                        <input class="form-control" required type="file" accept=".png,.jpg" id="upload_file2" onchange="getImagePreview2(event)" name="teste2" >
+                        </div>
+                        <div id="preview2"> </div>
                         <label for="formFile" class="form-label" style="font-size:11px;color:red;">*Tamanho máximo da imagem 2MB* </label>
                         
                         <p id="output2"></p>
@@ -267,12 +314,11 @@ height:70px;
                         });
                     </script>
 
-                  </div>
     </div>
 
-    
 
-    
+
+    </div>
                   </div>
                   <div class="tile-footer">
             <?php if ($_SESSION["acesso"] == 'Tec'){ ?>  

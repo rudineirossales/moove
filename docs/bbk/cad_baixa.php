@@ -23,6 +23,9 @@
                     while ($dado = mysql_fetch_assoc($sql))
                     {
                         
+                    
+                        date_default_timezone_set('America/Sao_Paulo');
+                        $hoje = date('Y-m-d H:i:s');
                         $ba2 = $dado["ba"];
                         $uf = $dado["uf"];
                         $localidade = $dado["localidade"];
@@ -51,7 +54,6 @@
                         $cabo= $dado["cabo"];
                         $trecho= $dado["trecho"];
                         $barramento = $dado["barramento"];
-
                         
                         
                         
@@ -357,7 +359,7 @@ height:70px;
                                         <?php
 
                                           
-                                        $sql = "SELECT * FROM usuario where funcao = 'COORD_BBK'  group by nome_gestor order by nome
+                                        $sql = "SELECT * FROM usuario where funcao = 'COORD_BBK' or funcao = 'COORD_BBK_FTTH' group by nome_gestor order by nome
                                         ";
                                         $qr = mysql_query($sql) or die(mysql_error());
                                         while($ln = mysql_fetch_assoc($qr)) 
@@ -378,7 +380,7 @@ height:70px;
                                           </select>
                       </div> 
                         </div> 
-                        <?php if($status == "PARALIZADO") { ?> <span>BA PARALIZADO</span> <?php } else {  ?>
+                        <?php if($status == "PARALISADO") { ?> <span>BA PARALISADO</span> <?php } else {  ?>
                         <button type="submit" class="btn btn-primary" name="submit2">Repassar</button> <?php }?>
                  </form>
             </div>        
@@ -421,27 +423,12 @@ if (isset($_POST ['submit2']) )
   $tec  =$_POST['tec'];
   $gestor  =$_POST['coord'];
   
-  $sql2 = mysql_query ("select * from usuario where id = '$gestor'" );
-
-  $row = mysql_num_rows($sql2);
-
-
-    if (mysql_num_rows($sql2) > 0)
-
-    {
-
-      while ($dado = mysql_fetch_assoc($sql2))
-      {
-
-      $gestor = $dado["nome"];
-
-      }
-
-    }
   
   
+          date_default_timezone_set('America/Sao_Paulo');
+          $hoje = date('Y-m-d H:i:s');
    
-          $query = "update atividade_bbk set id_usu = '$tec', status = 'DESPTEC', data_desptec = NOW(), nome_gestor = '$gestor' where ba = '$ba2'";
+          $query = "update atividade_bbk set id_usu = '$tec', status = 'DESPTEC', data_desptec = '$hoje', nome_gestor = '$gestor' where ba = '$ba2'";
   
           $sql = mysql_query($query);
   

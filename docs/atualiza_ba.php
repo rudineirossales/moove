@@ -344,6 +344,7 @@
                             <option value="<?php echo $tipo?>">  <?php echo $tipo?> </option>
                             <option value="97"> 97 </option>
                             <option value="7048"> 7048 </option>
+                            <option value="TIM"> TIM </option>
                             <option value="10"> 10 </option>
                             <option value="89"> 89 </option>
                             <option value="ESCALONAMENTO"> ESCALONAMENTO </option>

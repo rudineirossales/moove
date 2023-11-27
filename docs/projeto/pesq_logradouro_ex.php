@@ -9,7 +9,7 @@
                   exit;
             }
 
-            $connect = mysqli_connect("localhost", "root", "", "u504529778_projeto");  
+           $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "projeto");      
             $query ="select protocolo,cod_logradouro,localidade,logradouro from projeto where cadastro_status = 'EXCLUIDO' group by logradouro";  
             $result = mysqli_query($connect, $query); 
 ?>
@@ -170,7 +170,7 @@ function fnExcelReport() {
 
                                echo '  
                                <tr>  
-                                    <td><a href="pesq_survey_ex.php?cod='.$row["cod_logradouro"].'"> '.$row["cod_logradouro"].' </span></a></td>   
+                                    <td><a href="pesq_survey_ex.php?cod='.$row["cod_logradouro"].'"> '.$row["cod_logradouro"].' </span></a></td>      
                                     <td>'.$row["localidade"].'</td>
                                     <td>'.$row["logradouro"].'</td>  
                                      

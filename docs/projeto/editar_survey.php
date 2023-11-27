@@ -77,7 +77,15 @@
   <link rel="icon" href="img/icomon.png">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
- 
+
+
+
+
+
+
+
+
+  
 <style>
   #loading
 {
@@ -111,12 +119,18 @@ $(document).ready(function() {
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet"  href="/resources/demos/style.css">
+
+
+
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery.maskedinput.js"></script>
 <script type="text/javascript" src="validacaoid.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui.js"></script>
+
+
+
 
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     <!-- Twitter meta-->
@@ -141,6 +155,9 @@ $(document).ready(function() {
   </head>
   <body class="app sidebar-mini rtl">
 
+  
+
+  
     <!-- Navbar-->
     <header class="app-header"><a class="app-header__logo" href="#">Icomon</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
@@ -221,6 +238,7 @@ $(document).ready(function() {
                     <label for="exampleInputEmail1">Complemento 2</label>
                     <input class="form-control"  id="ba"  name="comp2"  value="<?php echo $comp2?>" type="text" aria-describedby="emailHelp" >
                   </div>
+                  <input class="form-control"  id="ba" readonly name="protocolo"  value="<?php echo $protocolo?>" type="hidden" aria-describedby="emailHelp" >
                   <input class="form-control"  id="ba" readonly name="cod_logradouro"  value="<?php echo $cod_logradouro?>" type="hidden" aria-describedby="emailHelp" >
                   <div class="form-group">
                     <label for="exampleInputEmail1">Complemento 3</label>
@@ -233,7 +251,7 @@ $(document).ready(function() {
                   
                   <div class="form-group">
                       <label for="email">Descrição: </label>
-                     <textarea class="form-control" rows="5" id="obs" required name="obs"></textarea>
+                     <textarea class="form-control" rows="5" id="obs"  name="obs"></textarea>
                   </div>
 
                   <div class="form-check form-check-inline">
@@ -284,14 +302,14 @@ if (isset($_POST ['submit']) )
   $nova_fachada  =$_POST['nova_fachada'];
   $cod_logradouro  =$_POST['cod_logradouro'];
   $obs  =$_POST['obs'];
-  $comp1  =$_POST['comp1'];
-  $comp2  =$_POST['comp2'];
-  $comp3  =$_POST['comp3'];
+  $comp1 = $_POST['comp1'];
+  $comp2 = $_POST['comp2'];
+  $comp3 = $_POST['comp3'];
   
 
 
  
-    $query = "update projeto set cadastro_status = '$inlineRadioOptions',cadasrtro_nova_fachada = '$nova_fachada',cadastro_responsavel = '".$_SESSION['nome']."', cadastro_obs = '$obs', cadastro_data = NOW(), comp1 = '$comp1',comp2 = '$comp2', comp3 = '$comp3' where protocolo = '$protocolo'";
+    $query = "update projeto set cadastro_status = '$inlineRadioOptions',cadasrtro_nova_fachada = '$nova_fachada',cadastro_responsavel = '".$_SESSION['nome']."', cadastro_obs = '$obs', cadastro_data = NOW(), comp1 = '$comp1', comp2 = '$comp2', comp3 = '$comp3' where protocolo = '$protocolo'";
   
 
           

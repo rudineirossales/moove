@@ -9,7 +9,7 @@
                   exit;
             }
 
-            $connect = mysqli_connect("localhost", "root","", "icomom_");
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon");   
             
 ?>
 
@@ -62,6 +62,9 @@ function fnExcelReport() {
 }
 
 
+
+
+
 </script> 
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     <!-- Twitter meta-->
@@ -83,10 +86,11 @@ function fnExcelReport() {
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   </head>
   <body class="app sidebar-mini rtl">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="#">Icomon</a>
+    <header class="app-header"><a class="app-header__logo" href="page_tec/page_ftth.php"><i class="bi bi-arrow-left">           ICOMON</i></a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -112,7 +116,7 @@ function fnExcelReport() {
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" <?php if ($_SESSION["acesso"] == "Tec"){ echo 'href="index_col.html"';} else {echo 'href="dashboard.php"'; } ?>><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" <?php if ($_SESSION["acesso"] == "Tec"){ echo 'href="page_tec/page_tec.html"';} else {echo 'href="dashboard.php"'; } ?>><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -129,7 +133,7 @@ function fnExcelReport() {
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> Estoque Atual</h1>
+          <h1><i class="fa fa-th-list"></i> Pesquisa porperíodo</h1>
           
         </div>
         <ul class="app-breadcrumb breadcrumb side">
@@ -235,7 +239,10 @@ function fnExcelReport() {
                      <table id="myTable" class="table table-striped table-bordered">  
                           <thead>  
                                <tr> 
-                               <td>Ba</td>  
+                                    <td>Ba</td>  
+                                    <td>Tipo 7048</td>
+                                    <td>Sa</td>
+                                    <td>Id.Gpon</td>
                                     <td>Uf</td> 
                                     <td>Localidade</td>  
                                     <td>Estação</td>  
@@ -245,21 +252,31 @@ function fnExcelReport() {
                                     <td>Cdoe</td>  
                                     <td>Tipo ba</td>
                                     <td>Tipo rede</td>
-                                    <td>Téc</td> 
+                                    <td>RE Tec</td>
+                                    <td>Nome Tec</td> 
+                                    <td>Coordenador</td> 
                                     <td>Abertura</td>
                                     <td>vencimento</td>
                                     <td>Despacho</td> 
+                                    <td>Despacho por</td> 
                                     <td>Atribuíção</td>
+                                    <td>Rejeitada</td>
+                                    <td>Rejeitada por</td>
                                     <td>Encerramento</td>
+                                    <td>Encerramento por</td>
                                     <td>Causa</td>
                                     <td>Sub-causa</td>
                                     <td>Ro</td>
                                     <td>Cis</td>
-                                    <td>Ba Apoio</td>
+                                    <td>BA Apoio</td>
                                     <td>Status</td> 
                                     <td>Material</td>
                                     <td>Evidencias</td>
-   
+
+                                    
+                                    
+                                      
+                                     
                                </tr>  
                           </thead> 
                           
@@ -275,37 +292,55 @@ function fnExcelReport() {
                             if ($_SESSION["acesso"] == "Tec")
                             {
 
-                            $query ="select *  from usuario join atividade on usuario.id = atividade.id_usu  where data_encerramento BETWEEN '$data 00:00:00' and '$data2 23:59:00' and status='ENCERRADO' and id_usu = '".$_SESSION["id"]."'";  
+                            $query ="select *  from usuario join atividade on usuario.id = atividade.id_usu  where data_validacao BETWEEN '$data 00:00:00' and '$data2 23:59:00' and status='ENCERRADO' and id_usu = '".$_SESSION["id"]."'";  
                             }
                             else
                             {
-                            $query ="select *  from usuario join atividade on usuario.id = atividade.id_usu  where data_encerramento BETWEEN '$data 00:00:00' and '$data2 23:59:00' and status='ENCERRADO' ";
+                            $query ="select *  from usuario join atividade on usuario.id = atividade.id_usu  where data_validacao BETWEEN '$data 00:00:00' and '$data2 23:59:00' and status='ENCERRADO' ";
                             }
                             $result = mysqli_query($connect, $query); 
                           
                           while($row = mysqli_fetch_array($result))  
                           {     
                                     $ba = $row["ba"]; 
+                                    $tipo_7048 = $row["tipo_7048"];
+                                    if($tipo_7048 == 'OMR')
+                                    {
+                                      $incremento = '4-';  
+                                    }
+                                    else
+                                    {
+                                      $incremento = '';
+                                    }
                                echo '  
                                <tr> 
-                               <td>'.$row["ba"].'</td>
+                               <td style="min-width: 150px;">'.$incremento.$row["ba"].'</td>
+                              <td>'.$row["tipo_7048"].'</td>
+                               <td>'.$row["sa"].'</td>
+                               <td>'.$row["idgpon"].'</td>
                                <td>'.$row["uf"].'</td> 
                                <td>'.$row["localidade"].'</td>  
                                <td>'.$row["estacao"].'</td>  
-                               <td>'.$row["endereco"].'</td>
+                               <td style="min-width: 250px;">'.$row["endereco"].'</td>
                                <td>'.$row["afetacao"].'</td>  
                                <td>'.$row["celula"].'</td>  
-                               <td>'.$row["cdoe"].'</td>  
+                               <td style="min-width: 450px;">'.$row["cdoe"].'</td>  
                                <td>'.$row["tipo"].'</td>
                                <td>'.$row["tipo_rede"].'</td>
-                               <td>'.$row["nome"].'</td>
-                               <td>'.$row["data_abertura"].'</td>
-                               <td>'.$row["data_vencimento"].'</td>
-                               <td>'.$row["data_despacho"].'</td> 
-                               <td>'.$row["data_atribuicao"].'</td>  
-                               <td>'.$row["data_encerramento"].'</td>
-                               <td>'.$row["causa"].'</td>  
-                               <td>'.$row["sub"].'</td>    
+                               <td style="min-width: 150px;">'.$row["id_usu"].'</td>
+                               <td style="min-width: 150px;">'.$row["nome"].'</td>
+                               <td style="min-width: 150px;">'.$row["nome_gestor"].'</td>
+                               <td style="min-width: 150px;">'.$row["data_abertura"].'</td>
+                               <td style="min-width: 150px;">'.$row["data_vencimento"].'</td>
+                               <td style="min-width: 150px;">'.$row["data_despacho"].'</td>
+                               <td style="min-width: 150px;">'.$row["nome_despacho"].'</td> 
+                               <td style="min-width: 150px;">'.$row["data_atribuicao"].'</td> 
+                               <td style="min-width: 150px;">'.$row["data_rejeicao"].'</td>
+                               <td style="min-width: 150px;">'.$row["nome_rejeicao"].'</td>
+                               <td style="min-width: 150px;">'.$row["data_encerramento"].'</td>
+                               <td style="min-width: 150px;">'.$row["nome_validacao"].'</td>
+                               <td style="min-width: 150px;">'.$row["causa"].'</td>  
+                               <td style="min-width: 150px;">'.$row["sub"].'</td>    
                                <td>'.$row["ro"].'</td>    
                                <td>'.$row["cis"].'</td>
                                <td>'.$row["ba_apoio"].'</td>
@@ -326,7 +361,20 @@ function fnExcelReport() {
  </html>  
  <script>  
  $(document).ready(function(){  
-      $('#myTable').DataTable();  
+      $('#myTable').DataTable(
+        {
+                   
+          "scrollX": false,
+    "ordering": true,
+    "lengthMenu": [ [ -1, 10, 30, 50, 100], ["Todos", "10","30", "50", "100"] ],
+    "scrollCollapse": true,
+    
+                    
+                }
+
+
+
+      );  
  });  
- </script>  
+ </script>   
  <script src="js/main.js"></script>

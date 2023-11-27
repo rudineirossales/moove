@@ -9,7 +9,7 @@
                   exit;
             }
 
-            $connect = mysqli_connect("mysql.hostinger.com.br", "u504529778_icomon_", "Rud!n3!@", "u504529778_icomon_");  
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon");  
             
 ?>
 
@@ -238,7 +238,7 @@ function fnExcelReport() {
                      <table id="myTable" class="table table-striped table-bordered">  
                           <thead>  
                                <tr> 
-                               <td>Ba</td>  
+                                    <td>Ba</td>  
                                     <td>Estação</td> 
                                     <td>Endereço</td>  
                                     <td>Data de Encerramento</td>  
@@ -246,6 +246,11 @@ function fnExcelReport() {
                                     <td>Técnico</td>
                                    
                                     <td>PDF</td>
+
+                                    
+                                    
+                                      
+                                     
                                </tr>  
                           </thead> 
                           
@@ -277,7 +282,7 @@ function fnExcelReport() {
                                <td>'.$row["nome"].' ';?> </td> 
                                
                               
-                               <td><?php echo "<a target='_blank' href='pdf_vistoria.php?ba=<?php echo $ba; ?>'> <span class='glyphicon glyphicon-list-alt'><button class='btn btn-primary'> PDF </button></a>"?></td>   
+                               <td><?php echo "<a target='_blank' href='pdf_vistoria.php?ba=$ba'> <span class='glyphicon glyphicon-list-alt'><button class='btn btn-primary'> PDF </button></a>"?></td>   
                                     
                                     
                                </tr>  
@@ -291,7 +296,20 @@ function fnExcelReport() {
  </html>  
  <script>  
  $(document).ready(function(){  
-      $('#myTable').DataTable();  
+      $('#myTable').DataTable(
+        {
+                   
+          "scrollX": false,
+    "ordering": true,
+    "lengthMenu": [ [ -1, 10, 30, 50, 100], ["Todos", "10","30", "50", "100"] ],
+    "scrollCollapse": true,
+    
+                    
+                }
+
+
+
+      );  
  });  
- </script>  
+ </script>   
  <script src="js/main.js"></script>

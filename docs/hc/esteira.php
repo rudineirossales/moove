@@ -3,21 +3,20 @@
       
          session_start();
 
-         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"])  || ($_SESSION["acesso"] != 'ADM' ) AND ($_SESSION["acesso"] != 'GA' ) )
+         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) )
             {
                  header("Location: index.html");
                   exit;
             }
 
-            $connect = mysqli_connect("185.213.81.103", "u504529778_hc", "Rud!n3!@", "u504529778_hc");  
-
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "hc");  
 
             
-            $query ="SELECT * FROM reparo_hc where status == 'NAO OK' OR status == 'EM ANDAMENTO' ";   
+            $query ="SELECT * FROM reparo_hc where status = 'NAO OK' OR status = 'EM ANDAMENTO' ";   
            
              
             $result = mysqli_query($connect, $query); 
-            $connection ->close();
+            mysql_close($connection);
 
 ?>
 
@@ -102,7 +101,7 @@
   </head>
   <body class="app sidebar-mini rtl">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="dashboard.php">Icomon</a>
+    <header class="app-header"><a class="app-header__logo" href="dashboard_hc.php">Icomon</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -128,7 +127,7 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="dashboard.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" href="dashboard_hc.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -165,15 +164,19 @@
                           <thead >  
                                <tr> 
                                     <th>Coordenador</th> 
+                                    <th>Téc</th> 
                                     <th>Sa</th>  
+                                    <th>Acesso Gpon</th>
                                     <th>Uf</td>  
                                     <th>Execução</td> 
                                     <th>Companhia</th>  
                                     <th >Macro</th>  
-                                    <th>Célula</th> 
                                     <th>Cliente</th>  
-                                    <th>Contato</th>  
+                                    <th>Contato</th>
+                                    <th>Agendamento</th>
+                                    <th>Período</th>
                                     <th>Status</th>  
+                                    
                                       
                                </tr>  
                           </thead>  
@@ -183,15 +186,19 @@
                                echo '  
                                <tr > 
                                <td>'.$row["coordenador"].'</td> 
+                               <td>'.$row["tecnico"].'</td> 
                                <td>'.$row["sa"].'</td>  
+                               <td>'.$row["acesso_gpon"].'</td>  
                                <td>'.$row["uf"].'</td>
                                <td>'.$row["data_execucao"].'</td>  
                                <td>'.$row["companhia"].'</td>  
                                <td>'.$row["macro"].'</td> 
-                               <td>'.$row["celula"].'</td>  
                                <td>'.$row["cliente"].'</td>  
                                <td>'.$row["contato"].'</td> 
+                               <td>'.$row["data_ag"].'</td>  
+                               <td>'.$row["periodo"].'</td> 
                                <td>'.$row["status"].'</td>  
+                               
                                   
                                </tr>  
                                ';  
@@ -204,7 +211,20 @@
  </html>  
  <script>  
  $(document).ready(function(){  
-      $('#myTable').DataTable();  
+      $('#myTable').DataTable(
+        {
+                   
+          "scrollX": false,
+    "ordering": true,
+    "lengthMenu": [ [ -1, 10, 30, 50, 100], ["Todos", "10","30", "50", "100"] ],
+    "scrollCollapse": true,
+    
+                    
+                }
+
+
+
+      );  
  });  
  </script>  
  <script src="js/main.js"></script>

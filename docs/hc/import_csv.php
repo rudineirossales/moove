@@ -8,7 +8,7 @@
  function __construct()
  {
 
-    parent::__construct("185.213.81.103","u504529778_hc","Rud!n3!@","u504529778_hc");
+    parent::__construct("62.72.63.187","remoteicomon","Rud!n3!@","hc");
     if($this->connect_error)
     {
 
@@ -44,7 +44,7 @@ function import($file)
 
       
       
-      $q = "insert  into reparo_hc (sa,data_execucao,companhia,tecnico,macro,uf,cliente,contato,endereco) values(". $value2 .")";
+      $q = "insert  into reparo_hc (sa,data_execucao,companhia,tecnico,macro,uf,cliente,contato,endereco,acesso_gpon) values(". $value2 .")";
 
       
 

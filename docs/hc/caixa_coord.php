@@ -9,17 +9,17 @@
                   exit;
             }
 
-            $connect = mysqli_connect("185.213.81.103", "u504529778_hc", "Rud!n3!@", "u504529778_hc");
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "hc"); 
             $query ="SELECT * FROM reparo_hc where coordenador = '".$_SESSION['nome']."' and status = 'NAO OK' order by status";  
             $result = mysqli_query($connect, $query); 
-            $connection ->close();
+            mysql_close($connection);
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <title>Controle de estoque</title>  
+  <title>Icomon</title>  
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
            <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script> 
            
@@ -117,7 +117,7 @@ function fnExcelReport() {
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="index_col.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" href="dashboard_hc.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -154,16 +154,12 @@ function fnExcelReport() {
                           <thead>  
                                <tr>  
                                     <td>Sa</td> 
+                                    <td>Acesso Gpon</td> 
                                     <td>Status</td>  
                                     <td>Execução</td>  
                                     <td>Companhia</td> 
                                     <td>Técnico</td> 
-                                    
-                                    
-                                     
-                                    
-                                    
-                                     
+                                       
                                </tr>  
                           </thead>  
                           <?php  
@@ -172,6 +168,7 @@ function fnExcelReport() {
                                echo '  
                                <tr>  
                                     <td><a href="cad_baixa.php?sa='.$row["sa"].'"> '.$row["sa"].' </span></a></td>   
+                                    <td>'.$row["acesso_gpon"].'</td>
                                     <td>'.$row["status"].'</td>
                                     <td>'.$row["data_execucao"].'</td>  
                                     <td>'.$row["companhia"].'</td> 

@@ -64,6 +64,8 @@ function saidasuccessfully()
 
 <?php
 
+date_default_timezone_set('America/Sao_Paulo');
+$hoje = date('Y-m-d H:i:s');
 $ba  =$_POST['ba'];
 $tec  =$_POST['tec'];
 $coord  =$_POST['coord'];
@@ -95,7 +97,7 @@ $row = mysql_num_rows($sql2);
       {
 
         $query4 = "insert into logs (ba,status,nome,id,data)";
-        $query4.= "values ('$ba','DESPCOORD_REPASSE','".$_SESSION['nome']."','".$_SESSION['id']."',NOW())";
+        $query4.= "values ('$ba','DESPCOORD_REPASSE','".$_SESSION['nome']."','".$_SESSION['id']."','$hoje')";
         $sql4 = mysql_query($query4);
 
         echo "

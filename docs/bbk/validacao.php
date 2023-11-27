@@ -96,6 +96,7 @@
               <table class="table table-hover table-bordered" >
                 <thead>
                   <tr>
+                    <th>Coordenador</th>  
                     <th>Ba</th>
                     <th>Localidade</th>
                     <th>Estação</th>
@@ -112,7 +113,7 @@
 <?php
                     
  
-    $sql = mysql_query ("select * from usuario join atividade_bbk on usuario.id = id_usu where status = 'EM VALIDACAO' and atividade_bbk.nome_gestor = '".$_SESSION['nome']."'" );
+    $sql = mysql_query ("select * from usuario join atividade_bbk on usuario.id = id_usu where status = 'EM VALIDACAO' " );
 
       
     $row = mysql_num_rows($sql);
@@ -136,8 +137,9 @@
 
                   <tr>
                   
+                    <td><?php echo $dado ["nome_gestor"];  ?></td> 
                     <td><?php echo $dado ["ba"];  ?></td>
-                     
+                    
                     <td><?php echo $dado ["localidade"];  ?></td>
                     <td><?php echo $dado ["estacao_a"];  ?></td>
                     

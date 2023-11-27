@@ -1,17 +1,10 @@
 <?php
  
-include "conn.php";
+  include "conn.php";
  
 $coord = $_POST['coord'];
-
-
-
  
-   $sql = "SELECT * FROM usuario WHERE id_gestor = '$coord'";
-
-
- 
-
+$sql = "SELECT * FROM usuario WHERE acesso = 'Tec' order by nome";
 $qr = mysql_query($sql) or die(mysql_error());
  
 if(mysql_num_rows($qr) == 0){

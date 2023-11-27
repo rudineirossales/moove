@@ -53,6 +53,7 @@
                         $obs_contato = $dado["obs_contato4"];
 
                         $coordenador = $dado["coordenador"];
+                        $obs_tec = $dado["obs_tec"];
                        
                     }
                 
@@ -169,7 +170,7 @@ fieldset
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="dashboard.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" href="dashboard_hc.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -191,7 +192,7 @@ fieldset
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-edit"></i> Validação.</h1>
+          <h1><i class="fa fa-edit"></i> Máscara do Reteste</h1>
           <p></p>
         </div>
         <ul class="app-breadcrumb breadcrumb">
@@ -213,7 +214,7 @@ fieldset
                         
                         
                      
-                        <input type="text" class="form-control"  name="ba" placeholder="BA" >
+                        <input type="text" class="form-control"  name="ba" placeholder="Digite SA referente" >
                     
                       </div>
                       
@@ -271,6 +272,7 @@ fieldset
                           $obs_contato = $dado["obs_contato4"];
   
                           $coordenador = $dado["coordenador"];
+                          $obs_tec = $dado["obs_tec"];
                             
                            
                            
@@ -294,23 +296,24 @@ fieldset
                   <li class="list-group-item"><b> Macro: </b> <?php echo $macro;  ?></li>
                   <li class="list-group-item"><b> Uf: </b> <?php echo $uf;  ?></li>
                   <li class="list-group-item"><b> Cliente: </b> <?php echo $cliente;  ?></li>
+                  <li class="list-group-item"><b> Endereço: </b> <?php echo $endereco;  ?></li>
                   <li class="list-group-item"><b> Contato: </b> <?php echo $contato;  ?></li>
-                  <li class="list-group-item"><b> Potencia 1º contato: </b> <?php echo $potencia;  ?></li>
+                  <li class="list-group-item"><b> Potência 1º contato: </b> <?php echo $potencia;  ?></li>
                   <li class="list-group-item"><b> Funcionalidade 1º contato: </b> <?php echo $funcionalidade;  ?></li>
                   <li class="list-group-item"><b> Data 1º contato: </b> <?php echo $data_contato1;  ?></li>
                   <li class="list-group-item"><b> Operador 1ª contato: </b> <?php echo $contato1;  ?></li>
 
-                  <li class="list-group-item"><b> Potencia 2º contato: </b> <?php echo $potencia_2;  ?></li>
+                  <li class="list-group-item"><b> Potência 2º contato: </b> <?php echo $potencia_2;  ?></li>
                   <li class="list-group-item"><b> Funcionalidade 2º contato: </b> <?php echo $funcionalidade_2;  ?></li>
                   <li class="list-group-item"><b> data 2º contato: </b> <?php echo $data_contato2;  ?></li>
                   <li class="list-group-item"><b> Operador 2ª contato: </b> <?php echo $contato2;  ?></li>
                    
-                  <li class="list-group-item"><b> Potencia 3º contato: </b> <?php echo $potencia_3;  ?></li>
+                  <li class="list-group-item"><b> Potência 3º contato: </b> <?php echo $potencia_3;  ?></li>
                   <li class="list-group-item"><b> Funcionalidade 3º contato: </b> <?php echo $funcionalidade_3;  ?></li>
                   <li class="list-group-item"><b> data 3º contato: </b> <?php echo $data_contato3;  ?></li>
                   <li class="list-group-item"><b> Operador 3ª contato: </b> <?php echo $contato3;  ?></li>
                   
-                  <li class="list-group-item"><b> Potencia 4º contato: </b> <?php echo $potencia_4;  ?></li>
+                  <li class="list-group-item"><b> Potência 4º contato: </b> <?php echo $potencia_4;  ?></li>
                   <li class="list-group-item"><b> Funcionalidade 4º contato: </b> <?php echo $funcionalidade_4;  ?></li>
                   <li class="list-group-item"><b> data 4º contato: </b> <?php echo $data_contato4;  ?></li>
                   <li class="list-group-item"><b> Operador 4ª contato: </b> <?php echo $contato4;  ?></li>
@@ -333,6 +336,10 @@ fieldset
                     <label for="exampleTextarea">Descrição 4º contato: </label>
                     <textarea readonly  class="form-control"  id="exampleTextarea" name="obs" rows="6"> <?php echo $obs_contato4; ?> </textarea>
                   </div>
+                  <div class="form-group">
+                    <label for="exampleTextarea">Descrição técnica: </label>
+                    <textarea readonly  class="form-control"  id="exampleTextarea" name="obs" rows="6"> <?php echo $obs_tec; ?> </textarea>
+                  </div>
                   
                   
                   
@@ -353,15 +360,16 @@ fieldset
             <tr>
             
                   <div class="text-center">
-                  <img src="../Api/HC/FOTOS_HC/<?php echo $dado2["foto_antes"]; ?>"  style="padding-top: 5%;"> <br>
+                  <img width='500' height='500' src="../Api/VPS/HC/FOTOS_HC/<?php echo $dado2["foto_antes"]; ?>"  style="padding-top: 5%;"> <br>
                   
                 </div>
                 <div class="text-center">
-                  <img src="../Api/HC/FOTOS_HC/<?php $dado2["foto_depois"] ?>"  style="padding-top: 5%;"> 
+                  <img width='500' height='500' src="../Api/VPS/HC/FOTOS_HC/<?php $dado2["foto_depois"] ?>"  style="padding-top: 5%;"> 
                 </div>
                 <div class="text-center">
-                  <img src="../Api/HC/FOTOS_HC/<?php echo $dado2["terceira_imagem"] ?>"  style="padding-top: 5%;"> 
+                  <img width='500' height='500' src="../Api/VPS/HC/FOTOS_HC/<?php echo $dado2["terceira_imagem"] ?>"  style="padding-top: 5%;"> 
                 </div>
+                <a href="pdf_mascara.php?sa=<?php echo $sa; ?>" target="_blank"  role="button" aria-pressed="true">Gerar Pdf</a>
             
             </tr>  
 

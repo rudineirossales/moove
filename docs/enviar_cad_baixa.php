@@ -61,10 +61,11 @@ function saidasuccessfully()
 
 <?php
 
-
+date_default_timezone_set('America/Sao_Paulo');
 
 $ba =$_POST['ba'];
 $status =$_POST['status'];
+$hoje = date('Y-m-d H:i:s');
 
 
 if($status == 'DESPTEC'){
@@ -72,7 +73,7 @@ if($status == 'DESPTEC'){
 
 
 
-$query = "update atividade set status = 'EM ANDAMENTO', data_atribuicao = NOW() where ba = '$ba'";
+$query = "update atividade set status = 'EM ANDAMENTO', data_atribuicao = '$hoje' where ba = '$ba'";
 $sql = mysql_query($query);
 
 
@@ -80,9 +81,12 @@ $sql = mysql_query($query);
 
 if($sql)
 {
-  $query4 = "insert into logs (ba,status,nome,id,data)";
-  $query4.= "values ('$ba','EM ANDAMENTO','".$_SESSION['nome']."','".$_SESSION['id']."',NOW())";
-  $sql4 = mysql_query($query4);
+    
+      $query4 = "insert into logs (ba,status,nome,id,data)";
+      $query4.= "values ('$ba','EM ANDAMENTO','".$_SESSION['nome']."','".$_SESSION['id']."','$hoje')";
+      $sql4 = mysql_query($query4);
+      mysql_close($connection);
+  
   
   echo "
   <script language='JavaScript'>

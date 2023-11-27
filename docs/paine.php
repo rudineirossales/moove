@@ -70,7 +70,15 @@ if(!isset($_SESSION["senha"]) && !isset($_SESSION["login"]))
 
 else
 {
+    
+    
+  if($_SESSION["autenticacao"] == 'page_tec' ){
+  
 
+		header("Location: page_tec/page_tec.html");
+		break;
+	
+		}
 	if($_SESSION["acesso"] == 'ADM' ){
   
 
@@ -82,6 +90,12 @@ else
   
 
 	header("Location: atualiza_ba.php");
+
+	}
+	elseif($_SESSION["acesso"] == 'EDT_HC' ){
+  
+
+	header("Location: hc/editar_sa.php");
 
 	}
 	
@@ -102,7 +116,20 @@ else
 
 				header("Location: projeto/dashboard_pj.php");
 			
-				}			
+				}		
+	elseif($_SESSION["acesso"] == 'BBK' ){
+  
+
+				header("Location: bbk/dashboard_bbk.php");
+			
+				}
+	elseif($_SESSION["acesso"] == 'Tec' ){
+  
+
+				header("Location: page_tec/page_tec.html");
+				
+		    	}	
+					
 
 	else{
 

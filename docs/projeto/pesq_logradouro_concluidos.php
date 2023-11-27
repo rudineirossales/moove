@@ -12,7 +12,7 @@
             $cod = $_GET["cod"];
             $protocolo = $_GET["protocolo"];
 
-            $connect = mysqli_connect("localhost", "root", "", "u504529778_projeto");  
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "projeto");    
             $query ="select check_,cadastro_status,protocolo,logradouro,num_fachada,comp1,comp2,comp3,cod_survey from projeto where cod_logradouro = '$cod' and cadastro_status = 'CONCLUIDO'  order by num_fachada ";  
             $result = mysqli_query($connect, $query); 
 ?>

@@ -71,8 +71,8 @@ function saidasuccessfully()
 
 <?php
 
-
-
+date_default_timezone_set('America/Sao_Paulo');
+$hoje = date('Y-m-d H:i:s');
 $ba =$_POST['ba'];
 $obs_rej =$_POST['obs_rej']; 
 $opc =$_POST['opc']; 
@@ -92,15 +92,24 @@ if ($opc == 'validar')
 
   $status = 'ENCERRADO';
 
-
+    if(isset($_FILES['teste1'])) {
+    
+	
+    $extensao = strtolower (substr($_FILES['teste1'] ['name'], -4));
+    $novo_nome1  = md5(mt_rand(1, 1000) . microtime()) . $extensao;
+    $diretorio = "../Api/Backbone/backbone_foto/";
+  
+  
+  
+  move_uploaded_file($_FILES['teste1'] ['tmp_name'], $diretorio.$novo_nome1 )	;
+    }
  
 
-    $query = "update  atividade_bbk set status = 'ENCERRADO', justificativa = '', nome_validacao = '".$_SESSION['nome']."', data_validacao = NOW(), trava_ba = '', trava_por = '' where ba = '$ba'";
+    $query = "update  atividade_bbk set cabo = '$cabo', trecho = '$trecho', status = 'ENCERRADO', justificativa = '', nome_validacao = '".$_SESSION['nome']."', data_validacao = '$hoje', trava_ba = '', trava_por = '', evidencia3 = '$novo_nome1' where ba = '$ba'";
     
     $query4 = "insert into logs (ba,status,nome,id,data)";
-    $query4.= "values ('$ba','ENCERRADO','".$_SESSION['nome']."','".$_SESSION['id']."',NOW())";
-
-    $query6 = "update  atividade set status = 'ENCERRADO', data_encerramento = NOW()  where ba_apoio = '$ba' and status <> 'ENCERRADO'";
+    $query4.= "values ('$ba','ENCERRADO','".$_SESSION['nome']."','".$_SESSION['id']."','$hoje')";
+    $query6 = "update  atividade set status = 'ENCERRADO', data_encerramento = '$hoje'  where ba_apoio = '$ba'";
     $sql4 = mysql_query($query4);
     $sql6 = mysql_query($query6);
     
@@ -115,11 +124,11 @@ else
     $status = 'REPROVADO';
     
     
-    $query = "update  atividade_bbk set status = 'REPROVADO', justificativa = '$obs_rej', trava_ba = '', trava_por = '', data_rejeicao = NOW(), nome_rejeicao = '".$_SESSION['nome']."', cabo = '$cabo', trecho = '$trecho' where ba = '$ba'";
+    $query = "update  atividade_bbk set status = 'REPROVADO', justificativa = '$obs_rej', trava_ba = '', trava_por = '', data_rejeicao = '$hoje', nome_rejeicao = '".$_SESSION['nome']."', cabo = '$cabo', trecho = '$trecho' where ba = '$ba'";
     $query1 = "delete from material where ba = '$ba'";
 
     $query4 = "insert into logs (ba,status,nome,id,data)";
-    $query4.= "values ('$ba','REPROVADO','".$_SESSION['nome']."','".$_SESSION['id']."',NOW())";
+    $query4.= "values ('$ba','REPROVADO','".$_SESSION['nome']."','".$_SESSION['id']."','$hoje')";
     $sql4 = mysql_query($query4);
     $por = $_SESSION['nome'];
     include "telegram.php";

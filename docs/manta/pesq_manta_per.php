@@ -95,14 +95,14 @@ function fnExcelReport() {
 <nav class="navbar navbar-inverse" style="background-image: url('img/buss.jpg');">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Serede</a>
+      <a class="navbar-brand" href="#">Icomon</a>
     </div>
     <ul class="nav navbar-nav">
       
       
       <li class="active" style="float:right"> <a href="#" id="test" onClick="javascript:fnExcelReport();">Gerar excel</a></li>
       
-      <li class="active" style="float:right"><a href="dashboard.php">Voltar</a></li>
+      <li class="active" style="float:right"><a href="#.php">Voltar</a></li>
       
       
       
@@ -130,7 +130,6 @@ function fnExcelReport() {
 <div style="float:left;" class="bootstrap-iso">
   
   <div class="row">
-  <pre> <span class="badge badge-pill badge-<?php if($contaValidacao > 0 ) { echo 'warning';} else { echo 'success';} ?>">  <?php echo $contaValidacao;?>  </span></pre>
    <label  for="data">
       Período
       </label>
@@ -195,25 +194,30 @@ function fnExcelReport() {
   </form>
 </div>
 
-  <div class="table-responsive" >
-  <table class="table table-hover" id="myTable">
+  <div class="table-responsive" id="myTable">
+  <table class="table table-hover" >
     <thead>
       <tr >
         <th>Protocolo</th>
         <th>Uf</th>
         <th>Cidade</th>
-        <th>Estação</th>
+        <th>Estacao</th>
         <th>Bairro</th>
         <th>Endereço</th>
         <th>Data</th>
-        <th>Contato</th>
+        <th>Nome</th>
+        <th>Coordenador</th>
         <th>Tipo</th>
         <th>Cabo</th>
         <th>Rede</th>
         <th>Latitude / Longitude</th>
         <th>Quantidade de mantas</th>
+        <th>Espiral</th>
+        <th>Plaquetas</th>
+        <th>Reserva Técnica</th>
         <th>Visualizar</th>
         <th>Pdf</th>
+        <th>Maps</th>
        
         
       </tr>
@@ -230,20 +234,24 @@ function fnExcelReport() {
 
         $sql = mysql_query ("select * from mantas where data BETWEEN '$data' and '$data2' order by data" );
         $contaValidacao = mysql_num_rows($sql);
+
     
 $row = mysql_num_rows($sql);
-
 
 
 if (mysql_num_rows($sql) > 0)
 
 {
+     ?> <span style="padding-left:3%;"class="badge badge-pill badge-success">  <?php echo $contaValidacao;?>  </span> <?php
   while ($dado = mysql_fetch_assoc($sql )){
 ?>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <tbody >
+       
+
       <tr class="success">
-        <td> <?php echo $dado ["id"];  ?></td>
+      <td> <?php echo $dado ["id"];  ?></td>
         <td> <?php echo $dado ["uf"];  ?></td>
         <td> <?php echo $dado ["cidade"];  ?></td>
         <td> <?php echo $dado ["estacao"];  ?></td>
@@ -251,22 +259,35 @@ if (mysql_num_rows($sql) > 0)
         <td> <?php echo $dado ["endereco"];  ?></td>
         <td> <?php echo $dado ["data"];  ?></td>
         <td> <?php echo $dado ["contato"];  ?></td>
+        <td> <?php echo $dado ["coordenador"];  ?></td>
         <td> <?php echo $dado ["tipo_rede"];  ?></td>
         <td> <?php echo $dado ["cabo"];  ?></td>
         <td> <?php echo $dado ["tipo_rede"];  ?></td>
-        <td> <?php echo $dado ["latitude"].','.$dado ["logitude"]  ?></td>
+        <td> <?php echo $dado ["latitude"].','.$dado ["longitude"]  ?></td>
         <td> <?php echo $dado ["mantas"];  ?></td>
+        <td> <?php echo $dado ["espiral"];  ?></td>
+        <td> <?php echo $dado ["plaquetas"];  ?></td>
+        <td> <?php echo $dado ["reserva_tecnica"];  ?></td>
+         
         <?php
-        $foto_antes = $dado ["foto_antes"];
-        $foto_depois = $dado ["foto_depois"];
-        $protocolo = $dado ["id"];
+        $foto_antes = $dado["foto_antes"];
+        $foto_depois = $dado["foto_depois"];
+        $protocolo = $dado["id"];
         ?>
-
-        <td> <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal<?php echo $dado ['id'];  ?>" >Visualizar</button> </td>
-        <td> <a href="pdf.php?protocolo=<?php echo $dado["protocolo"];?>" target="_blank" class="btn btn-info btn-xs active" role="button" aria-pressed="true">Gerar Pdf</a></td>
+          
+        <td> <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal<?php echo $dado['id'];  ?>" >Visualizar</button> </td>
+        <td> <a href="pdf.php?protocolo=<?php echo $dado["id"];?>" target="_blank" class="btn btn-info btn-xs active" role="button" aria-pressed="true">Gerar Pdf</a></td>
+        <td> <a href="https://www.google.com.br/maps/search/<?php echo $dado ["latitude"] ?>,<?php echo $dado ["longitude"] ?>/@<?php echo $dado ["latitude"] ?>,<?php echo $dado ["longitude"] ?>,17z?entry=ttu" target="_blank" class="btn btn-info btn-xs active" role="button" aria-pressed="true">Maps</a></td>
+        </tr> 
+               
+                </div>  
+           </div>  
+     
+     
+       </body>  
        
         <div class="modal fade" id="myModal<?php echo $dado["id"];  ?>" role="dialog">
-    <div class="modal-dialog-lg">
+    <div class="modal-dialog">
 
    
     
@@ -274,7 +295,7 @@ if (mysql_num_rows($sql) > 0)
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" style="text-align:center">FOTOS <h4>
+        <h4 class="modal-title" style="text-align:center">FOTOS <?php echo $protocolo?><h4>
           
 
          
@@ -291,21 +312,16 @@ if (mysql_num_rows($sql) > 0)
 
 
         
-        <?php echo "<figure> <img src='../arquivo/$foto_antes' class='img-rounded' alt='' >" ?>
+        <?php echo "<figure> <img src='../Api/Preventivas_mantas_fotos/$foto_antes' class='img-rounded' alt='' >" ?>
         <?php echo "<figcaption> FOTO ANTES </figcaption></figure>" ?><br>
 
-        <?php echo "<figure> <img src='../arquivo/$foto_depois' class='img-rounded' alt='' >" ?>
+        <?php echo "<figure> <img src='../Api/Preventivas_mantas_fotos/$foto_depois' class='img-rounded' alt='' >" ?>
         <?php echo "<figcaption> FOTO DEPOIS </figcaption></figure>" ?><br>
 
         </div>
         <div class="modal-footer">
 <button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
-
-          
-
-
-
-          
+  
         </div>
       </div>
       
@@ -339,12 +355,4 @@ if (mysql_num_rows($sql) > 0)
 
 </body>
 </html>
-<script>  
- $(document).ready(function(){  
-      $('#myTable').DataTable();   
- });  
- </script>  
- 
- <script src="js/main.js"></script>
-
 

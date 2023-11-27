@@ -59,14 +59,27 @@ function saidasuccessfully()
                         $data_despacho = $dado["data_despacho"];
                         $data_abertura = $dado["data_abertura"];
                         $data_vencimento = $dado["data_vencimento"];
+                        $data_validacao = $dado["data_validacao"];
+                        $data_paralizacao = $dado["data_paralizacao"];
+                        $data_liberacao = $dado["data_liberacao"];
+                        $data_atribuicao = $dado["data_atribuicao"];
+                        $data_desptec = $dado["data_desptec"];
                         $afetacao = $dado["afetacao"];
                         $trava  = $dado["trava_ba"];
                         $trava_por  = $dado["trava_por"];
+                        $escalonamento  = $dado["escalonamento"];
+                        $tipo_7048  = $dado["tipo_7048"];
                         $evidencia3  = $dado["evidencia3"];
                         $evidencia4  = $dado["evidencia4"];
+                        $foto_antes  = $dado["foto_antes"];
+                        $foto_depois  = $dado["foto_depois"];
+                        $latitude_final  = $dado["latitude_final"];
+                        $longitude_final  = $dado["longitude_final"];
+                        $capacidade_cabo  = $dado["capacidade_cabo"];
+                    
                         
                        
-                        
+                       
                         
                         
                         
@@ -79,7 +92,7 @@ function saidasuccessfully()
 
                   echo "
                   <script language='JavaScript'>
-                  window.alert('BA EM VALIDAÇÃO POR $trava_por')
+                  window.alert('BA EM VALIDACAO POR $trava_por')
                   
                   </script>";
 
@@ -112,6 +125,12 @@ function saidasuccessfully()
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 
+
+
+
+
+
+  
 <style>
   #loading
 {
@@ -140,6 +159,9 @@ fieldset
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet"  href="/resources/demos/style.css">
+
+
+
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery.maskedinput.js"></script>
@@ -224,11 +246,11 @@ fieldset
           <li class="breadcrumb-item"><a href="#">Form Components</a></li>
         </ul>
       </div>
-      <div class="row">
-        <div class="col-md-12">
+      <div class="row justify-content-md-center">
+         <div class="col-md-8">
           <div class="tile">
             <div class="row">
-              <div class="col-lg-10">
+              <div class="col-md-12">
                 <form onSubmit="if(!confirm('Deseja mudar status da atividade??')){return false;}"  enctype="multipart/form-data" method="post"  action="enviar_vali2.php ">
                   <div class="form-group">
                 <ul class="list-group">
@@ -244,12 +266,21 @@ fieldset
                   <li class="list-group-item"><b> Rede: </b> <?php echo $tipo_rede;  ?></li>
                   <li class="list-group-item"><b> Abertura: </b> <?php echo $data_abertura;  ?></li>
                   <li class="list-group-item"><b> Vencimento: </b> <?php echo $data_vencimento;  ?></li>
-                  <li class="list-group-item"><b> Hora despacho: </b> <?php echo $data_despacho;  ?></li>
+                  <li class="list-group-item"><b> Hora despacho coordenador: </b> <?php echo $data_despacho;  ?></li>
+                  <li class="list-group-item"><b> Hora despacho técnico: </b> <?php echo $data_desptec;  ?></li>
+                  <li class="list-group-item"><b> Hora atribuição: </b> <?php echo $data_atribuicao;  ?></li>
                   <li class="list-group-item"><b> Hora encerramento: </b> <?php echo $data_encerramento;  ?></li>
+                  <li class="list-group-item"><b> Hora paralização: </b> <?php echo $data_paralizacao;  ?></li>
+                  <li class="list-group-item"><b> Hora liberação: </b> <?php echo $data_liberacao;  ?></li>
                   <li class="list-group-item"><b> Causa: </b> <?php echo $causa;  ?></li>
                   <li class="list-group-item"><b> Sub-causa: </b> <?php echo $sub;  ?></li>
                   <li class="list-group-item"><b> Ro: </b> <?php echo $ro;  ?></li>
                   <li class="list-group-item"><b> Cis: </b> <?php echo $cis;  ?></li>
+                  <li class="list-group-item"><b> Latitude: </b> <?php echo $latitude_final;  ?></li>
+                  <li class="list-group-item"><b> Longitude: </b> <?php echo $longitude_final;  ?></li>
+                  <li class="list-group-item"><b> Escalonamento: </b> <?php echo $escalonamento;  ?></li>
+                  <li class="list-group-item"><b> Tipo 7048: </b> <?php echo $tipo_7048;  ?></li>
+                  <li class="list-group-item"><b> Capacidade do Cabo: </b> <?php echo $capacidade_cabo;  ?></li>
                   
                   <?php
 
@@ -281,47 +312,42 @@ fieldset
                     <input type="hidden" value="<?php echo $ba;  ?>" name="ba" checked>
                     <input type="hidden" value="<?php echo $tipo;  ?>" name="tipo">
                     <input type="hidden" value="<?php echo $nome;  ?>" name="nome">
+                    <input type="hidden" value="<?php echo $estacao;  ?>" name="estacao">
+                    <input type="hidden" value="<?php echo $celula;  ?>" name="celula">
+
                         
                   <div class="form-group">
                     <label for="exampleTextarea">Observação</label>
                     <textarea readonly  class="form-control"  id="exampleTextarea" name="obs" rows="6"> <?php echo '(' . $obs . ' )     ' . $obs_cl; ?> </textarea>
                   </div>
-                    
+                  
+                  <div class="text-center">
+                      
+                     
+                    <img src="arquivo/<?php echo $evidencia3 ?>"   width="500" height="500" style="padding-top: 5%;"> <br>
+
+                  </div> <br><br>
+                   <div class="text-center">
+
+                    <img src="arquivo/<?php echo $evidencia4 ?>"   width="500" height="500" style="padding-top: 5%;"> <br>
+
+                  </div> <br><br>
                   <div class="text-center">
 
-                  <?php  if ($evidencia3 == ''){?>
+                    <img src="arquivo/<?php echo $foto_antes?>"   width="500" height="500" style="padding-top: 5%;"> <br>
 
-                      <span style="color:red;">FOTO NÃO ANEXADA</span>
-
-                  <?php } else {?>
-                      
-                  
-                      <img src="arquivo/<?php echo $evidencia3 ?>"   width="500" height="500" style="padding-top: 5%;"> <br>
-
-                  <?php }?>
-            
                   </div> <br><br>
+                   <div class="text-center">
 
-                  <div class="text-center">
+                    <img src="arquivo/<?php echo $foto_depois?>"   width="500" height="500" style="padding-top: 5%;"> <br>
 
-                  <?php  if ($evidencia4 == ''){?>
-
-                      <span style="color:red;">FOTO NÃO ANEXADA</span>
-
-                  <?php } else {?>
-                      
-                  
-                      <img src="arquivo/<?php echo $evidencia4 ?>"   width="500" height="500" style="padding-top: 5%;"> <br>
-
-                  <?php }?>
-            
                   </div> <br><br>
-
-          
+                  
+                  
               <fieldset class="col-md-6">
                   <div class="form-group">
                         <label for="formFile" class="form-label">Teste de validação </label>
-                        <input class="form-control" required type="file" accept=".png,.jpg,.jpeg" id="teste1" name="teste1" >
+                        <input class="form-control"  type="file" accept=".png,.jpg,.jpeg" id="teste1" name="teste1" >
                         <p  style="font-size: 10px; color:red;" > Obrigatório**</p>
                         <p id="output1"></p>
                         <script type="text/javascript">
@@ -331,7 +357,7 @@ fieldset
                               (this.files[0].size / 1024 / 1024).toFixed(2);
                   
                             if (size > 1 ) {
-                                alert("Máximo 1 MB"); 
+                                alert("Máximo 1 MB");
                                 $("#teste1").val("");
                                 
                             } else {
@@ -339,7 +365,7 @@ fieldset
                                   'Tamanho: ' + size + " MB" + '</b>');
                             }
                         });
-                    </script>   
+                    </script>
 
                   </div>
                   <div class="form-group">
@@ -381,7 +407,7 @@ fieldset
                 </div>
 
         </br> </br><div class="form-group">
-                    <label for="exampleTextarea">Justificativa para reprovação </label>
+                    <label for="exampleTextarea">Justificativa para reprovação</label>
                     <textarea  placeholder="Caso seja rejeitada a justificativa deve ser preenchida" class="form-control"  id="exampleTextarea" name="obs_rej" rows="6"> </textarea>
                   </div>
 

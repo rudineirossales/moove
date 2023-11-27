@@ -1,17 +1,16 @@
-    <script type="text/javascript">
+                <script type="text/javascript">
                   function saidasuccessfully()
                   {
                     setTimeout("window.location='pesq_contato1.php'");
                     
                     
                   }
-                  </script>
+                </script>
 
-
-    <?php 
+<?php 
          include "conn.php"; 
-         
-      
+         date_default_timezone_set('America/Sao_Paulo');
+         $hoje = date('Y-m-d H:i:s');
          session_start();
 
          if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]))
@@ -20,7 +19,7 @@
                  header("Location: index.html");
                   exit;
             }
-           
+
             $sa =$_GET['sa'];
             
             $sql = mysql_query ("select * from reparo_hc where sa = '$sa'" );
@@ -35,6 +34,7 @@
                     {
                         
                         $sa = $dado["sa"];
+                        $contador = $dado["contador"];
                         $uf = $dado["uf"];
                         $data_execucao = $dado["data_execucao"];
                         $companhia = $dado["companhia"];
@@ -42,20 +42,21 @@
                         $macro = $dado["macro"];
                         $cliente = $dado["cliente"];
                         $contato1 = $dado["contato1"];
-                        $contador = $dado["contador"];
+                        $contato = $dado["contato"];
                         $trava = $dado["trava"];
                         $trava_por = $dado["trava_por"];
                         
                 }
                 
                 }
-
-                if($trava == "S")
+                
+                
+                  if($trava == "S")
                 {
 
                   echo "
                   <script language='JavaScript'>
-                  window.alert('BA EM VALIDAÇÃO POR $trava_por')
+                  window.alert('BA EM VALIDACAO POR $trava_por')
                   
                   </script>";
 
@@ -67,7 +68,7 @@
                 else
                 {
 
-                  $query = "update  atividade set trava_ba = 'S', trava_por = '".$_SESSION['nome']."' where ba = '$ba'";
+                  $query = "update  reparo_hc set trava = 'S', trava_por = '".$_SESSION['nome']."' where sa = '$sa'";
                   $sql = mysql_query($query);
 
 
@@ -88,7 +89,7 @@
   <script type="text/javascript">
 function saidasuccessfully()
 {
-	setTimeout("window.location='../dashboard.php'");
+	setTimeout("window.location='dashboard_hc.php'");
 	
 	
 }
@@ -233,7 +234,7 @@ $(document).ready(function() {
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active"  <?php if ($_SESSION["acesso"] == "Tec"){ echo 'href="index_col.html"';} else {echo 'href="../dashboard.php"'; } ?>><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active"  <?php if ($_SESSION["acesso"] == "Tec"){ echo 'href="index_col.html"';} else {echo 'href="dashboard_hc.php"'; } ?>><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -263,7 +264,7 @@ $(document).ready(function() {
           <div class="tile">
             <div class="row">
               <div class="col-lg-12">
-                <form method="post"  onSubmit="if(!confirm('Deseja modificar atividade?')){return false;}" action="cadastro_hc.php ">
+                <form method="post"  onSubmit="if(!confirm('Deseja modificar atividade?')){return false;}" action="enviar_cadastro.php ">
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Uf</label>
@@ -287,29 +288,31 @@ $(document).ready(function() {
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Cliente</label>
-                    <input class="form-control"  id="ba"  required name="cliente"   value="<?php echo $cliente?>" type="text" aria-describedby="emailHelp" >
+                    <input class="form-control"  id="ba"  readonly required name="cliente"   value="<?php echo $cliente?>" type="text" aria-describedby="emailHelp" >
                   </div>
-                  <input class="form-control"  id="ba"  required name="contador"   value="<?php echo $contador?>" type="text" aria-describedby="emailHelp" >
+                  <input class="form-control"  id="ba"  readonly required name="contador"   value="<?php echo $contador?>" type="hidden" aria-describedby="emailHelp" >
                   <div class="form-group">
                     <label for="exampleInputEmail1">Contato</label>
-                    <input class="form-control"  id="ba"  required name="contato"   value="<?php echo $contato1?>" type="text" aria-describedby="emailHelp" >
+                    <input class="form-control"    readonly required name="contato"   value="<?php echo $contato?>" type="text" aria-describedby="emailHelp" >
                   </div>
                   <div class="form-group">
                     <label for="email">Atendeu?</label>  
                         <select class="form-control "  name="atendeu">
-                          <option value="SIM MSG">  Sim msg </option>
-                          <option value="SIM WPP">  Sim Wpp </option>
-                          <option value="NAO">  Não </option>
+                          <option value="LIGACAO">  Ligação </option>
+                          <option value="WHATSAPP">  Whatsapp </option>
+                          <option value="NAO ATENDE">  Não atende </option>
                           <option value="Nº NAO EXISTE">  Nº não existe </option>
+                          <option value="DESCONHECE CLIENTE">  Desconhece cliente </option>
                         </select>
                   </div>
                   <div class="form-group">
                     <label for="email">Potência?</label>  
                         <select class="form-control"   name="potencia">
-                          <option value="OK">  Ok </option>
+                          <option value="DENTRO DOS PARAMETROS">  Dentro dos paramêtros </option>
                           <option value="ATENUADO">  Atenuado </option>
                           <option value="DESLIGADO">  Desligado </option>
-                          <option value="NAO ENCONTRADO">  Não encontrado </option>
+                          <option value="SEM PARAMETROS">  Sem paramêtros </option>
+                          
                         </select>
                   </div>
                   <div class="form-group">
@@ -319,29 +322,43 @@ $(document).ready(function() {
                           <option value="NAO OK">  Não ok </option>
                           <option value="SEM CONFIRMACAO">  Sem confirmação </option>
                           <option value="SEM RETORNO">  Sem retorno </option>
+                          <option value="CANCELAMENTO">  Cancelamento </option>
                         </select>
                   </div>
                   <div class="form-group" id="inputOculto1">
                     <label for="email">Enviar pendência para qual coordenador?</label>  
-                        <select class="form-control "   name="coordenador">
-                         <option value="" checked>ESCOLHA UM COORDENADOR </option>
-                          <option value="CARLOS ROBERTO SANTOS">CARLOS ROBERTO SANTOS </option>
-                          <option value="CLAUDINEI BATISTA BRAZ">CLAUDINEI BATISTA BRAZ</option>
-                          <option value="FERNANDO GOMES DA SILVA MOREIRA">FERNANDO GOMES DA SILVA MOREIRA </option>
-                          <option value="CHARLES MARCELO COSTA">CHARLES MARCELO COSTA </option>
-                          <option value="MARCELO CEOLI">MARCELO CEOLI </option>
-                          <option value="DHIEGO DE FREITAS">DHIEGO DE FREITAS </option>
-                          <option value="PAULO FRANCISCO ROCHA FIDELES">PAULO FRANCISCO ROCHA FIDELES </option>
-                          <option value="GERSINEI RODRIGUES">GERSINEI RODRIGUES </option>
-                          <option value="CLEMILSON SZNICER SOBRAL">CLEMILSON SZNICER SOBRAL </option>
-                          <option value="RENATO VIANA DE SOUSA">RENATO VIANA DE SOUSA
- </option>
-                          
-                        </select>
+                    <select class="form-control" id="coord" name="coord" required   >
+                    <option value="0" disabled="disabled"  >Escolha um coordenador</option>
+
+                          <?php
+
+                            
+                          $sql = "select * from usuario where funcao = 'COORD_HC' and acesso = 'HC' order by nome";
+                          $qr = mysql_query($sql) or die(mysql_error());
+                          while($ln = mysql_fetch_assoc($qr)) 
+                          {
+                              echo '<option value="'.$ln['nome'].'">'.$ln['nome'].'</option>';
+                          }
+                          ?>
+                    </select> <br>
+                        <div class="form-group">
+                            <label for="pwd"> Data do agendamento:</label>
+                            <input type="date" class="form-control"  name="data_ag" >
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Período:</label>  
+                            <select class="form-control"  id="mySelect" name="periodo">
+                              <option value="ND" checked>  ND </option>
+                              <option value="DURANTE O DIA" checked>  DURANTE O DIA </option>
+                              <option value="MANHA">  MANHA </option>
+                              <option value="TARDE">  TARDE </option>
+                              
+                            </select>
+                        </div>
                   </div>
                   <div class="form-group">
                       <label for="email">Descrição: </label>
-                     <textarea class="form-control" rows="5" id="obs" required name="obs" maxlength="20000" placeholder="Máximo 2000 caracteres"></textarea>
+                     <textarea class="form-control" rows="5" id="obs" required name="obs"  placeholder="Informar o nome da pessoa que passou as informações do reteste."></textarea>
                   </div>
                   
                   </div>
@@ -369,7 +386,7 @@ $(document).ready(function() {
 
 
     <?php 
-
+/*
 
 if (isset($_POST ['submit']) )
 {
@@ -384,6 +401,7 @@ if (isset($_POST ['submit']) )
   $contador  = $_POST['contador'];
   $contador_aguardo  = $_POST['contador'];
   $obs  =$_POST['obs'];
+  $quebra = 'OK';
   $status  ='';
 
 
@@ -392,6 +410,28 @@ if (isset($_POST ['submit']) )
 
     $status  ='NAO OK';
     
+    if($contador == ''){
+        
+       $quebra = '1º dia'; 
+    }
+    elseif ($contador == '1'){
+      
+      $quebra = '3º dia';  
+        
+    }
+    elseif ($contador == '2'){
+      
+      $quebra = '5º dia';  
+        
+    }
+    elseif ($contador == '3'){
+      
+      $quebra = '7º dia';  
+        
+    }
+    
+    
+    
 
   }
 
@@ -399,26 +439,27 @@ if (isset($_POST ['submit']) )
   {
     $contador  = '1';
     if($funcionalidade == 'SEM RETORNO'){$contador  = $contador_aguardo;}
-    $query = "update reparo_hc set coordenador = '$coordenador',status = '$status',contador = '$contador', cliente = '$cliente', contato1 = '".$_SESSION['nome']."', data_contato1 = NOW(), atendeu = '$atendeu', potencia = '$potencia', funcionalidade = '$funcionalidade', obs_contato1 = '$obs'  where sa = '$sa'";
+    $query = "update reparo_hc set coordenador = '$coordenador',status = '$status',contador = '$contador', contato = '$contato', cliente = '$cliente', contato1 = '".$_SESSION['nome']."', data_contato1 = '$hoje', atendeu = '$atendeu', potencia = '$potencia', funcionalidade = '$funcionalidade', obs_contato1 = '$obs', quebra = '$quebra', trava = '0', trava_por = '0'  where sa = '$sa'";
 
   }
   elseif ($contador == '1')
   {
     $contador  = '2';
     if($funcionalidade == 'SEM RETORNO'){$contador  = $contador_aguardo;}
-    $query = "update reparo_hc set coordenador = '$coordenador',status = '$status',contador = '$contador', cliente = '$cliente', contato2 = '".$_SESSION['nome']."', data_contato2 = NOW(), atendeu_2 = '$atendeu', potencia_2 = '$potencia', funcionalidade_2 = '$funcionalidade', obs_contato2 = '$obs'  where sa = '$sa'";
+    $query = "update reparo_hc set coordenador = '$coordenador',status = '$status',contador = '$contador', contato = '$contato', cliente = '$cliente', contato2 = '".$_SESSION['nome']."', data_contato2 = '$hoje', atendeu_2 = '$atendeu', potencia_2 = '$potencia', funcionalidade_2 = '$funcionalidade', obs_contato2 = '$obs', quebra = '$quebra', trava = '0', trava_por = '0'  where sa = '$sa'";
   }
-  if ($contador == '2')
+  elseif ($contador == '2')
   {
     $contador  = '3';
     if($funcionalidade == 'SEM RETORNO'){$contador  = $contador_aguardo;}
-    $query = "update reparo_hc set coordenador = '$coordenador',status = '$status',contador = '$contador', cliente = '$cliente', contato3 = '".$_SESSION['nome']."', data_contato3 = NOW(), atendeu_3 = '$atendeu', potencia_3 = '$potencia', funcionalidade_3 = '$funcionalidade', obs_contato3 = '$obs'  where sa = '$sa'";
+    $query = "update reparo_hc set coordenador = '$coordenador',status = '$status',contador = '$contador', contato = '$contato', cliente = '$cliente', contato3 = '".$_SESSION['nome']."', data_contato3 = '$hoje', atendeu_3 = '$atendeu', potencia_3 = '$potencia', funcionalidade_3 = '$funcionalidade', obs_contato3 = '$obs', quebra = '$quebra', trava = '0', trava_por = '0'  where sa = '$sa'";
   }
-  if ($contador == '3')
+  elseif ($contador == '3')
   {
+    $status  = 'ENCERRADO';
     $contador  = '4';
     if($funcionalidade == 'SEM RETORNO'){$contador  = $contador_aguardo;}
-    $query = "update reparo_hc set coordenador = '$coordenador',status = '$status',contador = '$contador', cliente = '$cliente', contato4 = '".$_SESSION['nome']."', data_contato4 = NOW(), atendeu_4 = '$atendeu', potencia_4 = '$potencia', funcionalidade_4 = '$funcionalidade', obs_contato4 = '$obs'  where sa = '$sa'";
+    $query = "update reparo_hc set coordenador = '$coordenador',status = '$status',contador = '$contador', contato = '$contato', cliente = '$cliente', contato4 = '".$_SESSION['nome']."', data_contato4 = '$hoje', atendeu_4 = '$atendeu', potencia_4 = '$potencia', funcionalidade_4 = '$funcionalidade', obs_contato4 = '$obs', quebra = '$quebra', trava = '0', trava_por = '0'  where sa = '$sa'";
   }
 
 
@@ -470,7 +511,7 @@ if (isset($_POST ['submit']) )
 
 
 
-
+*/
      ?>
     <!-- Essential javascripts for application. to work-->
   

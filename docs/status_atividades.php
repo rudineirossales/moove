@@ -9,7 +9,7 @@
                   exit;
             }
 
-            $connect = mysqli_connect("localhost", "root", "", "icomom_");  
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon");  
             
 ?>
 
@@ -162,20 +162,27 @@ function fnExcelReport() {
                                     <td>BA</td>  
                                     <td>STATUS</td>  
                                     <td>PRIORIDADE</td>
+                                    <td>CELULA</td>
+                                    <td>ESTACAO</td>
                                     <td>NOME</td>
+                                    <td>COORDENADOR</td>
                                </tr>  
                           </thead> 
                           
                           
                           <?php  
-
-                            
-
-                           
-
-                              
+                              if($_SESSION['id'] == '46077' )
+                              {
                                 
-                             $query ="select ba,status,tipo,id_usu,nome from atividade join usuario on atividade.id_usu = usuario.id where status <> 'ENCERRADO' and status <> 'EM VALIDACAO' and status <> 'PARALIZADO' and atividade.nome_gestor = '".$_SESSION['nome']."' and status <> 'DESPCOORD' order by nome;";  
+                                $query ="select atividade.nome_gestor,celula,estacao,ba,status,tipo,id_usu,nome from atividade join usuario on atividade.id_usu = usuario.id where status <> 'ENCERRADO' and status <> 'EM VALIDACAO' and status <> 'PARALISADO'  and status <> 'DESPCOORD' and usuario.funcao <> 'COORD' order by nome;";  
+                                   
+                              }
+                              else
+                              {
+                                  
+                                $query ="select atividade.nome_gestor,celula,estacao,ba,status,tipo,id_usu,nome from atividade join usuario on atividade.id_usu = usuario.id where status <> 'ENCERRADO' and status <> 'EM VALIDACAO' and status <> 'PARALISADO' and atividade.nome_gestor = '".$_SESSION['nome']."' and status <> 'DESPCOORD' and usuario.funcao <> 'COORD' order by nome;";
+                                  
+                              }
                              $result = mysqli_query($connect, $query); 
                              while($row = mysqli_fetch_array($result))  
                           { 
@@ -187,7 +194,10 @@ function fnExcelReport() {
                                <td>'.$row["ba"].'</td>   
                                <td>'.$row["status"].'</td>
                                <td>'.$row["tipo"].'</td>
-                               <td>'.$row["nome"].'</td>     
+                               <td>'.$row["celula"].'</td>
+                               <td>'.$row["estacao"].'</td>
+                               <td>'.$row["nome"].'</td>  
+                               <td>'.$row["nome_gestor"].'</td>
                                </tr>  
                                ';  
                           }    
@@ -199,8 +209,21 @@ function fnExcelReport() {
  </html>  
  <script>  
  $(document).ready(function(){  
-      $('#myTable').DataTable();  
+      $('#myTable').DataTable(
+        {
+                   
+          "scrollX": false,
+    "ordering": true,
+    "lengthMenu": [ [ -1, 10, 30, 50, 100], ["Todos", "10","30", "50", "100"] ],
+    "scrollCollapse": true,
+    
+                    
+                }
+
+
+
+      );  
  });  
- </script>  
+ </script>   
 
 <script src="js/main.js"></script>

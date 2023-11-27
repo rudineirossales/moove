@@ -4,7 +4,7 @@
       
          session_start();
 
-         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"])  || ($_SESSION["acesso"] != 'ADM' ) AND ($_SESSION["acesso"] != 'GA' ) )
+         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"])  )
             {
                  header("Location: index.html");
                   exit;
@@ -251,8 +251,7 @@
                           <?php
 
                             
-                          $sql = "SELECT * FROM usuario  group by nome_gestor order by nome
-                          ";
+                          $sql = "SELECT * FROM usuario WHERE funcao = 'COORD_BBK' group by nome_gestor order by nome";
                           $qr = mysql_query($sql) or die(mysql_error());
                           while($ln = mysql_fetch_assoc($qr)) 
                           {
@@ -260,7 +259,7 @@
                           }
                           ?>
                     </select>
-                </div>
+                </div><br>
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Status</label>
@@ -274,7 +273,7 @@
                             
 </div>
 </div><br><br>
-<?php if ($ba > 0 && $status <> "ENCERRADO" && $status <> "PARALIZADO" )
+<?php if ($ba > 0 && $status <> "ENCERRADO" && $status <> "PARALISADO" )
 
 {?>
 <button class="btn btn-primary"  name="submit" type="submit">Enviar</button>

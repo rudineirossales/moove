@@ -10,45 +10,7 @@
             }
 
 
-          
-
-            $sql = mysql_query ("select * from usuario join atividade on usuario.id = atividade.id_usu where atividade.ba = '$ba'" );
-
-            $row = mysql_num_rows($sql);
-
-
-                if (mysql_num_rows($sql) > 0)
-
-                {
-                    while ($dado = mysql_fetch_assoc($sql))
-                    {
-                        
-                        $ba2 = $dado["ba"];
-                        $nome = $dado["nome"];
-                        $localidade = $dado["localidade"];
-                        $estacao = $dado["estacao"];
-                        $endereco = $dado["endereco"];
-                        $celula = $dado["celula"];
-                        $cdoe = $dado["cdoe"];
-                        $tipo = $dado["tipo"];
-                        $tipo_rede = $dado["tipo_rede"];
-                        $data_despacho = $dado["data_despacho"];
-                        $causa = $dado["causa"];
-                        $sub = $dado["sub"];
-                        $ro = $dado["ro"];
-                        $cis = $dado["cis"];
-                        $obs = $dado["obs"];
-                        $obs_cl = $dado["obs_cl"];
-                        $data_encerramento = $dado["data_encerramento"];
-                        $data_despacho = $dado["data_despacho"];
-                        $data_abertura = $dado["data_abertura"];
-                        $data_vencimento = $dado["data_vencimento"];
-                        $afetacao = $dado["afetacao"];
-                     
-                    }
-                
-                }
-
+            
             
 
 ?>
@@ -131,10 +93,11 @@ fieldset
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   </head>
   <body class="app sidebar-mini rtl">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="dashboard.php">Icomon</a>
+    <header class="app-header"><a class="app-header__logo" href="page_tec/page_ftth.php"><i class="bi bi-arrow-left">           ICOMON</i></a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -160,7 +123,7 @@ fieldset
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="dashboard.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+       <li><a class="app-menu__item active" <?php if ($_SESSION["acesso"] == "Tec"){ echo 'href="page_tec/page_tec.html"';} else {echo 'href="dashboard.php"'; } ?>><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -246,16 +209,17 @@ fieldset
                             $data_despacho = $dado["data_despacho"];
                             $data_abertura = $dado["data_abertura"];
                             $data_vencimento = $dado["data_vencimento"];
+                            $nome_validacao = $dado["nome_validacao"];
                             $afetacao = $dado["afetacao"];
                             $evidencia1 = $dado["evidencia1"];
                             $evidencia2 = $dado["evidencia2"];
                             $evidencia3 = $dado["evidencia3"];
-                            
-                           
-                           
-                            
-                            
-                            
+                            $evidencia4 = $dado["evidencia4"];
+                            $foto_antes = $dado["foto_antes"];
+                            $foto_depois = $dado["foto_depois"];
+                            $latitude_final = $dado["latitude_final"];
+                            $longitude_final = $dado["longitude_final"];
+   
                         }
                     
                     }
@@ -280,10 +244,13 @@ fieldset
                   <li class="list-group-item"><b> Vencimento: </b> <?php echo $data_vencimento;  ?></li>
                   <li class="list-group-item"><b> Hora despacho: </b> <?php echo $data_despacho;  ?></li>
                   <li class="list-group-item"><b> Hora encerramento: </b> <?php echo $data_encerramento;  ?></li>
+                  <li class="list-group-item"><b> Nome validação: </b> <?php echo $nome_validacao;  ?></li>
                   <li class="list-group-item"><b> Causa: </b> <?php echo $causa;  ?></li>
                   <li class="list-group-item"><b> Sub-causa: </b> <?php echo $sub;  ?></li>
                   <li class="list-group-item"><b> Ro: </b> <?php echo $ro;  ?></li>
                   <li class="list-group-item"><b> Cis: </b> <?php echo $cis;  ?></li>
+                  <li class="list-group-item"><b> Latitude: </b> <?php echo $latitude_final;  ?></li>
+                  <li class="list-group-item"><b> Longitude: </b> <?php echo $longitude_final;  ?></li>
                   
                   
              <?php
@@ -321,22 +288,35 @@ fieldset
                     <textarea readonly  class="form-control"  id="exampleTextarea" name="obs" rows="6"> <?php echo '(' . $obs . ' )     ' . $obs_cl; ?> </textarea>
                   </div>
                   <div class="text-center">
-                  <img src="arquivo/<?php echo $evidencia1 ?>"  style="padding-top: 5%;"> <br>
+                  <img src="arquivo/<?php echo $evidencia1 ?>"  width='300' height='300' style="padding-top: 5%;"> <br>
                   
                 </div>
                 <div class="text-center">
-                  <img src="arquivo/<?php echo $evidencia2 ?>"  style="padding-top: 5%;"> 
+                  <img src="arquivo/<?php echo $evidencia2 ?>"  width='300' height='300' style="padding-top: 5%;"> 
                 </div>
                 <div class="text-center">
-                  <img src="arquivo/<?php echo $evidencia3 ?>"  style="padding-top: 5%;"> 
+                  <img src="arquivo/<?php echo $evidencia3 ?>"  width='300' height='300' style="padding-top: 5%;"> <br>
+                  
                 </div>
-
+                <div class="text-center">
+                  <img src="arquivo/<?php echo $evidencia4 ?>"  width='300' height='300' style="padding-top: 5%;"> 
+                </div>
+                
+                <div class="text-center">
+                  <img src="arquivo/<?php echo $foto_antes ?>"  width='300' height='300' style="padding-top: 5%;"> 
+                </div> <br> <br>
+                <div class="text-center">
+                  <img src="arquivo/<?php echo $foto_depois ?>"  width='300' height='300' style="padding-top: 5%;"> 
+                </div> <br> <br>
+                  
+                <a href="pdf.php?ba=<?php echo $ba; ?>" target="_blank"  role="button" aria-pressed="true">Gerar Pdf</a>
+                  
                   <?php } ?>
              
                 </form>
 
                 
-                <a href="pdf.php?ba=<?php echo $ba; ?>" target="_blank" class="btn btn-info btn-xs active" role="button" aria-pressed="true">Gerar Pdf</a>
+                
               </div>
             </div>
             

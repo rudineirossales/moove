@@ -9,7 +9,7 @@
                   exit;
             }
 
-            $connect = mysqli_connect("localhost", "root", "", "icomom_");  
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon");  
             
 ?>
 
@@ -90,7 +90,7 @@ function fnExcelReport() {
   </head>
   <body class="app sidebar-mini rtl">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="dashboard.php">Serede</a>
+    <header class="app-header"><a class="app-header__logo" href="dashboard.php">Icomon</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -160,7 +160,7 @@ function fnExcelReport() {
                                     <td>Nome</td>  
                                     <td>Localidade</td> 
                                     <td>Estação</td>  
-                                    <td>Prioridade</td>
+                                    <td>Prioridade</td> 
                                     <td>Célula</td> 
                                     <td>Cdoe</td>  
                                     
@@ -182,7 +182,7 @@ function fnExcelReport() {
 
                               
                                 
-                             $query ="select * from atividade join usuario on atividade.id_usu = usuario.id where status <> 'ENCERRADO' and status <> 'EM VALIDACAO' and status <> 'PARALIZADO' and id_usu = '$id_usu'";  
+                             $query ="select * from atividade join usuario on atividade.id_usu = usuario.id where status <> 'ENCERRADO' and status <> 'EM VALIDACAO' and status <> 'PARALISADO' and id_usu = '$id_usu'";  
                              $result = mysqli_query($connect, $query); 
                              while($row = mysqli_fetch_array($result))  
                           { 
@@ -196,7 +196,7 @@ function fnExcelReport() {
                         
                             <td>'.$row["localidade"].'</td>
                             <td>'.$row["estacao"].'</td>  
-                            <td>'.$row["tipo"].'</td> 
+                            <td>'.$row["tipo"].'</td>
                             <td>'.$row["celula"].'</td> 
                             <td>'.$row["cdoe"].'</td>  
                             

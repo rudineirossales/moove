@@ -9,11 +9,16 @@
                   exit;
             }
 
-            $connect = mysqli_connect("185.213.81.103", "u504529778_hc", "Rud!n3!@", "u504529778_hc");  
+            $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "hc"); 
             $query ="SELECT * FROM reparo_hc where status = '' and contador = '1' and funcionalidade = 'SEM RETORNO'";  
             $result = mysqli_query($connect, $query); 
-            $connection ->close();
+            
             $hoje = date('Y-m-d');
+            
+            
+            $sql = mysql_query ("SELECT * FROM reparo_hc where status = '' and contador = '1' and funcionalidade = 'SEM RETORNO'");
+            $contaValidacao = mysql_num_rows($sql);
+            mysql_close($connection);
 ?>
 
 
@@ -122,7 +127,7 @@ function fnExcelReport() {
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="index_col.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" href="dashboard_hc.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -155,6 +160,7 @@ function fnExcelReport() {
           <div class="tile">
           
           <div class="table-responsive">  
+          <span style="padding-left:3%;"class="badge badge-pill badge-success">  <?php echo $contaValidacao;?>  </span>
                      <table id="myTable" class="table table-striped table-bordered">  
                           <thead>  
                                <tr> 

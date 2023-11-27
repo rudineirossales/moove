@@ -1,10 +1,10 @@
 <?php
 error_reporting (E_ALL & ~ E_NOTICE & ~ E_DEPRECATED);
 
-$host = "185.213.81.103";
-$user = "u504529778_icomon_";
+$host = "62.72.63.187";
+$user = "remoteicomon";
 $pass = "Rud!n3!@";
-$database ="u504529778_icomon_";
+$database ="icomon";
 $connection = mysql_connect($host,$user,$pass,$database) or die (mysql_error());
 mysql_select_db($database)or die (mysql_error());
 

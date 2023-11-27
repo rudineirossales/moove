@@ -64,6 +64,7 @@ function loginfailed()
 
 $senha=$_POST['senha'];
 $login=$_POST['login'];
+$autenticacao = $_POST['autenticacao'];
 
 
 $sql = mysql_query("select * from usuario where senha  = '$senha' and login = '$login' ");
@@ -86,6 +87,8 @@ if($row > 0  )
     $acesso = $linha['acesso'];
     $nome_gestor = $linha['nome_gestor'];
 	$id_gestor = $linha['id_gestor'];
+	$funcao = $linha['funcao'];
+	$gram = $linha['gram'];
 	
  
     
@@ -103,8 +106,9 @@ if($row > 0  )
     $_SESSION['acesso'] =$acesso;
     $_SESSION['nome_gestor'] =$nome_gestor;
 	$id_gestor['id_gestor'] =$ga;
-
-
+	$_SESSION['funcao'] =$funcao;
+	$_SESSION['autenticacao'] = $autenticacao;
+	$_SESSION['gram'] = $gram;
 
 
 

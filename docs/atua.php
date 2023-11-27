@@ -163,7 +163,43 @@
       </div>
       
       
-      
+      <!-- 
+      <div class="row">
+        <div class="col-md-6 col-lg-3">
+          <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+            <div class="info">
+              <h4>TESTE</h4>
+              <p><b>5</b></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="widget-small info coloured-icon"><i class="icon fa fa-thumbs-o-up fa-3x"></i>
+            <div class="info">
+              <h4>TESTE</h4>
+              <p><b>25</b></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
+            <div class="info">
+              <h4>TESTE</h4>
+              <p><b>10</b></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="widget-small danger coloured-icon"><i class="icon fa fa-star fa-3x"></i>
+            <div class="info">
+              <h4>TESTE</h4>
+              <p><b>500</b></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      -->
+
                   <?php 
                       if (isset($_POST ['submit3']) )
                 { 
@@ -213,9 +249,7 @@
         <div class="col-md-6">
         
           <div class="tile">
-          <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-                Click para digitar o ba
-          </button></br>
+          <h3 class="tile-title"></h3>
           
 
 
@@ -225,7 +259,9 @@
             
             <div class="bs-component">
               <ul class="nav nav-tabs">
-                <li class="nav-item" ><a class="nav-link active" data-toggle="tab" href="#home"></a></li>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                      Click para digitar o ba
+                </button>
                 
                 
                 
@@ -288,7 +324,7 @@
                           <?php
 
                             
-                          $sql = "SELECT * FROM usuario  group by nome_gestor order by nome
+                          $sql = "SELECT * FROM usuario  where funcao = 'COORD' group by nome_gestor order by nome
                           ";
                           $qr = mysql_query($sql) or die(mysql_error());
                           while($ln = mysql_fetch_assoc($qr)) 
@@ -316,11 +352,11 @@
                                 
 </div>
 </div><br><br>
-<?php if ($ba > 0 && $status <> "ENCERRADO" && $status <> "PARALIZADO" )
+<?php if ($ba > 0 && $status <> "ENCERRADO" && $status <> "PARALISADO")
 
 {?>
 <button class="btn btn-primary"  name="submit" type="submit">Enviar</button>
- <?php } ?>
+ <?php }  else { ?> <span style="color: red;">BA PARALISADO</span> <?php } ?>
 
                       
  
@@ -425,6 +461,15 @@
   
 </div>
 
+
+
+
+
+
+
+
+
+
 <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
@@ -445,40 +490,16 @@
 
 </div>
 
-</div>
-                
+
                 </div>
+                
               </div>
             </div>
-            <div class="col-lg-6">
-  </div>
-        </div>
-      </main>
-
-   
-      </body>
-</html>
-
-
-
-     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-             
+          </div>
+          <div class="col-lg-6">
+</div>
+      </div>
+    </main>
     <!-- Essential javascripts for application to work-->
     
     
@@ -486,4 +507,6 @@
 
     
 
- 
+    
+  </body>
+</html>

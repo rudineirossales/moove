@@ -1,5 +1,6 @@
 <?php 
          include "conn.php"; 
+         include "atualiza_atividades.php"; 
       
          session_start();
 
@@ -96,12 +97,12 @@
               <table class="table table-hover table-bordered" >
                 <thead>
                   <tr>
-                    <th>Ba</th>
+                     <th>Ba</th>
                     <th>Localidade</th>
                     <th>Estação</th>
                     <th>Célula</th>
-                    <th>Cdoe</th>
-                    <th>Rede</th>
+                    <th>Vencimento</th>
+                    <th>Prioridade</th>
                     <th>Técnico</th>
                     <th>Baixa</th>
                     <th>Validacao</th>
@@ -123,7 +124,7 @@
       
 
       
-    $sql = mysql_query ("select atividade.ba,atividade.cdoe, usuario.nome, atividade.localidade, atividade.estacao, atividade.celula, atividade.cdoe, atividade.tipo_rede, data_encerramento  from usuario join atividade on usuario.id = atividade.id_usu where atividade.status = 'EM VALIDACAO';" );
+    $sql = mysql_query ("select data_vencimento,atividade.ba,atividade.cdoe, usuario.nome, atividade.localidade, atividade.estacao, atividade.celula, atividade.cdoe, atividade.tipo, atividade.data_encerramento  from usuario join atividade on usuario.id = atividade.id_usu left join encerramento on encerramento.ba = atividade.ba where atividade.status = 'EM VALIDACAO';" );
 
       
     $row = mysql_num_rows($sql);
@@ -153,10 +154,10 @@
                     <td><?php echo $dado ["estacao"];  ?></td>
                     
                     <td><?php echo $dado ["celula"];  ?></td>
-                    <td><?php echo $dado ["cdoe"];  ?></td>
-                    <td><?php echo $dado ["tipo_rede"];  ?></td>
-                    <td><?php echo $dado ["nome"];  ?></td>
-                    <td><?php echo $dado ["data_encerramento"];  ?></td>
+                    <td style="min-width: 200px;" ><?php echo $dado ["data_vencimento"];  ?></td>
+                    <td><?php echo $dado ["tipo"];  ?></td>
+                    <td style="min-width: 200px;"><?php echo $dado ["nome"];  ?></td>
+                    <td style="min-width: 200px;"><?php echo $dado ["data_encerramento"];  ?></td>
                     
                     <td> <a style="color:black;" href="enviar_vali.php?ba=<?php echo $dado["ba"];?>"   role="button" aria-pressed="true"><i style="padding-left:40%;" class="fa fa-check-circle fa-lg" aria-hidden="true"></i></a></td>
                     <td> <a style="color:black;" href="liberar_ba.php?ba=<?php echo $dado["ba"];?>"   role="button" aria-pressed="true"><i style="padding-left:40%;" class="fa fa-solid fa-key fa-lg"></i></a></td>
@@ -201,7 +202,7 @@
       	ga('send', 'pageview');
       }
     </script>
-
+<?php mysql_close($connection) ?>
   
   </body>
 </html>

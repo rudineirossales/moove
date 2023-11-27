@@ -8,7 +8,7 @@
  function __construct()
  {
 
-    parent::__construct("127.0.0.1","root","","icomom_");
+    parent::__construct("62.72.63.187","remoteicomon","Rud!n3!@","icomon");
     if($this->connect_error)
     {
 
@@ -36,12 +36,29 @@ function import($file)
 
       $value2 =  utf8_decode($value2);
 
+      
+
+
+
+
+
+      
+      
       $q = "INSERT INTO atividade (uf,localidade,estacao,ba,tipo,data_abertura,data_vencimento,endereco,celula,cdoe,obs_cl,status,nome_gestor) values(". $value2 .")";
+
+      
+
+
+
 
       if ( $this->query($q) ) 
       {
 
               $this->state_csv = true;
+
+
+             
+
 
       } 
 
