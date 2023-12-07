@@ -158,9 +158,9 @@ function fnExcelReport() {
                      <table id="myTable" class="table table-striped table-bordered">  
                           <thead>  
                                <tr>  
+                                  
                                     <td>Ba</td> 
                                     <td>Prioridade</td> 
-                                     
                                     <td>Coordenador</td> 
                                     <td>Status</td>  
                                     <td>Estação</td>  
@@ -180,6 +180,7 @@ function fnExcelReport() {
                           {  
                                echo '  
                                <tr>  
+                                    
                                     <td><a href="cad_baixa.php?ba='.$row["ba"].'"> '.$row["ba"].' </span></a></td>   
                                     <td>'.$row["tipo"].'</td>
                                     

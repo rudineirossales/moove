@@ -3,17 +3,26 @@
       
          session_start();
 
-         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]) || ($_SESSION["acesso"] != 'ADM' ) AND ($_SESSION["acesso"] != 'Tec' ) )
+         if(!isset($_SESSION["login"]) &&  !isset($_SESSION["senha"]))
             {
                  header("Location: index.html");
                   exit;
             }
 
             $connect = mysqli_connect("62.72.63.187", "remoteicomon", "Rud!n3!@", "icomon");  
+            if($_SESSION['acesso'] == 'ADM'){
+                
+                 $query ="SELECT * FROM atividade where status = 'DESPCOORD' OR  status = 'PARALISADO' order by status";  
+            }
+            else{
+              $query ="SELECT * FROM atividade where id_usu = '".$_SESSION['id']."' and status <> 'ENCERRADO' and status <> 'PARALISADO' order by status";    
+                
+            }
             
+            $result = mysqli_query($connect, $query); 
 ?>
 
- 
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,12 +30,7 @@
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
            <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script> 
            
-           
-              
-            
-           
-          
-  <link rel="icon" href="img/icomon.png">
+       <link rel="icon" href="img/icomon.png">
 
     <script type="text/javascript">
 function fnExcelReport() {
@@ -66,7 +70,6 @@ function fnExcelReport() {
 
 
 </script> 
-    
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     <!-- Twitter meta-->
     <meta property="twitter:card" content="summary_large_image">
@@ -87,10 +90,13 @@ function fnExcelReport() {
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   </head>
   <body class="app sidebar-mini rtl">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="dashboard.php">Icomon</a>
+        <header class="app-header"><a class="app-header__logo" href="page_tec/page_tec.html"><i class="bi bi-arrow-left">           ICOMON</i></a>
+        
+
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -116,7 +122,7 @@ function fnExcelReport() {
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="dashboard.php"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item active" <?php if ($_SESSION["acesso"] == "Tec"){ echo 'href="page_tec/page_tec.html"';} else {echo 'href="dashboard.php"'; } ?> ><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
@@ -124,13 +130,16 @@ function fnExcelReport() {
             <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-circle-o"></i> Cards</a></li>
             <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Widgets</a></li>
           </ul>
-        </li> 
-      <li><a class="app-menu__item " href="#" id="test" onClick="javascript:fnExcelReport();">  <i class="app-menu__icon fa fa-table"></i> </i><span class="app-menu__label"> Gerar Excel </span> </a> </li>
+        </li>
+        
+        
+        
+        <li><a class="app-menu__item " href="#" id="test" onClick="javascript:fnExcelReport();">  <i class="app-menu__icon fa fa-table"></i> </i><span class="app-menu__label"> Gerar Excel </span> </a> </li>
     </aside>
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> Caixa técnica</h1>
+          <h1><i class="fa fa-th-list"></i> Caixa de atividades.</h1>
           
         </div>
         <ul class="app-breadcrumb breadcrumb side">
@@ -140,33 +149,27 @@ function fnExcelReport() {
         </ul>
       </div>
 
-<form method="post"  onSubmit="if(!confirm('Deseja encerrar atividade??')){return false;}" action="enviar_check_repasse_colaborador.php ">
+    <form method="post"  onSubmit="if(!confirm('Deseja encerrar atividade??')){return false;}" action="enviar_check.php ">
+
+
       <div class="row">
         <div class="col-md-12">
+
         <div class="form-group col-md-6">
                                  <input type="hidden" class="form-control"  value= "<?php echo $ba; ?>" name="ba2" required>
-                                  <label for="exampleSelect1">Técnico </label>
+                                  <label for="exampleSelect1">Coordenador </label>
                                   <select class="form-control" id="tec" name="tec" required" >
                                   <option value="0" disabled="disabled"  >Escolha um coordenador </option>
 
                                         <?php
+
                                           
-                                          
-                                          
-                                         $sql = "SELECT * FROM usuario  where funcao = 'TEC' or funcao = 'COORD' ";
+                                        $sql = "SELECT * FROM usuario  where funcao = 'TEC'";
                                         
                                         $qr = mysql_query($sql) or die(mysql_error());
                                         while($ln = mysql_fetch_assoc($qr)) 
                                         {
-                                          if($ln['funcao'] == 'COORD')
-                                          {
-                                            echo '<option value="'.$ln['id'].'" style="background-color:yellow;">'.$ln['nome'].' - (COORDENADOR)'.'</option>';
-                                          }
-                                          else
-                                          {
                                             echo '<option value="'.$ln['id'].'">'.$ln['nome'].'</option>';
-                                            
-                                          }
                                         }
                                         ?> 
                                   </select>
@@ -174,73 +177,73 @@ function fnExcelReport() {
         <div class="form-group col-md-6">
         <button type="submit" class="btn btn-primary" name="submit">Repassar</button>
         </div>
-        
-        <div class="tile">
-          <form class="form-inline" role="form"  method="POST" action="pesq_cx_col_adm.php"  style="margin-left:10%;">
-                
-        </form>
+
+          <div class="tile">
+          
           <div class="table-responsive">  
                      <table id="myTable" class="table table-striped table-bordered">  
                           <thead>  
                                <tr>  
                                     <td>#</td>
-                                    <td>Id</td>  
-                                    <td>Nome</td>  
-                                    <td>Localidade</td> 
-                                    <td>Estação</td>  
+                                    <td>Ba</td> 
                                     <td>Prioridade</td> 
-                                    <td>Célula</td> 
-                                    <td>Cdoe</td>  
+                                    <td>Coordenador</td> 
                                     <td>Status</td>  
-                                    <td>Data despacho</td>  
-                                    <td>Data atribuicao</td>  
+                                    <td>Estação</td>  
+                                    <td>Cdoe</td> 
+                                    <td>Afetação</td>
+                                    <td>Célula</td> 
+                                    
+                                    
+                                     
+                                    
+                                    
+                                     
                                </tr>  
                           </thead>  
-                          
-                           
                           <?php  
-
-                            
-
-                              $id_usu = $_GET['id_usu'];
-
-                              
-                                
-                             $query ="select * from atividade join usuario on atividade.id_usu = usuario.id where status <> 'ENCERRADO' and status <> 'EM VALIDACAO' and status <> 'PARALISADO' and id_usu = '$id_usu'";  
-                             $result = mysqli_query($connect, $query); 
-                             while($row = mysqli_fetch_array($result))  
-                          { 
-                              
-                           
-                            echo '  
-                            <tr> 
-                            <input type="hidden" name="id" id="id" value="'.$row["id"].'">
-                            <td><input type="checkbox" name="ba[]" id="'.$ba.'" value="'.$row["ba"].'"></td> 
-                            <td><a href="pesquisa_ba.php?ba='.$row["ba"].'"> '.$row["ba"].' </span></a></td>  
-                            <td>'.$row["nome"].'</td>   
-                            <td>'.$row["localidade"].'</td>
-                            <td>'.$row["estacao"].'</td>  
-                            <td>'.$row["tipo"].'</td>
-                            <td>'.$row["celula"].'</td> 
-                            <td>'.$row["cdoe"].'</td>  
-                            <td>'.$row["status"].'</td>  
-                            <td>'.$row["data_despacho"].'</td>  
-                            <td>'.$row["data_atribuicao"].'</td> 
-                                 
-                            </tr>  
-                            ';  
-                          }    
+                          while($row = mysqli_fetch_array($result))  
+                          {  
+                               echo '  
+                               <tr>  
+                                    <td><input type="checkbox" name="ba[]" id="'.$ba.'" value="'.$row["ba"].'"></td>
+                                    <td><a href="cad_baixa.php?ba='.$row["ba"].'"> '.$row["ba"].' </span></a></td>   
+                                    <td>'.$row["tipo"].'</td>
+                                    <td>'.$row["nome_gestor"].'</td>
+                                    <td>'.$row["status"].'</td>
+                                    <td>'.$row["estacao"].'</td>  
+                                    <td>'.$row["cdoe"].'</td>
+                                    <td>'.$row["afetacao"].'</td>
+                                    <td>'.$row["celula"].'</td> 
+                                </tr>  
+                               ';  
+                          }  
                           ?>  
                      </table>  
                 </div>  
-           </div> 
-</form> 
+           </div>  
+
+    </form>
+
       </body>  
  </html>  
  <script>  
  $(document).ready(function(){  
-      $('#myTable').DataTable();  
+      $('#myTable').DataTable(
+        {
+                   
+          "scrollX": false,
+    "ordering": true,
+    "lengthMenu": [ [ -1, 10, 30, 50, 100], ["Todos", "10","30", "50", "100"] ],
+    "scrollCollapse": true,
+    
+                    
+                }
+
+
+
+      );  
  });  
  </script>  
-
-<script src="js/main.js"></script>
+ 
+ <script src="js/main.js"></script>

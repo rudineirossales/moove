@@ -64,6 +64,9 @@
 <html lang="en">
   <head>
 
+ 
+
+
   <script type="text/javascript">
 function saidasuccessfully()
 {
@@ -107,7 +110,7 @@ function saidasuccessfully()
 
 
 
-
+ 
 
 
   
@@ -318,14 +321,8 @@ height:70px;
                   <label for="email">Justificativa reprovação: </label>
                 <textarea class="form-control" rows="5" readonly id="justificativa" name="obs"  placeholder="Aparecerá caso ba seja reprovador pelo COC"> <?php echo $justificativa; ?> </textarea>
                   </div>
-      
-    
-        
-    
-    
-                  
-                  
-                    </div>
+                
+                 </div>
                   </div>
                   <div class="tile-footer">
             <?php if ($_SESSION["acesso"] == 'Tec'){
@@ -370,7 +367,7 @@ height:70px;
             <div class="form-group">
                   
                  <form class="form-group" role="form"   method="POST" action="cad_baixa.php">
-                              <div class="form-group">
+                    <div class="form-group">
                                  <input type="hidden" class="form-control"  value= "<?php echo $ba; ?>" name="ba2" required>
                                   <label for="exampleSelect1">Coordenador </label>
                                   <select class="form-control" id="coord" name="coord" required  onchange="ativarInputDataContrato()" >
@@ -388,7 +385,7 @@ height:70px;
                                         }
                                         ?> 
                                   </select>
-              </div>
+                    </div>
                       <div class="form-group">
                                           <label for="exampleSelect1">Técnico</label>
                                           <select class="form-control" id="tec" name="tec" required >

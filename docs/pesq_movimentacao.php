@@ -239,6 +239,7 @@ function fnExcelReport() {
                      <table id="myTable" class="table table-striped table-bordered">  
                           <thead>  
                                <tr> 
+                                    
                                     <td>Ba</td>  
                                     <td>Tipo 7048</td>
                                     <td>Sa</td>
@@ -314,8 +315,9 @@ function fnExcelReport() {
                                     }
                                echo '  
                                <tr> 
+                               
                                <td style="min-width: 150px;">'.$incremento.$row["ba"].'</td>
-                              <td>'.$row["tipo_7048"].'</td>
+                               <td>'.$row["tipo_7048"].'</td>
                                <td>'.$row["sa"].'</td>
                                <td>'.$row["idgpon"].'</td>
                                <td>'.$row["uf"].'</td> 
